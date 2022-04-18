@@ -147,7 +147,7 @@
                   </div>
                 </div>
 
-                <div class="w-full md:w-1/2 px-3 mb-6">
+                <div class=" md:w-1/2 px-3 mb-6">
                   <button
                     type="submit"
                     class="
@@ -161,7 +161,7 @@
                       focus:ring-blue-500
                       focus:ring-opacity-50
                       text-white
-                      w-96
+                      w-full
                       py-2.5
                       rounded-lg
                       text-sm
@@ -308,11 +308,22 @@ export default {
           
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-
-          console.log(errorCode);
-          alert(errorMessage);
+         switch(error.code){
+          case 'auth/user-already-in-used':
+            alert("Email already in used")
+            break
+          case 'auth/operation-not-allowed':
+            alert("Operation not allowed")
+            break
+          case 'auth/weak-password':
+            alert("Weak Password")
+            break
+          case 'auth/invalid-email':
+            alert("Invalid email")
+            break
+          default:
+            alert("Something went wrong")
+        }
         });
     },
   },

@@ -8,6 +8,7 @@ import PrivacyPolicy from '../views/documents/PrivacyPolicy.vue'
 import HomeIndi from '../views/users/individual/HomePage.vue'
 import SettingsIndi from '../views/users/individual/Settings.vue'
 import GenerateQR from '../views/users/individual/GenerateQR.vue'
+import PhoneVerification from '../views/users/individual/PhoneVerification.vue'
 
 
 
@@ -23,6 +24,8 @@ import Settings from '../views/users/estab/Settings.vue'
 import LoginPageAdmin from '../views/users/admin/LoginPage.vue'
 import AdminHome from '../views/users/admin/AdminHome.vue'
 import CheckApplication from '../views/users/admin/CheckApplication.vue'
+import EntryRecord from '../views/users/admin/EntryRecord.vue'
+import Application from '../views/users/admin/Application.vue'
 
 import {getAuth} from 'firebase/auth'
 import app from '../firebase/auth-individual/firebase'
@@ -32,7 +35,7 @@ const auth = getAuth(app);
 const routes = [
 
   {
-    path: '/individual-home/:phoneId',
+    path: '/individual-home',
     name: 'HomeIndi',
     component: HomeIndi,
     meta: {
@@ -63,9 +66,14 @@ const routes = [
     name: 'LoginPage',
     component: LoginPage
   },
+  {
+    path: '/individual-verify-user',
+    name: 'PhoneVerification',
+    component: PhoneVerification
+  },
 
   {
-    path: '/individual-create-account',
+    path: '/individual-create-account/:phone',
     name: 'CreateAccount',
     component: CreateAccount,
   },
@@ -135,6 +143,18 @@ const routes = [
     component: AdminHome
   },
 
+  {
+    path: '/admin-entry-record',
+    name: 'EntryRecord',
+    component: EntryRecord
+  },
+
+  {
+    path: '/admin-application',
+    name: 'Application',
+    component: Application
+  },
+
    {
     path: '/admin-check/:applicationID',
     name: 'CheckApplication',
@@ -150,13 +170,14 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if(to.path === '/individual-login' && auth.currentUser){
-    next('/')
+  if (to.path === '' && auth.currentUser) {
+    next('/individual-home')
     return;
   }
   if(to.matched.some(record => record.meta.requiresAuth) && !auth.currentUser){
-    next('/individual-login');
-    return;
+        alert("You have been logged out")
+        next('/') 
+        return;
   }
   next();
 })

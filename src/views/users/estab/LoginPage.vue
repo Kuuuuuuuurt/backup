@@ -272,11 +272,16 @@ export default {
           this.checkUser();
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-
-          console.log(errorCode);
-          alert(errorMessage);
+           switch(error.code){
+          case 'auth/user-not-found':
+            alert("User not found")
+            break
+          case 'auth/wrong-password':
+            alert("Wrong password")
+            break
+          default:
+            alert("Something went wrong")
+        }
         });
     },
 

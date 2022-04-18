@@ -1,4 +1,22 @@
 <template>
+    <nav class="bg-white shadow fixed z-10 mx-auto inset-x-0 top-0 flex justify-between items-center">
+      
+        <a href="#" class="font-bold m-3 inline-flex hover:text-pink-700 transition-all duration-500">
+              <img src="https://cdn-icons-png.flaticon.com/512/2681/2681062.png" style="height: 25px" alt="" class="mr-2"
+      loading="lazy" />
+          Application Form
+        </a>
+        
+      
+      <!-- List of nav item -->
+           <a href="#" class="font-extrabold m-3 uppercase inline-flex hover:text-pink-700 transition-all duration-500">
+              <img src="https://cdn-icons-png.flaticon.com/512/1008/1008001.png" style="height: 25px" alt="" class="mr-2"
+      loading="lazy" />
+          TRAFEX
+        </a>
+      
+    </nav>
+
   <div class="flex flex-wrap items-center justify-center -mt-5">
     <div class="w-full md:w-3/5 bg-white p-6">
       <div class="mt-5 text-2xl">

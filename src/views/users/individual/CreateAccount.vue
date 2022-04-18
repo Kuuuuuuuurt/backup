@@ -25,8 +25,8 @@
                 <input
                   class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
                   id="grid-text-1"
-                  type="text"
-                  placeholder="Enter Number"
+                  type="phone"
+                  placeholder="9 Digit # ex. 9099991320"
                   required
                   v-model="user.userInfo.phoneNumber"
                 />
@@ -153,7 +153,7 @@
                     </div>
                   </div>
 
-                  <div class="w-full md:w-1/2 px-3 mb-6">
+                  <div class=" md:w-1/2 px-3 mb-6">
                     <button
                       type="submit"
                       class="
@@ -167,7 +167,7 @@
                         focus:ring-blue-500
                         focus:ring-opacity-50
                         text-white
-                        w-96
+                        w-full
                         py-2.5
                         rounded-lg
                         text-sm
@@ -297,7 +297,7 @@ export default {
       console.log("Creating Account");
 
       const emailPhone =
-        "+63" + this.$data.user.userInfo.phoneNumber + "@gmail.com";
+        this.$data.user.userInfo.phoneNumber + "@gmail.com";
       const password = this.$data.password;
       const auth = getAuth(app);
       const db = getFirestore(app);
@@ -313,17 +313,32 @@ export default {
           const addDocs = setDoc(doc(db, "user", id), this.$data.user);
           console.log(addDocs);
           console.log("Success");
-          this.$router.push(`/individual-home/${id}`);
+          this.$router.push(`/individual-home`);
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-
-          console.log(errorCode);
-          alert(errorMessage);
-          // ..
+         switch(error.code){
+          case 'auth/user-already-in-used':
+            alert("Email already in used")
+            break
+          case 'auth/operation-not-allowed':
+            alert("Operation not allowed")
+            break
+          case 'auth/weak-password':
+            alert("Weak Password")
+            break
+          case 'auth/invalid-email':
+            alert("Invalid email")
+            break
+          default:
+            alert("Something went wrong")
+        }
         });
     },
   },
+
+  created(){
+    let phone = this.$route.params.phone;
+    this.$data.user.userInfo.phoneNumber = phone;
+  }
 };
 </script>

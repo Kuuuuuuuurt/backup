@@ -1,11 +1,26 @@
 <template>
+    <nav class="bg-white shadow fixed z-10 mx-auto inset-x-0 top-0 flex justify-between items-center">
+      
+        <a href="#" class="font-bold m-3 inline-flex hover:text-pink-700 transition-all duration-500">
+              <img src="https://cdn-icons-png.flaticon.com/512/93/93634.png" style="height: 25px" alt="" class="mr-2"
+      loading="lazy" />
+          Back
+        </a>
+        
+      
+      <!-- List of nav item -->
+           <a href="#" class="font-bold m-3 inline-flex hover:text-pink-700 transition-all duration-500">
+              <img src="https://cdn-icons-png.flaticon.com/512/4379/4379661.png" style="height: 25px" alt="" class="mr-2"
+      loading="lazy" />
+          Scan QR Code
+        </a>
+      
+    </nav>
+
   <div>
    <div class=" min-h-screen font-mono bg-slate-500 ">
       <div class="container mx-auto">
         <div class="w-full max-w-2xl p-6 mx-auto">
-          <div class="mt-5">
-            <label class="text-2xl text-gray-900">Scan QR-Code</label>
-          </div>
           <div class=" w-full h-full max-w-lg px-10 py-8 mx-auto bg-white rounded-lg shadow-xl">
             <div class='max-w-md mx-auto space-y-6'>
               <qrcode-stream

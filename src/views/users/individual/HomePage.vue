@@ -1,5 +1,24 @@
 <template>
-  <div class="flex flex-wrap items-center justify-center -mt-5">
+    <nav class="bg-white shadow fixed z-10 mx-auto inset-x-0 top-0 flex justify-between items-center">
+      
+        <a href="#" class="font-bold m-3 inline-flex hover:text-pink-700 transition-all duration-500">
+              <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" style="height: 25px" alt="" class="mr-2"
+      loading="lazy" />
+          Home
+        </a>
+        
+      
+      <!-- List of nav item -->
+           <a href="#" class="font-extrabold m-3 uppercase inline-flex hover:text-pink-700 transition-all duration-500">
+              <img src="https://cdn-icons-png.flaticon.com/512/1008/1008001.png" style="height: 25px" alt="" class="mr-2"
+      loading="lazy" />
+          TRAFEX
+        </a>
+      
+    </nav>
+
+
+  <div class="flex flex-wrap items-center justify-center mt-5">
     <div class="w-full md:w-3/5 bg-white p-6 mt-8">
     <div class="flex flex-wrap items-center justify-center -mt-5" v-if="showQr">
      <qrcode-vue :value="value" :size="size" level="H"/>
@@ -136,12 +155,12 @@
         </div>
 
         <div class="text-lg ml-3">
-          <a href="google.com"><p><span class="text-blue-600 underline underline-offset-4"> Entry Record</span></p></a>
+         <button @click="toggleEntryRecordBtn"><span class="text-blue-600 underline underline-offset-4"> Entry Record</span></button>
         </div>
       </div>
     </div>
   </div>
-<section class="py-1 bg-blueGray-50">
+<section v-show="toggleEntryRecord" class="py-1 bg-blueGray-50">
 <div class="xl:w-8/12  xl:mb-0 px-4 mx-auto">
   <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
     <div class="rounded-t mb-0 px-4 py-3 border-0">
@@ -150,7 +169,7 @@
           <h3 class="font-semibold text-base text-blueGray-700">Establishment Visited</h3>
         </div>
         <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-          <button class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">Hide</button>
+          <button class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" @click="hide">Hide</button>
         </div>
       </div>
     </div>
@@ -223,8 +242,9 @@ export default defineComponent({
   data() {
     return {
       myEntry:  [],
+      toggleEntryRecord: false,
       value: "",
-        size: 200,
+      size: 200,
       selectedUser: {},
       userID: "",
       phone: "",
@@ -303,11 +323,15 @@ export default defineComponent({
     else if(this.$data.user.qrStatus == "No Application"){
          this.$router.push(`/individual-generate-qr/${id}`);
     }
+    else if(this.$data.user.qrStatus == "Declined"){
+      this.$router.push(`/individual-generate-qr/${id}`);
+    }
     else{
       alert("Already have a QR Code")
     }
     
     },
+
 
     editProfile() {
       const id = this.$data.userID;
@@ -327,6 +351,13 @@ export default defineComponent({
         console.log(error);
       });
   },
+
+  toggleEntryRecordBtn(){
+    this.toggleEntryRecord = !this.toggleEntryRecord
+  },
+  hide(){
+    this.toggleEntryRecord = !this.toggleEntryRecord
+  },
   },
 
   computed:{
@@ -337,12 +368,16 @@ export default defineComponent({
         else{
           return true;
         }
-      }
+      },
   },
 
   created() {
-    let id = this.$route.params.phoneId;
-    this.$data.userID = id;
+    const auth = getAuth(app)
+    let str = auth.currentUser.email;
+    str = str.toString();
+    str = str.slice(0, -10)
+    this.$data.userID = str
+
     this.getUser();
   },
 });

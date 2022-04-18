@@ -1,5 +1,32 @@
 <template>
-  <div class="w-5/6 flex items-center justify-center">
+    <nav class="bg-white shadow fixed z-10 mx-auto inset-x-0 top-0 flex justify-between items-center">
+      
+        <a href="#" class="font-bold m-3 inline-flex hover:text-pink-700 transition-all duration-500">
+              <img src="https://cdn-icons-png.flaticon.com/512/1008/1008001.png" style="height: 25px" alt="" class="mr-2"
+      loading="lazy" />
+          TRAFEX
+        </a>
+        
+      
+      <!-- List of nav item -->
+           <div class="font-extrabold m-3 uppercase inline-flex hover:text-pink-700 transition-all duration-500">
+             <button>
+               <img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png" style="height: 25px" alt="" class="mr-2"
+      loading="lazy" />
+             </button>
+              <button @click="toSettings">
+               <img src="https://cdn-icons-png.flaticon.com/512/2099/2099058.png" style="height: 25px" alt="" class="mr-2"
+      loading="lazy" />
+             </button>
+             <button @click="signOut">
+               <img src="https://cdn-icons-png.flaticon.com/512/450/450387.png" style="height: 25px" alt="" class="mr-2"
+      loading="lazy" />
+             </button>
+           </div>
+      
+    </nav>
+
+  <div class="">
     <div class="flex items-center justify-left">
       <!-- Card -->
       <div class="bg-white p-8 w-[32rem]">
@@ -25,42 +52,7 @@
         <h2 class="font-bold text-3xl mt-2">
           {{ user.estabName }}
         </h2>
-        <div>
-           <a>
-            <button
-              class="
-                bg-red-600
-                hover:bg-red-800
-                text-white
-                py-1
-                px-3
-                sm
-                rounded-full
-                
-              "
-              @click="toSettings"
-            >
-              Settings
-            </button>
-          </a>
-
-          <a href="#">
-            <button
-              class="
-                bg-green-500
-                hover:bg-green-700
-                text-white
-                py-1
-                px-3
-                sm
-                rounded-full
-              "
-              @click="signOut"
-            >
-              Logout
-            </button>
-          </a>
-        </div>
+        
 
         <!-- Tags -->
         <p class="mt-2">
@@ -122,100 +114,368 @@
       </div>
     </div>
   </div>
+<body class="antialiased font-sans">
+    <div class="container mx-auto px-4 sm:px-8 mt-10">
+      <div class="py-8">
+        <div>
+          <h2 class="text-2xl font-semibold leading-tight">
+            Entry Data Record
+          </h2>
+        </div>
+        <div class="my-2 flex sm:flex-row flex-col">
+          <div class="flex flex-row mb-1 sm:mb-0">
+            <div class="relative">
+            </div>
+            
+            <div class="my-2 flex sm:flex-row flex-col">
+              <div class="flex flex-row mb-1 sm:mb-0">
+                <div class="relative"></div>
+              </div>
+              <div class="block relative">
+                <span
+                  class="
+                    h-full
+                    absolute
+                    inset-y-0
+                    left-0
+                    flex
+                    items-center
+                    pl-2
+                  "
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    class="h-4 w-4 fill-current text-gray-500"
+                  >
+                    <path
+                      d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z"
+                    ></path>
+                  </svg>
+                </span>
+                <input
+                  placeholder="Search by name"
+                  class="
+                    appearance-none
+                    rounded-r rounded-l
+                    sm:rounded-l-none
+                    border border-gray-400 border-b
+                    block
+                    pl-8
+                    pr-6
+                    py-2
+                    w-full
+                    bg-white
+                    text-sm
+                    placeholder-gray-400
+                    text-gray-700
+                    focus:bg-white
+                    focus:placeholder-gray-600
+                    focus:text-gray-700
+                    focus:outline-none
+                  "
+                  v-model="searchName"
+                />
+              </div>
 
-  <section class="antialiased text-gray-600 px-4">
-    <div class="flex flex-col justify-center">
-      <!-- Table -->
-      <div
-        class="
-          w-full
-          max-w-2xl
-          mx-auto
-          bg-white
-          shadow-lg
-          rounded-sm
-          border border-gray-200
-          my-8
-        "
-      >
-        <header class="px-5 py-4 border-b border-gray-100">
-          <h2 class="font-semibold text-gray-800">Entry Record</h2>
-        </header>
-        <div class="p-3">
-          <div class="overflow-x-auto">
-            <table class="table-auto w-full">
-              <thead
-                class="text-xs font-semibold uppercase text-gray-400 bg-gray-50"
+              <button
+                class="
+                ml-1
+                  relative
+                  w-fit
+                  h-fit
+                  px-2
+                  py-1
+                  text-md
+                  border
+                  rounded
+                  border-blue
+                "
+                @click="findByName"
               >
+                <p>Search</p>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+          <div
+            class="inline-block min-w-full shadow rounded-lg overflow-hidden"
+          >
+            <table class="min-w-full leading-normal">
+              <thead>
                 <tr>
-                  <th class="p-2 whitespace-nowrap">
-                    <div class="font-semibold text-left">Name</div>
+                  <th
+                    class="
+                      px-5
+                      py-3
+                      border-b-2 border-gray-200
+                      bg-gray-100
+                      text-left text-xs
+                      font-semibold
+                      text-gray-600
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Name
                   </th>
-                  <th class="p-2 whitespace-nowrap">
-                    <div class="font-semibold text-left">Phone</div>
+                  <th
+                    class="
+                      px-5
+                      py-3
+                      border-b-2 border-gray-200
+                      bg-gray-100
+                      text-left text-xs
+                      font-semibold
+                      text-gray-600
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Contact Number
                   </th>
-                  <th class="p-2 whitespace-nowrap">
-                    <div class="font-semibold text-left">Address</div>
+                  <th
+                    class="
+                      px-5
+                      py-3
+                      border-b-2 border-gray-200
+                      bg-gray-100
+                      text-left text-xs
+                      font-semibold
+                      text-gray-600
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Address
                   </th>
-                  <th class="p-2 whitespace-nowrap">
-                    <div class="font-semibold text-center">Gender</div>
+                  <th
+                    class="
+                      px-5
+                      py-3
+                      border-b-2 border-gray-200
+                      bg-gray-100
+                      text-left text-xs
+                      font-semibold
+                      text-gray-600
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Establishment Visited
                   </th>
-                  <th class="p-2 whitespace-nowrap">
-                    <div class="font-semibold text-center">Temperature</div>
+
+                    <th
+                    class="
+                      px-5
+                      py-3
+                      border-b-2 border-gray-200
+                      bg-gray-100
+                      text-left text-xs
+                      font-semibold
+                      text-gray-600
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Time
                   </th>
-                  <th class="p-2 whitespace-nowrap">
-                    <div class="font-semibold text-center">Time</div>
+
+                    <th
+                    class="
+                      px-5
+                      py-3
+                      border-b-2 border-gray-200
+                      bg-gray-100
+                      text-left text-xs
+                      font-semibold
+                      text-gray-600
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Date
                   </th>
-                  <th class="p-2 whitespace-nowrap">
-                    <div class="font-semibold text-center">Date</div>
+
+                    <th
+                    class="
+                      px-5
+                      py-3
+                      border-b-2 border-gray-200
+                      bg-gray-100
+                      text-left text-xs
+                      font-semibold
+                      text-gray-600
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Temperature
                   </th>
                 </tr>
               </thead>
-              <tbody class="text-sm divide-y divide-gray-100">
+              <tbody>
                 <tr v-for="customer in customers" :key="customer.id">
-                  <td class="p-2 whitespace-nowrap">
-                    <div class="flex items-center">
-                      <div class="font-medium text-gray-800">
-                        {{ customer.name }}
+                  <td
+                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                  >
+                    <div class="">
+                      <div class="flex-shrink-0">
+                      </div>
+                      <div class="">
+                        <p class="text-gray-900 whitespace-no-wrap">
+                          {{customer.name}}
+                        </p>
                       </div>
                     </div>
                   </td>
-                  <td class="p-2 whitespace-nowrap">
-                    <div class="text-left">{{ customer.phoneNumber }}</div>
+                  <td
+                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                  >
+                    <p class="text-gray-900 whitespace-no-wrap">{{customer.phoneNumber}}</p>
                   </td>
-                  <td class="p-2 whitespace-nowrap">
-                    <div class="text-left font-medium text-green-500">
-                      {{ customer.address }}
-                    </div>
+                  <td
+                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                  >
+                    <p class="text-gray-900 whitespace-no-wrap">{{customer.address}}</p>
                   </td>
-                  <td class="p-2 whitespace-nowrap">
-                    <div class="text-medium text-center">
-                      {{ customer.gender }}
-                    </div>
+                  <td
+                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                  >
+                    <span
+                      class="
+                        relative
+                        inline-block
+                        px-3
+                        py-1
+                        font-semibold
+                        text-green-900
+                        leading-tight
+                      "
+                    >
+                      <span
+                        aria-hidden
+                        class="
+                          absolute
+                          inset-0
+                          opacity-50
+                          rounded-full
+                        "
+                      ></span>
+                      <span class="relative">{{customer.visitedEstab}}</span>
+                    </span>
                   </td>
-                  <td class="p-2 whitespace-nowrap">
-                    <div class="text-medium text-center">
-                      {{ customer.temperature }}
-                    </div>
+
+                   <td
+                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                  >
+                    <p class="text-gray-900 whitespace-no-wrap">{{customer.time}}</p>
                   </td>
-                  <td class="p-2 whitespace-nowrap">
-                    <div class="text-medium text-center">
-                      {{ customer.time }}
-                    </div>
+
+                   <td
+                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                  >
+                    <p class="text-gray-900 whitespace-no-wrap">{{customer.month + " " + customer.day + ", " + customer.year}}</p>
                   </td>
-                  <td class="p-2 whitespace-nowrap">
-                    <div class="text-medium text-center">
-                      {{ customer.date }}
-                    </div>
+                   <td
+                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                  >
+                    <p class="text-gray-900 whitespace-no-wrap">{{customer.temperature}}</p>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
+            <div class="my-2 flex sm:flex-row flex-col">
+              <div class="flex flex-row mb-1 sm:mb-0">
+                <div class="relative"></div>
+              </div>
+              <div class="block relative">
+               <select
+                class="
+                  appearance-none
+                  h-full
+                  rounded-r
+                  border-t
+                  sm:rounded-r-none sm:border-r-1
+                  border-r border-b border-l
+                  block
+                  appearance-none
+                  w-full
+                  bg-white
+                  border-gray-400
+                  text-gray-700
+                  py-2
+                  px-4
+                  pr-8
+                  leading-tight
+                  focus:outline-none
+                  focus:border-l
+                  focus:border-r
+                  focus:bg-white
+                  focus:border-gray-500
+                "
+                v-model="selectMonth"
+              >
+                <option>January</option>
+                <option>February</option>
+                <option>March</option>
+                <option>April</option>
+                <option>May</option>
+                <option>June</option>
+                <option>July</option>
+                <option>August</option>
+                <option>September</option>
+                <option>October</option>
+                <option>November</option>
+                <option>December</option>
+              </select>
+              <div
+                class="
+                  pointer-events-none
+                  absolute
+                  inset-y-0
+                  right-0
+                  flex
+                  items-center
+                  px-2
+                  text-gray-700
+                "
+              >
+                <svg
+                  class="fill-current h-4 w-4 border"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                  />
+                </svg>
+              </div>       
+              </div>
+
+              <button
+                class="
+                ml-1
+                  relative
+                  w-fit
+                  h-fit
+                  px-2
+                  py-1
+                  text-md
+                  border
+                  rounded
+                  border-blue
+                "
+                @click="findByName"
+              >
+                <p>Go</p>
+              </button>
+            </div>
         </div>
       </div>
     </div>
-  </section>
+  </body>
 </template>
 
 <script>
@@ -231,6 +491,8 @@ import {getAuth, signOut} from 'firebase/auth'
 export default {
   data() {
     return {
+      selectMonth: 'January',
+      searchName: '',
       customers: [],
       estabID: "",
       reference: "",
@@ -316,4 +578,7 @@ export default {
     this.getUser();
   },
 };
+//<tr v-for="customer in customers" :key="customer.id">
 </script>
+
+

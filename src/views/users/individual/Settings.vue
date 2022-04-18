@@ -1,5 +1,24 @@
 <template>
-  <div class="py-40 bg-gray-100 bg-opacity-50">
+
+    <nav class="bg-white shadow fixed z-10 mx-auto inset-x-0 top-0 flex justify-between items-center">
+      
+        <a href="#" class="font-bold m-3  inline-flex hover:text-pink-700 transition-all duration-500">
+              <img src="https://cdn-icons-png.flaticon.com/512/3524/3524636.png" style="height: 25px" alt="" class="mr-2"
+      loading="lazy" />
+          Settings
+        </a>
+        
+      
+      <!-- List of nav item -->
+           <a href="#" class="font-extrabold m-3 uppercase inline-flex hover:text-pink-700 transition-all duration-500">
+              <img src="https://cdn-icons-png.flaticon.com/512/1008/1008001.png" style="height: 25px" alt="" class="mr-2"
+      loading="lazy" />
+          TRAFEX
+        </a>
+      
+    </nav>
+
+  <div class=" bg-gray-100 bg-opacity-50 mt-16">
     <div class="mx-auto container max-w-2xl md:w-3/4 shadow-md">
       <div
         class="
@@ -56,7 +75,7 @@
         </div>
 
         <hr />
-        <div
+          <div
           class="
             md:inline-flex
             space-y-4
@@ -67,141 +86,180 @@
             items-center
           "
         >
-          <h2 class="md:w-1/3 mx-auto max-w-sm">Personal info</h2>
           <div class="md:w-2/3 mx-auto max-w-sm space-y-5">
-            <div>
-              <label class="text-sm text-gray-400">First Name</label>
-              <div class="w-full inline-flex border">
-                <div class="w-1/12 pt-2 bg-gray-100">
-                  <img
-                    class="w-4 ml-2 mt-1"
-                    src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png"
-                    alt="logo"
-                  />
-                </div>
-                <input
-                  type="text"
-                  class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                  v-model="user.userInfo.firstName"
+            <label class="text-sm text-gray-400">First Name</label>
+            <div class="w-full inline-flex border">
+              <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
+                <img
+                  class="w-4 ml-2 mt-1"
+                  src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png"
+                  alt="logo"
                 />
               </div>
+              <input
+                type=""
+                class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
+                v-model="user.userInfo.firstName"
+              />
             </div>
+          </div>
 
-            <div>
-              <label class="text-sm text-gray-400">Last Name</label>
-              <div class="w-full inline-flex border">
-                <div class="w-1/12 pt-2 bg-gray-100">
-                     <img
-                    class="w-4 ml-2 mt-1"
-                    src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png"
-                    alt="logo"
-                  />
-                </div>
-                <input
-                  type="text"
-                  class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                  v-model="user.userInfo.lastName"
+          <div class="md:w-2/3 mx-auto max-w-sm space-y-5">
+          <label class="text-sm text-gray-400">Last Name</label>
+          <div class="w-full inline-flex border">
+              <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
+                <img
+                  class="w-4 ml-2 mt-1"
+                  src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png"
+                  alt="logo"
                 />
               </div>
+              <input
+              v-model="user.userInfo.lastName"
+                type=""
+                class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
+              />
             </div>
+            </div>
+        </div>
 
-            <div>
-              <label class="text-sm text-gray-400">Gender</label>
-              <div class="w-full inline-flex border">
-                <div class="w-1/12 pt-2 bg-gray-100">
-                   <img
-                    class="w-4 ml-2 mt-1"
-                    src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png"
-                    alt="logo"
-                  />
-                </div>
-                <input
-                  type="text"
-                  class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                  v-model="user.userInfo.gender"
+
+              <div
+          class="
+            md:inline-flex
+            space-y-4
+            md:space-y-0
+            w-full
+            p-4
+            text-gray-500
+            items-center
+          "
+        >
+          <div class="md:w-2/3 mx-auto max-w-sm space-y-5">
+            <label class="text-sm text-gray-400">Gender</label>
+            <div class="w-full inline-flex border">
+              <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
+                <img
+                  class="w-4 ml-2 mt-1"
+                  src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png"
+                  alt="logo"
                 />
               </div>
+              <input
+              v-model="user.userInfo.gender"
+                type=""
+                class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
+              />
             </div>
+          </div>
 
-            <div>
-              <label class="text-sm text-gray-400">Age</label>
-              <div class="w-full inline-flex border">
-                <div class="w-1/12 pt-2 bg-gray-100">
-                      <img
-                    class="w-4 ml-2 mt-1"
-                    src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png"
-                    alt="logo"
-                  />
-                </div>
-                <input
-                  type="text"
-                  class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                  v-model="user.userInfo.age"
+          <div class="md:w-2/3 mx-auto max-w-sm space-y-5">
+          <label class="text-sm text-gray-400">Age</label>
+          <div class="w-full inline-flex border">
+              <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
+                <img
+                  class="w-4 ml-2 mt-1"
+                  src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png"
+                  alt="logo"
                 />
               </div>
+              <input
+              v-model="user.userInfo.age"
+                type=""
+                class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
+              />
             </div>
+            </div>
+        </div>
 
-                <div>
-              <label class="text-sm text-gray-400">Purok</label>
-              <div class="w-full inline-flex border">
-                <div class="w-1/12 pt-2 bg-gray-100">
-                      <img
-                    class="w-4 ml-2 mt-1"
-                    src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png"
-                    alt="logo"
-                  />
-                </div>
-                <input
-                  type="text"
-                  class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                  v-model="user.userInfo.purok"
+              <div
+          class="
+            md:inline-flex
+            space-y-4
+            md:space-y-0
+            w-full
+            p-4
+            text-gray-500
+            items-center
+          "
+        >
+          <div class="md:w-2/3 mx-auto max-w-sm space-y-5">
+            <label class="text-sm text-gray-400">Establishment Purok</label>
+            <div class="w-full inline-flex border">
+              <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
+                <img
+                  class="w-4 ml-2 mt-1"
+                  src="https://cdn-icons-png.flaticon.com/512/927/927667.png"
+                  alt="logo"
                 />
               </div>
+              <input
+              v-model="user.userInfo.purok"
+                type=""
+                class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
+              />
             </div>
+          </div>
 
-                  <div>
-              <label class="text-sm text-gray-400">baranggay</label>
-              <div class="w-full inline-flex border">
-                <div class="w-1/12 pt-2 bg-gray-100">
-                      <img
-                    class="w-4 ml-2 mt-1"
-                    src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png"
-                    alt="logo"
-                  />
-                </div>
-                <input
-                  type="text"
-                  class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                  v-model="user.userInfo.baranggay"
+          <div class="md:w-2/3 mx-auto max-w-sm space-y-5">
+          <label class="text-sm text-gray-400">Establishment baranggay</label>
+          <div class="w-full inline-flex border">
+              <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
+                <img
+                  class="w-4 ml-2 mt-1"
+                  src="https://cdn-icons-png.flaticon.com/512/927/927667.png"
+                  alt="logo"
                 />
               </div>
+              <input
+              v-model="user.userInfo.baranggay"
+                type=""
+                class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
+              />
             </div>
+            </div>
+        </div>
 
-                  <div>
-              <label class="text-sm text-gray-400">municipality</label>
-              <div class="w-full inline-flex border">
-                <div class="w-1/12 pt-2 bg-gray-100">
-                      <img
-                    class="w-4 ml-2 mt-1"
-                    src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png"
-                    alt="logo"
-                  />
-                </div>
-                <input
-                  type="text"
-                  class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                  v-model="user.userInfo.municipality"
+
+             <div
+          class="
+            md:inline-flex
+            space-y-4
+            md:space-y-0
+            w-full
+            p-4
+            text-gray-500
+            items-center
+          "
+        >
+          <div class="md:w-2/3 mx-auto max-w-sm space-y-5">
+            <label class="text-sm text-gray-400">Establishment Purok</label>
+            <div class="w-full inline-flex border">
+              <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
+                <img
+                  class="w-4 ml-2 mt-1"
+                  src="https://cdn-icons-png.flaticon.com/512/927/927667.png"
+                  alt="logo"
                 />
               </div>
+              <input
+              v-model="user.userInfo.municipality"
+                type=""
+                class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
+              />
             </div>
+          </div>
 
+          <div class="md:w-2/3 mx-auto max-w-sm space-y-5">
+          
+            </div>
+        </div>
 
-                  <div>
-              <div class="w-full inline-flex">
-                <button
+        <div class="md:w-3/12 text-center md:pl-6">
+            <button
               class="
                 text-white
-                w-fit
+                w-full
                 mx-auto
                 max-w-sm
                 rounded-md
@@ -231,11 +289,8 @@
               </svg>
               Update
             </button>
-              </div>
-            </div>
-
           </div>
-        </div>
+        
 
         <hr />
         <div
@@ -283,6 +338,7 @@
                 type="password"
                 class="w-11/12 focus:outline-none focus:text-gray-600 p-2 ml-4"
                 placeholder="New"
+                v-model="newPassword"
               />
             </div>
           </div>
@@ -304,6 +360,7 @@
                 focus:outline-none
                 md:float-right
               "
+              @click="updatePassword"
             >
               <svg
                 fill="none"
@@ -345,6 +402,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import QrcodeVue from 'qrcode.vue'
+import { getAuth, updatePassword } from "firebase/auth";
 
 export default defineComponent({
   components: {
@@ -357,6 +415,7 @@ export default defineComponent({
       userRefer: null,
        value: "",
         size: 50,
+        newPassword: '',
       user: {
         userInfo: {
           phoneNumber: "",
@@ -410,7 +469,25 @@ export default defineComponent({
 
     back(){
       this.$router.push(`/individual-home/${this.$data.userID}`);
-    }
+    },
+
+     updatePassword(){
+    console.log("sdddfd")
+    const auth = getAuth(app);
+
+    const user = auth.currentUser;
+    const password = this.$data.newPassword;
+
+    updatePassword(user, password).then(() => {
+  // Update successful.
+  alert("password updated")
+}).catch((error) => {
+  // An error ocurred
+  alert(error)
+  // ...
+});
+
+  },
   },
 
   created() {
@@ -418,6 +495,7 @@ export default defineComponent({
     this.$data.userID = id;
     this.getUser();
   },
+
 
   computed:{
     showQr(){
