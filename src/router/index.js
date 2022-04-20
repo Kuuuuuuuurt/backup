@@ -19,6 +19,7 @@ import HomePageEstab from '../views/users/estab/HomePage.vue'
 import Scanner from '../views/users/estab/Scanner.vue'
 import InsertScannedUser from '../views/users/estab/InsertScannedUser.vue'
 import Settings from '../views/users/estab/Settings.vue'
+import ForgotPassword from '../views/users/individual/ForgotPassword.vue'
 
 //admin import
 import LoginPageAdmin from '../views/users/admin/LoginPage.vue'
@@ -66,6 +67,14 @@ const routes = [
     name: 'LoginPage',
     component: LoginPage
   },
+
+  
+  {
+    path: '/individual-forgot-pass',
+    name: 'ForgotPassword',
+    component: ForgotPassword
+  },
+
   {
     path: '/individual-verify-user',
     name: 'PhoneVerification',

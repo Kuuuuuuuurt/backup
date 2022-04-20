@@ -429,6 +429,9 @@ export default defineComponent({
           qrData: null,
           qrStatus: null,
           type: "individual",
+          password: "",
+          vaccinationLink: null,
+          validIdLink: null,
         },
       },
     };
@@ -460,6 +463,9 @@ export default defineComponent({
       this.$data.user.userInfo.qrStatus = userData.userInfo.qrStatus;
 
       this.$data.value = userData.userInfo.qrData;
+      this.$data.user.userInfo.password = userData.userInfo.password;
+      this.$data.user.userInfo.vaccinationLink = userData.userInfo.vaccinationLink;
+      this.$data.user.userInfo.validIdLink = userData.userInfo.validIdLink;
     },
 
     async updateProfile() {
@@ -472,7 +478,6 @@ export default defineComponent({
     },
 
      updatePassword(){
-    console.log("sdddfd")
     const auth = getAuth(app);
 
     const user = auth.currentUser;

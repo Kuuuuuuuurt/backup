@@ -324,6 +324,7 @@ export default {
           type: "individual",
           vaccinationLink: null,
           validIdLink: null,
+          password: "",
         },
       },
     };
@@ -366,6 +367,7 @@ export default {
       this.$data.user.userInfo.baranggay = userData.userInfo.baranggay;
       this.$data.user.userInfo.municipality = userData.userInfo.municipality;
       this.$data.user.userInfo.purok = userData.userInfo.purok;
+      this.$data.user.userInfo.password = userData.userInfo.password;
     },
 
     cancel() {

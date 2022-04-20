@@ -135,6 +135,7 @@
                     focus:ring-opacity-50
                     ring-inset
                   "
+                  @click="forgotPassword"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -291,7 +292,7 @@ export default {
     },
 
     toregister() {
-      this.$router.push("/individual-create-account");
+      this.$router.push("/individual-verify-user");
     },
     estab() {
       this.$router.push("/estab-login");
@@ -301,6 +302,10 @@ export default {
     },
     admin() {
       this.$router.push("/admin-login");
+    },
+
+    forgotPassword(){
+      this.$router.push("/individual-forgot-pass")
     },
 
     async checkUser() {

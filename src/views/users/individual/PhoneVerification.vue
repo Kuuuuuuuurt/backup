@@ -1,130 +1,184 @@
 <template>
-  <div class="w-screen h-screen flex justify-center items-center bg-green-900">
-    <div class="container h-screen max-w-full overflow-hidden shadow-lg">
-      <div class="flex flex-col">
-        <div class="flex flex-col w-full h-48 justify-center">
-          <div class="text-3xl block w-full text-gray-200 text-center">
-            Phone Number
-          </div>
-          <div
-            class="
-              text-sm
-              block
-              w-full
-              text-gray-400
-              font-base
-              text-center
-              pt-2
-            "
-          >
-            Please type your phone number.
-            <br />
-            <div>
-              <span
-                class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm bg-inherit"
+
+<div class="flex justify-center min-h-screen bg-gray-100 antialiased">
+  <div class="
+        container
+        sm:mt-40
+        mt-24
+        my-auto
+        max-w-md
+        border-2 border-gray-200
+        p-3
+        bg-white
+      "
+      v-show="togglePhoneNUmber">
+      <div class="text-center m-6">
+        <h1 class="text-3xl font-semibold text-gray-700">
+          Create an Account?
+        </h1>
+        <p class="text-gray-500">
+          Just enter your phone number below and we'll send you an OTP to
+          verify your phone number existence!
+        </p>
+      </div>
+
+      <div class="m-6">
+        <div class="mb-4">
+          <div class="mb-6">
+            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
+              >Phone Number</label>
+              <div class="flex ">
+                <span
+                class=" w-fit
+                px-2
+                py-2
+                placeholder-gray-300
+                border border-gray-300
+                rounded-md"
                 >+63</span
               >
-              <input
-                type="text"
-                class="
-                  appearance-none
-                  bg-transparent
-                  border
-                  rounded
-                  px-3
-                  py-2
-                  mt-1
-                  mb-5
-                  text-sm
-                "
-                placeholder="Phone Number"
-                v-model="phoneNumber"
-              />
-            </div>
-            <button
-              class="text-center -mt-5 text-yellow-500 cursor-pointer"
+              <input type="text" class="
+                w-full
+                px-3
+                py-2
+                placeholder-gray-300
+                border border-gray-300
+                rounded-md
+                focus:outline-none
+                focus:ring
+                focus:ring-indigo-100
+                focus:border-indigo-300
+                dark:bg-gray-700
+                dark:text-white
+                dark:placeholder-gray-500
+                dark:border-gray-600
+                dark:focus:ring-gray-900
+                dark:focus:border-gray-500
+              "
+              v-model="phoneNumber">
+              </div>
+              <p class="text-red-500">{{}}</p>
+          </div>
+        <div id="recaptcha-container"></div>
+          <div>
+             <button
+              type="button"
+              class="
+                w-full
+                px-3
+                py-4
+                text-white
+                bg-indigo-500
+                rounded-md
+                hover:bg-indigo-600
+                focus:outline-none
+                duration-100
+                ease-in-out
+              "
               @click="sendOtp"
             >
-              Get Code
+              Get OTP
             </button>
-
-            <div id="recaptcha-container"></div>
           </div>
-        </div>
-
-        <div class="flex flex-col w-full h-48 justify-center">
-          <div class="text-3xl block w-full text-gray-200 text-center">
-            Verification Code
-          </div>
-          <div
-            class="
-              text-sm
-              block
-              w-full
-              text-gray-400
-              font-base
-              text-center
-              pt-2
-            "
-          >
-            Please type the verification code sent to
-            <br />
-            {{ "+63" + phoneNumber }}
-          </div>
-        </div>
-        <div
-          class="
-            flex
-            w-full
-            flex-1
-            h-screen
-            flex
-            justify-center
-            items-center
-            text-white
-          "
-        >
-          <div class="h-full py-1 px-8 text-center">
-            <div class="w-full max-w-sm">
-              <div
-                class="flex items-center border-b-2 border-yellow-500 py-2 mt-1"
-              >
-                <input
-                  class="
-                    text-center
-                    appearance-none
-                    bg-transparent
-                    border-none
-                    w-full
-                    text-white text-3xl
-                    mr-3
-                    py-1
-                    px-2
-                    leading-tight
-                    focus:outline-none
-                  "
-                  type="number"
-                  placeholder="Enter Code here"
-                  v-model="otpCode"
-                />
-              </div>
-              <button
-                class="text-center pt-8 text-yellow-500 cursor-pointer"
-                @click="confirmCode"
-              >
-                Submit Code
-              </button>
-            </div>
-            <div>
-              <button class="text-center pt-8 text-yellow-500 cursor-pointer">
-                Resend Code
-              </button>
-            </div>
-          </div>
+           <p class="text-sm text-center text-gray-400">
+            Already have an account?
+            <a
+              href="#!"
+              class="
+                font-semibold
+                text-indigo-500
+                focus:text-indigo-600 focus:outline-none focus:underline
+              "
+              >Sign in</a
+            >.
+          </p>
         </div>
       </div>
-    </div>
   </div>
+
+
+  <div class="
+        container
+        sm:mt-40
+        mt-24
+        my-auto
+        max-w-md
+        border-2 border-gray-200
+        p-3
+        bg-white
+      "
+      v-show=" toggleOTP">
+      <div class="text-center m-6">
+        <h1 class="text-3xl font-semibold text-gray-700">
+          Confirm OTP
+        </h1>
+        <p class="text-gray-500">
+         Just enter the given OTP code to continue to setting up your account!
+        </p>
+      </div>
+
+      <div class="m-6">
+        <div class="mb-4">
+          <div class="mb-6">
+            <label class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
+              >OTP Code</label>
+              <input type="text" class="
+                w-full
+                px-3
+                py-2
+                placeholder-gray-300
+                border border-gray-300
+                rounded-md
+                focus:outline-none
+                focus:ring
+                focus:ring-indigo-100
+                focus:border-indigo-300
+                dark:bg-gray-700
+                dark:text-white
+                dark:placeholder-gray-500
+                dark:border-gray-600
+                dark:focus:ring-gray-900
+                dark:focus:border-gray-500
+              "
+               v-model="otpCode">
+              <p class="text-red-500">{{}}</p>
+          </div>
+          <div>
+             <button
+              type="button"
+              class="
+                w-full
+                px-3
+                py-4
+                text-white
+                bg-indigo-500
+                rounded-md
+                hover:bg-indigo-600
+                focus:outline-none
+                duration-100
+                ease-in-out
+              "
+               @click="confirmCode"
+            >
+              Submit OTP
+            </button>
+          </div>
+           <p class="text-sm text-center text-gray-400">
+            Already have an account?
+            <a
+              href="#!"
+              class="
+                font-semibold
+                text-indigo-500
+                focus:text-indigo-600 focus:outline-none focus:underline
+              "
+              >Sign in</a
+            >.
+          </p>
+        </div>
+      </div>
+  </div>
+</div>
 </template>
 
 <script>
@@ -141,12 +195,15 @@ export default {
       phoneNumber: "",
       appVerifier: "",
       otpCode: "",
+      togglePhoneNUmber: true,
+      toggleOTP: false,
     };
   },
 
   methods: {
     async sendOtp() {
-      let phoneNumber = this.$data.phoneNumber;
+      let phoneNumber =
+     this.$data.phoneNumber;
       phoneNumber = phoneNumber.toString();
       if (phoneNumber.length == 10) {
         if (phoneNumber.startsWith("9")) {
@@ -176,6 +233,8 @@ export default {
               window.confirmationResult = confirmationResult;
               console.log(confirmationResult);
               alert("SMS sent");
+              this.$data.togglePhoneNUmber = false;
+              this.$data.toggleOTP = true;
               // ...
             })
             .catch((error) => {

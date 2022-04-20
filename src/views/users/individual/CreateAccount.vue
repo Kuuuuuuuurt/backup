@@ -148,7 +148,7 @@
                         class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
                         type="password"
                         required
-                        v-model="password"
+                        v-model="user.userInfo.password"
                       />
                     </div>
                   </div>
@@ -273,7 +273,6 @@ import { getFirestore, setDoc, doc } from "firebase/firestore";
 export default {
   data() {
     return {
-      password: "",
       user: {
         userInfo: {
           phoneNumber: "",
@@ -287,6 +286,7 @@ export default {
           qrStatus: "No Application",
           qrData: null,
           type: "individual",
+          password: ''
         },
       },
     };
@@ -298,7 +298,7 @@ export default {
 
       const emailPhone =
         this.$data.user.userInfo.phoneNumber + "@gmail.com";
-      const password = this.$data.password;
+      const password = this.$data.user.userInfo.password;
       const auth = getAuth(app);
       const db = getFirestore(app);
 
