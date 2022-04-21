@@ -35,8 +35,7 @@
     </a>
 
     <!-- List of nav item -->
-    <a
-      href="#"
+    <button
       class="
         font-extrabold
         m-3
@@ -46,6 +45,7 @@
         transition-all
         duration-500
       "
+      @click="home"
     >
       <img
         src="https://cdn-icons-png.flaticon.com/512/1008/1008001.png"
@@ -55,7 +55,7 @@
         loading="lazy"
       />
       TRAFEX
-    </a>
+    </button>
   </nav>
 
   <body class="antialiased font-sans bg-gray-200">
@@ -494,6 +494,9 @@ export default {
       this.$data.dataRecord = dataRecord;
       console.log(this.$data.dataRecord)
 
+    },
+    home(){
+      this.$router.push('/admin-home')
     }
   },
   created(){

@@ -372,10 +372,7 @@ export default defineComponent({
   },
 
   created() {
-    const auth = getAuth(app)
-    let str = auth.currentUser.email;
-    str = str.toString();
-    str = str.slice(0, -10)
+   const str = this.$route.params.phoneId;
     this.$data.userID = str
 
     this.getUser();

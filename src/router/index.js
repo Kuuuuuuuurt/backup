@@ -36,7 +36,7 @@ const auth = getAuth(app);
 const routes = [
 
   {
-    path: '/individual-home',
+    path: '/individual-home/:phoneId',
     name: 'HomeIndi',
     component: HomeIndi,
     meta: {

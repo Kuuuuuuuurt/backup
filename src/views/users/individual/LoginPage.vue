@@ -322,7 +322,7 @@ export default {
       const identifier = userData.userInfo.type;
 
       if (identifier == "individual") {
-        this.$router.push(`/individual-home`);
+        this.$router.push(`/individual-home/${this.$data.user.phoneNumber}`);
       } else {
         alert("User Does not Exist!");
         signOut(auth)

@@ -36,7 +36,7 @@
 
     <!-- List of nav item -->
     <a
-      href="#"
+      href="/admin-home"
       class="
         font-extrabold
         m-3
