@@ -29,6 +29,7 @@
                   placeholder="9 Digit # ex. 9099991320"
                   required
                   v-model="user.userInfo.phoneNumber"
+                  disabled
                 />
 
                 <div class="">
@@ -294,8 +295,6 @@ export default {
 
   methods: {
     register() {
-      console.log("Creating Account");
-
       const emailPhone =
         this.$data.user.userInfo.phoneNumber + "@gmail.com";
       const password = this.$data.user.userInfo.password;

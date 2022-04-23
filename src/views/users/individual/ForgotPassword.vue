@@ -31,8 +31,18 @@
             <label class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
               >Phone Number</label
             >
-            <input
-              type="email"
+            <div class="flex">
+               <span
+                class=" w-fit
+                px-2
+                py-2
+                placeholder-gray-300
+                border border-gray-300
+                rounded-md"
+                >+63</span
+              >
+              <input
+              type="number"
               placeholder="Your phone number"
               class="
                 w-full
@@ -55,6 +65,8 @@
               v-model="phoneNumber"
             />
             <p class="text-red-500">{{ error.number }}</p>
+            </div>
+            
           </div>
           <div class="mb-6">
             <button
