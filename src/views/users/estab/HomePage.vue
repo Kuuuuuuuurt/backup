@@ -1,30 +1,80 @@
 <template>
-    <nav class="bg-white shadow fixed z-10 mx-auto inset-x-0 top-0 flex justify-between items-center">
-      
-        <a href="#" class="font-bold m-3 inline-flex hover:text-pink-700 transition-all duration-500">
-              <img src="https://cdn-icons-png.flaticon.com/512/1008/1008001.png" style="height: 25px" alt="" class="mr-2"
-      loading="lazy" />
-          TRAFEX
-        </a>
-        
-      
-      <!-- List of nav item -->
-           <div class="font-extrabold m-3 uppercase inline-flex hover:text-pink-700 transition-all duration-500">
-             <button>
-               <img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png" style="height: 25px" alt="" class="mr-2"
-      loading="lazy" />
-             </button>
-              <button @click="toSettings">
-               <img src="https://cdn-icons-png.flaticon.com/512/2099/2099058.png" style="height: 25px" alt="" class="mr-2"
-      loading="lazy" />
-             </button>
-             <button @click="signOut">
-               <img src="https://cdn-icons-png.flaticon.com/512/450/450387.png" style="height: 25px" alt="" class="mr-2"
-      loading="lazy" />
-             </button>
-           </div>
-      
-    </nav>
+  <nav
+    class="
+      bg-white
+      shadow
+      fixed
+      z-10
+      mx-auto
+      inset-x-0
+      top-0
+      flex
+      justify-between
+      items-center
+    "
+  >
+    <a
+      href="#"
+      class="
+        font-bold
+        m-3
+        inline-flex
+        hover:text-pink-700
+        transition-all
+        duration-500
+      "
+    >
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/1008/1008001.png"
+        style="height: 25px"
+        alt=""
+        class="mr-2"
+        loading="lazy"
+      />
+      TRAFEX
+    </a>
+
+    <!-- List of nav item -->
+    <div
+      class="
+        font-extrabold
+        m-3
+        uppercase
+        inline-flex
+        hover:text-pink-700
+        transition-all
+        duration-500
+      "
+    >
+      <button>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png"
+          style="height: 25px"
+          alt=""
+          class="mr-2"
+          loading="lazy"
+        />
+      </button>
+      <button @click="toSettings">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/2099/2099058.png"
+          style="height: 25px"
+          alt=""
+          class="mr-2"
+          loading="lazy"
+        />
+      </button>
+      <button @click="signOut">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/450/450387.png"
+          style="height: 25px"
+          alt=""
+          class="mr-2"
+          loading="lazy"
+        />
+      </button>
+    </div>
+  </nav>
 
   <div class="">
     <div class="flex items-center justify-left">
@@ -50,9 +100,8 @@
 
         <!-- Title -->
         <h2 class="font-bold text-3xl mt-2">
-          {{ user.estabName }}
+          {{ user.vehicleID }}
         </h2>
-        
 
         <!-- Tags -->
         <p class="mt-2">
@@ -114,7 +163,7 @@
       </div>
     </div>
   </div>
-<body class="antialiased font-sans">
+  <body class="antialiased font-sans">
     <div class="container mx-auto px-4 sm:px-8 mt-10">
       <div class="py-8">
         <div>
@@ -124,9 +173,8 @@
         </div>
         <div class="my-2 flex sm:flex-row flex-col">
           <div class="flex flex-row mb-1 sm:mb-0">
-            <div class="relative">
-            </div>
-            
+            <div class="relative"></div>
+
             <div class="my-2 flex sm:flex-row flex-col">
               <div class="flex flex-row mb-1 sm:mb-0">
                 <div class="relative"></div>
@@ -179,7 +227,7 @@
 
               <button
                 class="
-                ml-1
+                  ml-1
                   relative
                   w-fit
                   h-fit
@@ -265,7 +313,7 @@
                     Establishment Visited
                   </th>
 
-                    <th
+                  <th
                     class="
                       px-5
                       py-3
@@ -281,7 +329,7 @@
                     Time
                   </th>
 
-                    <th
+                  <th
                     class="
                       px-5
                       py-3
@@ -297,7 +345,7 @@
                     Date
                   </th>
 
-                    <th
+                  <th
                     class="
                       px-5
                       py-3
@@ -320,11 +368,10 @@
                     class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
                   >
                     <div class="">
-                      <div class="flex-shrink-0">
-                      </div>
+                      <div class="flex-shrink-0"></div>
                       <div class="">
                         <p class="text-gray-900 whitespace-no-wrap">
-                          {{customer.name}}
+                          {{ customer.name }}
                         </p>
                       </div>
                     </div>
@@ -332,12 +379,16 @@
                   <td
                     class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
                   >
-                    <p class="text-gray-900 whitespace-no-wrap">{{customer.phoneNumber}}</p>
+                    <p class="text-gray-900 whitespace-no-wrap">
+                      {{ customer.phoneNumber }}
+                    </p>
                   </td>
                   <td
                     class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
                   >
-                    <p class="text-gray-900 whitespace-no-wrap">{{customer.address}}</p>
+                    <p class="text-gray-900 whitespace-no-wrap">
+                      {{ customer.address }}
+                    </p>
                   </td>
                   <td
                     class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
@@ -355,43 +406,50 @@
                     >
                       <span
                         aria-hidden
-                        class="
-                          absolute
-                          inset-0
-                          opacity-50
-                          rounded-full
-                        "
+                        class="absolute inset-0 opacity-50 rounded-full"
                       ></span>
-                      <span class="relative">{{customer.visitedEstab}}</span>
+                      <span class="relative">{{ customer.visitedEstab }}</span>
                     </span>
                   </td>
 
-                   <td
+                  <td
                     class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
                   >
-                    <p class="text-gray-900 whitespace-no-wrap">{{customer.time}}</p>
+                    <p class="text-gray-900 whitespace-no-wrap">
+                      {{ customer.time }}
+                    </p>
                   </td>
 
-                   <td
+                  <td
                     class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
                   >
-                    <p class="text-gray-900 whitespace-no-wrap">{{customer.month + " " + customer.day + ", " + customer.year}}</p>
+                    <p class="text-gray-900 whitespace-no-wrap">
+                      {{
+                        customer.month +
+                        " " +
+                        customer.day +
+                        ", " +
+                        customer.year
+                      }}
+                    </p>
                   </td>
-                   <td
+                  <td
                     class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
                   >
-                    <p class="text-gray-900 whitespace-no-wrap">{{customer.temperature}}</p>
+                    <p class="text-gray-900 whitespace-no-wrap">
+                      {{ customer.temperature }}
+                    </p>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-            <div class="my-2 flex sm:flex-row flex-col">
-              <div class="flex flex-row mb-1 sm:mb-0">
-                <div class="relative"></div>
-              </div>
-              <div class="block relative">
-               <select
+          <div class="my-2 flex sm:flex-row flex-col">
+            <div class="flex flex-row mb-1 sm:mb-0">
+              <div class="relative"></div>
+            </div>
+            <div class="block relative">
+              <select
                 class="
                   appearance-none
                   h-full
@@ -451,27 +509,27 @@
                     d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
                   />
                 </svg>
-              </div>       
               </div>
-
-              <button
-                class="
-                ml-1
-                  relative
-                  w-fit
-                  h-fit
-                  px-2
-                  py-1
-                  text-md
-                  border
-                  rounded
-                  border-blue
-                "
-                @click="findByName"
-              >
-                <p>Go</p>
-              </button>
             </div>
+
+            <button
+              class="
+                ml-1
+                relative
+                w-fit
+                h-fit
+                px-2
+                py-1
+                text-md
+                border
+                rounded
+                border-blue
+              "
+              @click="findByMonth"
+            >
+              <p>Go</p>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -487,17 +545,18 @@ import {
   getDoc,
   getDocs,
 } from "firebase/firestore";
-import {getAuth, signOut} from 'firebase/auth'
+import { getAuth, signOut } from "firebase/auth";
 export default {
   data() {
     return {
-      selectMonth: 'January',
-      searchName: '',
+      month: "",
+      selectMonth: "January",
+      searchName: "",
       customers: [],
       estabID: "",
       reference: "",
       user: {
-        estabName: "",
+        vehicleID: "",
         ownerName: "",
         address: "",
         contactNumber: "",
@@ -517,7 +576,7 @@ export default {
 
       let userData = user.data();
 
-      this.$data.user.estabName = userData.userInfo.establishmentName;
+      this.$data.user.vehicleID = userData.userInfo.vehicleID;
       this.$data.user.address =
         userData.userInfo.purok +
         ", " +
@@ -533,15 +592,60 @@ export default {
       const customerRef = collection(db, "entry-record");
       let customerSnap = await getDocs(customerRef);
 
+      const current = new Date();
+      const monthData = `${current.getMonth() + 1}`;
+      if (monthData == "1") {
+        const month = "January";
+        this.$data.month = month;
+      } else if (monthData == "2") {
+        const month = "February";
+        this.$data.month = month;
+      } else if (monthData == "3") {
+        const month = "March";
+        this.$data.month = month;
+      } else if (monthData == "4") {
+        const month = "April";
+        this.$data.month = month;
+      } else if (monthData == "5") {
+        const month = "May";
+        this.$data.month = month;
+      } else if (monthData == "6") {
+        const month = "June";
+        this.$data.month = month;
+      } else if (monthData == "7") {
+        const month = "July";
+        this.$data.month = month;
+      } else if (monthData == "8") {
+        const month = "August";
+        this.$data.month = month;
+      } else if (monthData == "9") {
+        const month = "September";
+        this.$data.month = month;
+      } else if (monthData == "10") {
+        const month = "Ocotber";
+        this.$data.month = month;
+      } else if (monthData == "11") {
+        const month = "November";
+        this.$data.month = month;
+      } else if (monthData == "12") {
+        const month = "December";
+        this.$data.month = month;
+      }
+
       let customers = [];
       customerSnap.forEach((customer) => {
         let customerData = customer.data();
         customerData.id = customer.id;
-        if(customerData.visitedEstab == this.$data.user.estabName){
-          customers.push(customerData);
-        }
-        else{
-        console.log("")
+        if (customerData.visitedEstab == this.$data.user.vehicleID) {
+           if(customerData.month == this.$data.month & customerData.day == `${current.getDate()}` & customerData.year == `${current.getFullYear()}`){
+             customers.push(customerData);
+          }
+          else{
+            console.log()
+          }
+          
+        } else {
+          console.log();
         }
       });
       this.$data.customers = customers;
@@ -552,24 +656,64 @@ export default {
       this.$router.push(`/estab-scanner/${id}`);
     },
 
-    signOut(){
-      const auth = getAuth(app)
-         signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        this.$router.push('/estab-login');
-        console.log(auth.currentUser)
-      })
-      .catch((error) => {
-        // An error happened.
-        console.log(error);
-      });
+    signOut() {
+      const auth = getAuth(app);
+      signOut(auth)
+        .then(() => {
+          // Sign-out successful.
+          this.$router.push("/estab-login");
+          console.log(auth.currentUser);
+        })
+        .catch((error) => {
+          // An error happened.
+          console.log(error);
+        });
     },
 
-    toSettings(){
+    toSettings() {
       const id = this.$data.estabID;
-      this.$router.push( `/estab-settings/${id}`);
-    }
+      this.$router.push(`/estab-settings/${id}`);
+    },
+
+    async findByName() {
+      const db = getFirestore(app);
+
+      const dataRef = collection(db, "entry-record");
+      let customerSnap = await getDocs(dataRef);
+
+      let customers = [];
+      customerSnap.forEach((customer) => {
+        let customerData = customer.data();
+        if (customerData.visitedEstab == this.$data.user.vehicleID) {
+          if (customerData.name == this.$data.searchName) {
+            customers.push(customerData);
+          } else {
+            console.log("No User");
+          }
+        }
+      });
+      this.$data.customers = customers;
+    },
+
+    async findByMonth() {
+      const db = getFirestore(app);
+
+      const dataRef = collection(db, "entry-record");
+      let customerSnap = await getDocs(dataRef);
+
+      let customers = [];
+      customerSnap.forEach((customer) => {
+        let customerData = customer.data();
+        if (customerData.visitedEstab == this.$data.user.vehicleID) {
+          if (customerData.month == this.$data.selectMonth) {
+            customers.push(customerData);
+          } else {
+            console.log("No User");
+          }
+        }
+      });
+      this.$data.customers = customers;
+    },
   },
 
   created() {

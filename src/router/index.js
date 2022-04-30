@@ -28,11 +28,13 @@ import AdminHome from '../views/users/admin/AdminHome.vue'
 import CheckApplication from '../views/users/admin/CheckApplication.vue'
 import EntryRecord from '../views/users/admin/EntryRecord.vue'
 import Application from '../views/users/admin/Application.vue'
+import Report from '../views/users/admin/Report.vue'
+import ViewReport from '../views/users/admin/ViewReport.vue'
 
-import {getAuth} from 'firebase/auth'
-import app from '../firebase/auth-individual/firebase'
+// import {getAuth} from 'firebase/auth'
+// import app from '../firebase/auth-individual/firebase'
 
-const auth = getAuth(app);
+// const auth = getAuth(app);
 
 const routes = [
 
@@ -40,27 +42,18 @@ const routes = [
     path: '/individual-home/:phoneId',
     name: 'HomeIndi',
     component: HomeIndi,
-    meta: {
-      requiresAuth: true
-    }
   },
 
   {
     path: '/individual-settings/:phoneId',
     name: 'SettingsIndi',
     component: SettingsIndi,
-    meta: {
-      requiresAuth: true
-    }
   },
 
   {
     path: '/individual-generate-qr/:phoneId',
     name: 'GenerateQR',
     component: GenerateQR,
-    meta: {
-      requiresAuth: true
-    }
   },
 
   {
@@ -118,27 +111,18 @@ const routes = [
     path: '/estab-home/:estabId',
     name: 'HomePageEstab',
     component: HomePageEstab,
-    meta: {
-      requiresAuth: true
-    }
   },
 
   {
     path: '/estab-scanner/:estabId',
     name: 'Scanner',
     component: Scanner,
-    meta: {
-      requiresAuth: true
-    }
   },
 
   {
     path: '/estab-settings/:estabId',
     name: 'Settings',
     component: Settings,
-    meta: {
-      requiresAuth: true
-    }
   },
 
   {
@@ -169,6 +153,16 @@ const routes = [
     name: 'Application',
     component: Application
   },
+  {
+    path: '/admin-report',
+    name: 'Report',
+    component: Report
+  },
+  {
+    path: '/admin/report/view-report/:reportId',
+    name: 'ViewReport',
+    component: ViewReport
+  },
 
    {
     path: '/admin-check/:applicationID',
@@ -182,18 +176,5 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-})
-
-router.beforeEach((to, from, next) => {
-  if (to.path === '' && auth.currentUser) {
-    next('/individual-home')
-    return;
-  }
-  if(to.matched.some(record => record.meta.requiresAuth) && !auth.currentUser){
-        alert("You have been logged out")
-        next('/') 
-        return;
-  }
-  next();
 })
 export default router

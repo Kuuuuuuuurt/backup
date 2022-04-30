@@ -1,11 +1,11 @@
 <template>
     <nav class="bg-white shadow fixed z-10 mx-auto inset-x-0 top-0 flex justify-between items-center">
       
-        <a href="#" class="font-bold m-3 inline-flex hover:text-pink-700 transition-all duration-500">
+        <button href="" class="font-bold m-3 inline-flex hover:text-pink-700 transition-all duration-500" @click="back">
               <img src="https://cdn-icons-png.flaticon.com/512/93/93634.png" style="height: 25px" alt="" class="mr-2"
       loading="lazy" />
           Back
-        </a>
+        </button>
         
       
       <!-- List of nav item -->
@@ -126,6 +126,10 @@ export default {
       context.lineTo(points[0].x, points[0].y);
       context.closePath();
       context.stroke();
+    },
+
+    back(){
+      this.$router.push(`/estab-home/${this.$data.estabID }`)
     },
   },
 

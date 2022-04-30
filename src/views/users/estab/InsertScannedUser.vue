@@ -231,6 +231,7 @@
                   v-model="customerData.temperature"
                   required
                 />
+                <p class="text-red-600">{{tempError}}</p>
               </div>
              
             </div>
@@ -298,6 +299,7 @@ import app from "../../../firebase/auth-individual/firebase";
 export default {
   data() {
     return {
+      tempError: '',
       estabID: "",
       customerID: "",
       customerData: {
@@ -336,7 +338,7 @@ export default {
         const estabSnap = await getDoc(estabRef);
         let estabData = estabSnap.data();
         this.$data.customerData.visitedEstab =
-          estabData.userInfo.establishmentName;
+          estabData.userInfo.vehicleID;
       } else {
         alert("No such document!");
         this.$router.push(`/estab-scanner/${this.$data.estabID}`);
@@ -390,32 +392,32 @@ export default {
       }
          else if(monthData == "7"){
         const month = "July"
-        const date = month+ ", " + `${current.getDate()}, ${current.getDate()}`
+        const date = month + ", " + `${current.getDate()}, ${current.getFullYear()}`
         this.$data.customerData.date = date;
       }
          else if(monthData == "8"){
         const month = "August"
-        const date = month+ ", " + `${current.getDate()}, ${current.getDate()}`
+        const date = month+ ", " + `${current.getDate()}, ${current.getFullYear()}`
         this.$data.customerData.date = date;
       }
          else if(monthData == "9"){
         const month = "September"
-        const date = month+ ", " + `${current.getDate()}, ${current.getDate()}`
+        const date = month+ ", " + `${current.getDate()}, ${current.getFullYear()}`
         this.$data.customerData.date = date;
       }
          else if(monthData == "10"){
         const month = "Ocotber"
-        const date = month+ ", " + `${current.getDate()}, ${current.getDate()}`
+        const date = month+ ", " + `${current.getDate()}, ${current.getFullYear()}`
         this.$data.customerData.date = date;
       }
          else if(monthData == "11"){
         const month = "November"
-        const date = month+ ", " + `${current.getDate()}, ${current.getDate()}`
+        const date = month+ ", " + `${current.getDate()}, ${current.getFullYear()}`
         this.$data.customerData.date = date;
       }
          else if(monthData == "12"){
         const month = "December"
-        const date = month+ ", " + `${current.getDate()}, ${current.getDate()}`
+        const date = month+ ", " + `${current.getDate()}, ${current.getFullYear()}`
         this.$data.customerData.date = date;
       }
 
@@ -431,7 +433,12 @@ export default {
         charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
       });
       const db = getFirestore(app);
-      const addRecord = await setDoc(
+
+      if(this.$data.customerData.temperature == "" | this.$data.customerData.temperature == null){
+        this.$data.tempError = "Temperature Required!"
+      }
+      else{
+            const addRecord = await setDoc(
         doc(db, "entry-record", id),
         this.$data.customerData
       );
@@ -439,6 +446,7 @@ export default {
 
       alert("user " + this.$data.customerData.name + " is inserted");
       this.$router.push(`/estab-scanner/${this.$data.estabID}`);
+      }
     },
 
     back(){

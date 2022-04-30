@@ -218,6 +218,7 @@
                   focus:ring-opacity-50
                   ring-inset
                 "
+                @click="toAdmin"
               >
                 <span class="inline-block ml-1">Continue as admin</span>
                 <svg
@@ -298,6 +299,9 @@ export default {
     },
     forgotPassword(){
       this.$router.push("/estab-forgot-password");
+    },
+    toAdmin(){
+       this.$router.push("/admin-login");
     },
 
     async checkUser(){

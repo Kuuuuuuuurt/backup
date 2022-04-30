@@ -1,5 +1,5 @@
 <template>
-  <nav
+<nav
     class="
       bg-white
       shadow
@@ -31,12 +31,11 @@
         class="mr-2"
         loading="lazy"
       />
-      QR Application
+      Reports
     </a>
 
     <!-- List of nav item -->
-    <a
-      href="/admin-home"
+    <button
       class="
         font-extrabold
         m-3
@@ -46,6 +45,7 @@
         transition-all
         duration-500
       "
+      @click="home"
     >
       <img
         src="https://cdn-icons-png.flaticon.com/512/1008/1008001.png"
@@ -55,11 +55,13 @@
         loading="lazy"
       />
       TRAFEX
-    </a>
+    </button>
   </nav>
 
-  <section class="antialiased text-gray-600 px-2 mt-10">
-    <div class="flex flex-col justify-center">
+
+
+  <section class="antialiased text-gray-600 mt-14 px-4">
+    <div class="flex flex-col justify-center h-full">
       <!-- Table -->
       <div
         class="
@@ -70,13 +72,10 @@
           shadow-lg
           rounded-sm
           border border-gray-200
-          my-5
         "
       >
         <header class="px-5 py-4 border-b border-gray-100">
-          <h2 class="font-semibold text-gray-800">
-            QR Code Application Approval
-          </h2>
+          <h2 class="font-semibold text-gray-800">Reports</h2>
         </header>
         <div class="p-3">
           <div class="overflow-x-auto">
@@ -86,54 +85,55 @@
               >
                 <tr>
                   <th class="p-2 whitespace-nowrap">
-                    <div class="font-semibold text-left">Application ID</div>
+                    <div class="font-semibold text-left">Report ID</div>
                   </th>
-                   <th class="p-2 whitespace-nowrap">
+                  <th class="p-2 whitespace-nowrap">
                     <div class="font-semibold text-left">Name</div>
                   </th>
                   <th class="p-2 whitespace-nowrap">
-                    <div class="font-semibold text-left">Status</div>
+                    <div class="font-semibold text-left">Contact Number</div>
                   </th>
                   <th class="p-2 whitespace-nowrap">
-                    <div class="font-semibold text-left">Action</div>
+                    <div class="font-semibold text-center">Status</div>
+                  </th>
+                  <th class="p-2 whitespace-nowrap">
+                    <div class="font-semibold text-center">Action</div>
                   </th>
                 </tr>
               </thead>
               <tbody class="text-sm divide-y divide-gray-100">
-                <tr v-for="user in users" :key="user.id">
+                <tr v-for="report in reports" :key="report.id">
                   <td class="p-2 whitespace-nowrap">
-                    <div class="flex items-center">
-                      <div class="font-medium text-gray-800">
-                        {{ user.id }}
-                      </div>
-                    </div>
+                    <div class="font-medium text-gray-800">{{report.id}}</div>
                   </td>
-                   <td class="p-2 whitespace-nowrap">
-                    <div class="flex items-center">
-                      <div class="font-medium text-gray-800">
-                        {{ user.userInfo.firstName }}
-                      </div>
-                    </div>
+                  <td class="p-2 whitespace-nowrap">
+                    <div class="text-left">{{report.name}}</div>
                   </td>
-                   <td class="p-2 whitespace-nowrap">
-                    <div class="flex items-center">
-                      <div class="font-medium text-gray-800">
-                        {{}}
-                      </div>
+                  <td class="p-2 whitespace-nowrap">
+                    <div class="text-left">{{report.phoneNumber}}</div>
+                  </td>
+                  <td class="p-2 whitespace-nowrap">
+                    <div class="text-left font-medium text-green-500">
+                      {{report.status}}
                     </div>
                   </td>
                   <td class="p-2 whitespace-nowrap">
-                    <div class="text-left">
-                      <router-link
+                    <div class="text-lg text-center">
+                      <button
                         class="
-                          btn
-                          text-green-600
-                          dark:text-green-500
-                          hover:underline
+                          bg-white
+                          hover:bg-gray-100
+                          text-sm text-green-800
+                          font-semibold
+                          py-1
+                          px-2
+                          rounded
+                          shadow
                         "
-                        :to="{ path: `/admin-check/${user.id}` }"
-                        >View</router-link
+                        @click="viewReport"
                       >
+                        View
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -148,62 +148,37 @@
 
 <script>
 import app from "../../../firebase/auth-individual/firebase";
-import { getDocs, collection, getFirestore } from "firebase/firestore";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 export default {
   data() {
     return {
-      users: [],
+      reports: [],
+      id: '',
     };
   },
 
   methods: {
-    async fetchUser() {
+    async getReports() {
       const db = getFirestore(app);
-      const userRef = collection(db, "qr-application");
 
-      let userSnapshot = await getDocs(userRef);
-      let users = [];
-      userSnapshot.forEach((user) => {
-        let userData = user.data();
-        userData.id = user.id;
+      const dataRef = collection(db, "reports");
+      let reportSnap = await getDocs(dataRef);
 
-        console.log(userData.id);
-        users.push(userData);
+      let reports = [];
+      reportSnap.forEach((report) => {
+        let reportData = report.data();
+          reports.push(reportData.reportInfo);
+          this.$data.id = reportData.reportInfo.id;
       });
-      console.log(users);
-      this.$data.users = users;
+      this.$data.reports = reports;
     },
+    viewReport(){
+        this.$router.push(`/admin/report/view-report/${this.$data.id}`)
+    }
   },
 
   created() {
-    this.fetchUser();
+      this.getReports();
   },
 };
 </script>
-
-
-
-
-<style scoped>
-.table {
-  border-spacing: 0 15px;
-}
-
-i {
-  font-size: 1rem !important;
-}
-
-.table tr {
-  border-radius: 20px;
-}
-
-tr td:nth-child(n + 6),
-tr th:nth-child(n + 6) {
-  border-radius: 0 0.625rem 0.625rem 0;
-}
-
-tr td:nth-child(1),
-tr th:nth-child(1) {
-  border-radius: 0.625rem 0 0 0.625rem;
-}
-</style>

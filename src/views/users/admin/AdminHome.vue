@@ -133,6 +133,44 @@
             </div>
           </div>
         </div>
+
+        <div class="rounded-2xl px-8 py-12 sm:px-12 lg:px-8">
+          <div class="mb-12 space-y-4" @click="toReports">
+            <div
+              class="
+                bg-white
+                max-w-sm
+                mx-auto
+                rounded-2xl
+                overflow-hidden
+                shadow-lg
+                hover:shadow-2xl
+                transition
+                duration-500
+                transform
+                hover:scale-105
+                cursor-pointer
+              "
+            >
+              <div class="h-20 bg-blue-500 flex items-center justify-between">
+                <h1 class="text-white ml-4 border-2 py-2 px-4 rounded-full">
+                  C
+                </h1>
+                <p class="mr-20 text-white text-lg">Reports</p>
+                <p class="mr-4 text-white font-thin text-lg">Click</p>
+              </div>
+
+              <p class="py-6 text-lg tracking-wide ml-16">
+                View Records
+              </p>
+              <!-- <hr > -->
+              <div class="flex justify-between px-5 mb-2 text-sm text-gray-600">
+                <p>View Reports</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -147,8 +185,11 @@ export default {
    toRecords(){
      this.$router.push(`/admin-entry-record`);
    },
+   toReports(){
+     this.$router.push(`/admin-report`)
+   }
 
- } ,
+ },
 
  created(){
  }
