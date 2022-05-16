@@ -1,7 +1,7 @@
 <template>
-
-<div class="flex justify-center min-h-screen bg-gray-100 antialiased">
-  <div class="
+  <div class="flex justify-center min-h-screen bg-gray-100 antialiased">
+    <div
+      class="
         container
         sm:mt-40
         mt-24
@@ -11,14 +11,13 @@
         p-3
         bg-white
       "
-      v-show="togglePhoneNUmber">
+      v-show="togglePhoneNUmber"
+    >
       <div class="text-center m-6">
-        <h1 class="text-3xl font-semibold text-gray-700">
-          Create an Account?
-        </h1>
+        <h1 class="text-3xl font-semibold text-gray-700">Create an Account?</h1>
         <p class="text-gray-500">
-          Just enter your phone number below and we'll send you an OTP to
-          verify your phone number existence!
+          Just enter your phone number below and we'll send you an OTP to verify
+          your phone number existence!
         </p>
       </div>
 
@@ -26,42 +25,48 @@
         <div class="mb-4">
           <div class="mb-6">
             <label class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
-              >Phone Number</label>
-              <div class="flex ">
-                <span
-                class=" w-fit
-                px-2
-                py-2
-                placeholder-gray-300
-                border border-gray-300
-                rounded-md"
+              >Phone Number</label
+            >
+            <div class="flex">
+              <span
+                class="
+                  w-fit
+                  px-2
+                  py-2
+                  placeholder-gray-300
+                  border border-gray-300
+                  rounded-md
+                "
                 >+63</span
               >
-              <input type="text" class="
-                w-full
-                px-3
-                py-2
-                placeholder-gray-300
-                border border-gray-300
-                rounded-md
-                focus:outline-none
-                focus:ring
-                focus:ring-indigo-100
-                focus:border-indigo-300
-                dark:bg-gray-700
-                dark:text-white
-                dark:placeholder-gray-500
-                dark:border-gray-600
-                dark:focus:ring-gray-900
-                dark:focus:border-gray-500
-              "
-              v-model="phoneNumber">
-              </div>
-              <p class="text-red-500">{{}}</p>
+              <input
+                type="text"
+                class="
+                  w-full
+                  px-3
+                  py-2
+                  placeholder-gray-300
+                  border border-gray-300
+                  rounded-md
+                  focus:outline-none
+                  focus:ring
+                  focus:ring-indigo-100
+                  focus:border-indigo-300
+                  dark:bg-gray-700
+                  dark:text-white
+                  dark:placeholder-gray-500
+                  dark:border-gray-600
+                  dark:focus:ring-gray-900
+                  dark:focus:border-gray-500
+                "
+                v-model="phoneNumber"
+              />
+            </div>
+            <p class="text-red-500">{{}}</p>
           </div>
-        <div id="recaptcha-container"></div>
+          <div id="recaptcha-container"></div>
           <div>
-             <button
+            <button
               type="button"
               class="
                 w-full
@@ -80,7 +85,7 @@
               Get OTP
             </button>
           </div>
-           <p class="text-sm text-center text-gray-400">
+          <p class="text-sm text-center text-gray-400">
             Already have an account?
             <a
               href="#!"
@@ -94,10 +99,10 @@
           </p>
         </div>
       </div>
-  </div>
+    </div>
 
-
-  <div class="
+    <div
+      class="
         container
         sm:mt-40
         mt-24
@@ -107,13 +112,12 @@
         p-3
         bg-white
       "
-      v-show=" toggleOTP">
+      v-show="toggleOTP"
+    >
       <div class="text-center m-6">
-        <h1 class="text-3xl font-semibold text-gray-700">
-          Confirm OTP
-        </h1>
+        <h1 class="text-3xl font-semibold text-gray-700">Confirm OTP</h1>
         <p class="text-gray-500">
-         Just enter the given OTP code to continue to setting up your account!
+          Just enter the given OTP code to continue to setting up your account!
         </p>
       </div>
 
@@ -121,8 +125,11 @@
         <div class="mb-4">
           <div class="mb-6">
             <label class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
-              >OTP Code</label>
-              <input type="text" class="
+              >OTP Code</label
+            >
+            <input
+              type="text"
+              class="
                 w-full
                 px-3
                 py-2
@@ -140,11 +147,12 @@
                 dark:focus:ring-gray-900
                 dark:focus:border-gray-500
               "
-               v-model="otpCode">
-              <p class="text-red-500">{{}}</p>
+              v-model="otpCode"
+            />
+            <p class="text-red-500">{{}}</p>
           </div>
           <div>
-             <button
+            <button
               type="button"
               class="
                 w-full
@@ -158,12 +166,12 @@
                 duration-100
                 ease-in-out
               "
-               @click="confirmCode"
+              @click="confirmCode"
             >
               Submit OTP
             </button>
           </div>
-           <p class="text-sm text-center text-gray-400">
+          <p class="text-sm text-center text-gray-400">
             Already have an account?
             <a
               href="#!"
@@ -177,12 +185,13 @@
           </p>
         </div>
       </div>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
 import app from "../../../firebase/auth-individual/firebase";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 import {
   getAuth,
   signInWithPhoneNumber,
@@ -202,47 +211,55 @@ export default {
 
   methods: {
     async sendOtp() {
-      let phoneNumber =
-     this.$data.phoneNumber;
+      let phoneNumber = this.$data.phoneNumber;
       phoneNumber = phoneNumber.toString();
       if (phoneNumber.length == 10) {
         if (phoneNumber.startsWith("9")) {
-          const phone = "+63" + phoneNumber;
-          const auth = getAuth(app);
+          const db = getFirestore(app);
 
-          window.recaptchaVerifier = new RecaptchaVerifier(
-            "recaptcha-container",
-            {
-              size: "invisible",
-              callback: () => {
-                // reCAPTCHA solved, allow signInWithPhoneNumber.
-                // ...
+          const docRef = doc(db, "user", phoneNumber);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            alert("User Exist");
+          } else {
+            const phone = "+63" + phoneNumber;
+            const auth = getAuth(app);
+
+            window.recaptchaVerifier = new RecaptchaVerifier(
+              "recaptcha-container",
+              {
+                size: "invisible",
+                callback: () => {
+                  // reCAPTCHA solved, allow signInWithPhoneNumber.
+                  // ...
+                },
               },
-            },
-            auth
-          );
+              auth
+            );
 
-          const appVerifier = window.recaptchaVerifier;
-          console.log(appVerifier);
+            const appVerifier = window.recaptchaVerifier;
+            console.log(appVerifier);
 
-          signInWithPhoneNumber(auth, phone, appVerifier)
-            .then((confirmationResult) => {
-              console.log(confirmationResult);
-              // SMS sent. Prompt user to type the code from the message, then sign the
-              // user in with confirmationResult.confirm(code).
-              window.confirmationResult = confirmationResult;
-              console.log(confirmationResult);
-              alert("SMS sent");
-              this.$data.togglePhoneNUmber = false;
-              this.$data.toggleOTP = true;
-              // ...
-            })
-            .catch((error) => {
-              // Error; SMS not sent
-              console.log(error);
-              alert("Error ! SMS not sent");
-              // ...
-            });
+            signInWithPhoneNumber(auth, phone, appVerifier)
+              .then((confirmationResult) => {
+                console.log(confirmationResult);
+                // SMS sent. Prompt user to type the code from the message, then sign the
+                // user in with confirmationResult.confirm(code).
+                window.confirmationResult = confirmationResult;
+                console.log(confirmationResult);
+                alert("SMS sent");
+                this.$data.togglePhoneNUmber = false;
+                this.$data.toggleOTP = true;
+                // ...
+              })
+              .catch((error) => {
+                // Error; SMS not sent
+                console.log(error);
+                alert("Error ! SMS not sent");
+                // ...
+              });
+          }
         } else {
           alert("Invalid Phone Number Format");
         }

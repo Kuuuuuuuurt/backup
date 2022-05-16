@@ -1,5 +1,5 @@
 <template>
-<nav
+  <nav
     class="
       bg-white
       shadow
@@ -58,8 +58,6 @@
     </button>
   </nav>
 
-
-
   <section class="antialiased text-gray-600 mt-14 px-4">
     <div class="flex flex-col justify-center h-full">
       <!-- Table -->
@@ -104,22 +102,22 @@
               <tbody class="text-sm divide-y divide-gray-100">
                 <tr v-for="report in reports" :key="report.id">
                   <td class="p-2 whitespace-nowrap">
-                    <div class="font-medium text-gray-800">{{report.id}}</div>
+                    <div class="font-medium text-gray-800">{{ report.id }}</div>
                   </td>
                   <td class="p-2 whitespace-nowrap">
-                    <div class="text-left">{{report.name}}</div>
+                    <div class="text-left">{{ report.name }}</div>
                   </td>
                   <td class="p-2 whitespace-nowrap">
-                    <div class="text-left">{{report.phoneNumber}}</div>
+                    <div class="text-left">{{ report.phoneNumber }}</div>
                   </td>
                   <td class="p-2 whitespace-nowrap">
                     <div class="text-left font-medium text-green-500">
-                      {{report.status}}
+                      {{ report.status }}
                     </div>
                   </td>
                   <td class="p-2 whitespace-nowrap">
                     <div class="text-lg text-center">
-                      <button
+                      <router-link
                         class="
                           bg-white
                           hover:bg-gray-100
@@ -130,10 +128,9 @@
                           rounded
                           shadow
                         "
-                        @click="viewReport"
-                      >
-                        View
-                      </button>
+                        :to="{ path: `/admin/report/view-report/${report.id}` }"
+                        >View
+                      </router-link>
                     </div>
                   </td>
                 </tr>
@@ -153,7 +150,7 @@ export default {
   data() {
     return {
       reports: [],
-      id: '',
+      id: "",
     };
   },
 
@@ -167,18 +164,18 @@ export default {
       let reports = [];
       reportSnap.forEach((report) => {
         let reportData = report.data();
-          reports.push(reportData.reportInfo);
-          this.$data.id = reportData.reportInfo.id;
+        reports.push(reportData.reportInfo);
+        this.$data.id = reportData.reportInfo.id;
       });
       this.$data.reports = reports;
     },
-    viewReport(){
-        this.$router.push(`/admin/report/view-report/${this.$data.id}`)
-    }
+    viewReport() {
+      this.$router.push(`/admin/report/view-report/${this.$data.id}`);
+    },
   },
 
   created() {
-      this.getReports();
+    this.getReports();
   },
 };
 </script>

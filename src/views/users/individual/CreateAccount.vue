@@ -7,7 +7,7 @@
                     <input type="text"  placeholder="First Name" class="border p-2  w-1/2" v-model="user.userInfo.firstName" required>
                     <input type="tel"  placeholder="Last Name" class="border p-2 w-1/2" v-model="user.userInfo.lastName" required>
                 </div>
-                <input type="number"  placeholder="" class="border p-2 w-full mt-3" disabled v-model="user.userInfo.phoneNumber" required>
+                <input type="tel"  placeholder="" class="border p-2 w-full mt-3" disabled v-model="user.userInfo.phoneNumber" required>
                  <div class="flex space-x-5 mt-3">
                     <input type="text"  placeholder="Gender" class="border p-2  w-1/2" v-model="user.userInfo.gender" required>
                     <input type="tel"  placeholder="Age" class="border p-2 w-1/2" v-model="user.userInfo.age" required>
@@ -56,7 +56,10 @@ export default {
           qrStatus: "No Application",
           qrData: null,
           type: "individual",
-          password: ''
+          password: '',
+          loginToken: "Yes",
+          vaccinationLink: null,
+          validIdLink: null,
         },
       },
     };

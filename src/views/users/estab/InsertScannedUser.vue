@@ -14,7 +14,6 @@
     "
   >
     <button
-      
       class="
         font-bold
         m-3
@@ -61,12 +60,19 @@
   <div class="flex mt-12">
     <div class="m-auto">
       <div>
-
         <div class="mt-5 bg-white rounded-lg shadow">
           <div class="flex">
             <div class="flex-1 py-5 pl-5 overflow-hidden">
-              <h1 class="inline text-2xl font-semibold leading-none"> <img src="https://cdn-icons-png.flaticon.com/512/2681/2681062.png" style="height: 25px" alt="" class="mr-2"
-      loading="lazy" /> User Information</h1>
+              <h1 class="inline text-2xl font-semibold leading-none">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/2681/2681062.png"
+                  style="height: 25px"
+                  alt=""
+                  class="mr-2"
+                  loading="lazy"
+                />
+                User Information
+              </h1>
             </div>
           </div>
           <div class="px-5 pb-5">
@@ -94,7 +100,6 @@
               "
               disabled
               v-model="customerData.name"
-              
             /><input
               placeholder="Address"
               class="
@@ -203,8 +208,7 @@
               </div>
             </div>
 
-
-             <div class="flex">
+            <div class="flex">
               <div class="flex-grow w-1/4 pr-2">
                 <input
                   placeholder="Temperature"
@@ -231,9 +235,25 @@
                   v-model="customerData.temperature"
                   required
                 />
-                <p class="text-red-600">{{tempError}}</p>
+                <p class="text-red-600">{{ tempError }}</p>
               </div>
-             
+            </div>
+
+            <div class="mt-2">
+              <label class="block text-left" style="max-width: 300px">
+                <span class="text-gray-700">Health Declaration</span>
+                <select
+                  v-model="customerData.symptomsFelt.symptoms"
+                  class="form-multiselect block w-full mt-1"
+                  multiple
+                >
+                  <option>Fever</option>
+                  <option>Cough</option>
+                  <option>Cold</option>
+                  <option>Chills</option>
+                </select>
+              </label>
+              {{ customerData.symptomsFelt.symptoms }}
             </div>
           </div>
 
@@ -283,11 +303,8 @@
                 <span class="pl-2 mx-1">Save</span>
               </button>
             </div>
-           
           </div>
         </div>
-
-
       </div>
     </div>
   </div>
@@ -299,7 +316,7 @@ import app from "../../../firebase/auth-individual/firebase";
 export default {
   data() {
     return {
-      tempError: '',
+      tempError: "",
       estabID: "",
       customerID: "",
       customerData: {
@@ -314,6 +331,9 @@ export default {
         day: "",
         month: "",
         year: "",
+        symptomsFelt:{
+          symptoms: [],
+        }
       },
     };
   },
@@ -337,8 +357,7 @@ export default {
         const estabRef = doc(db, "user", this.$data.estabID);
         const estabSnap = await getDoc(estabRef);
         let estabData = estabSnap.data();
-        this.$data.customerData.visitedEstab =
-          estabData.userInfo.vehicleID;
+        this.$data.customerData.visitedEstab = estabData.userInfo.vehicleID;
       } else {
         alert("No such document!");
         this.$router.push(`/estab-scanner/${this.$data.estabID}`);
@@ -347,81 +366,74 @@ export default {
 
     async submit() {
       const current = new Date();
-      const monthData =  `${current.getMonth() + 1}`
-      if(monthData == "1"){
-        const month = "January"
-        const day = `${current.getDate()}`
+      const monthData = `${current.getMonth() + 1}`;
+      if (monthData == "1") {
+        const month = "January";
+        const day = `${current.getDate()}`;
         this.$data.customerData.day = day;
         this.$data.customerData.month = month;
-        this.$data.customerData.year = `${current.getFullYear()}`
-      }
-      else if(monthData == "2"){
-        const month = "February"
-        const day = `${current.getDate()}`
+        this.$data.customerData.year = `${current.getFullYear()}`;
+      } else if (monthData == "2") {
+        const month = "February";
+        const day = `${current.getDate()}`;
         this.$data.customerData.day = day;
         this.$data.customerData.month = month;
-        this.$data.customerData.year = `${current.getFullYear()}`
-      }
-        else if(monthData == "3"){
-        const month = "March"
-        const day = `${current.getDate()}`
+        this.$data.customerData.year = `${current.getFullYear()}`;
+      } else if (monthData == "3") {
+        const month = "March";
+        const day = `${current.getDate()}`;
         this.$data.customerData.day = day;
         this.$data.customerData.month = month;
-        this.$data.customerData.year = `${current.getFullYear()}`
-      }
-         else if(monthData == "4"){
-        const month = "April"
-        const day = `${current.getDate()}`
+        this.$data.customerData.year = `${current.getFullYear()}`;
+      } else if (monthData == "4") {
+        const month = "April";
+        const day = `${current.getDate()}`;
         this.$data.customerData.day = day;
         this.$data.customerData.month = month;
-        this.$data.customerData.year = `${current.getFullYear()}`
-      }
-         else if(monthData == "5"){
-        const month = "May"
-        const day = `${current.getDate()}`
+        this.$data.customerData.year = `${current.getFullYear()}`;
+      } else if (monthData == "5") {
+        const month = "May";
+        const day = `${current.getDate()}`;
         this.$data.customerData.day = day;
         this.$data.customerData.month = month;
-        this.$data.customerData.year = `${current.getFullYear()}`
-      }
-         else if(monthData == "6"){
-        const month = "June"
-        const day = `${current.getDate()}`
+        this.$data.customerData.year = `${current.getFullYear()}`;
+      } else if (monthData == "6") {
+        const month = "June";
+        const day = `${current.getDate()}`;
         this.$data.customerData.day = day;
         this.$data.customerData.month = month;
-        this.$data.customerData.year = `${current.getFullYear()}`
-      }
-         else if(monthData == "7"){
-        const month = "July"
-        const date = month + ", " + `${current.getDate()}, ${current.getFullYear()}`
+        this.$data.customerData.year = `${current.getFullYear()}`;
+      } else if (monthData == "7") {
+        const month = "July";
+        const date =
+          month + ", " + `${current.getDate()}, ${current.getFullYear()}`;
+        this.$data.customerData.date = date;
+      } else if (monthData == "8") {
+        const month = "August";
+        const date =
+          month + ", " + `${current.getDate()}, ${current.getFullYear()}`;
+        this.$data.customerData.date = date;
+      } else if (monthData == "9") {
+        const month = "September";
+        const date =
+          month + ", " + `${current.getDate()}, ${current.getFullYear()}`;
+        this.$data.customerData.date = date;
+      } else if (monthData == "10") {
+        const month = "Ocotber";
+        const date =
+          month + ", " + `${current.getDate()}, ${current.getFullYear()}`;
+        this.$data.customerData.date = date;
+      } else if (monthData == "11") {
+        const month = "November";
+        const date =
+          month + ", " + `${current.getDate()}, ${current.getFullYear()}`;
+        this.$data.customerData.date = date;
+      } else if (monthData == "12") {
+        const month = "December";
+        const date =
+          month + ", " + `${current.getDate()}, ${current.getFullYear()}`;
         this.$data.customerData.date = date;
       }
-         else if(monthData == "8"){
-        const month = "August"
-        const date = month+ ", " + `${current.getDate()}, ${current.getFullYear()}`
-        this.$data.customerData.date = date;
-      }
-         else if(monthData == "9"){
-        const month = "September"
-        const date = month+ ", " + `${current.getDate()}, ${current.getFullYear()}`
-        this.$data.customerData.date = date;
-      }
-         else if(monthData == "10"){
-        const month = "Ocotber"
-        const date = month+ ", " + `${current.getDate()}, ${current.getFullYear()}`
-        this.$data.customerData.date = date;
-      }
-         else if(monthData == "11"){
-        const month = "November"
-        const date = month+ ", " + `${current.getDate()}, ${current.getFullYear()}`
-        this.$data.customerData.date = date;
-      }
-         else if(monthData == "12"){
-        const month = "December"
-        const date = month+ ", " + `${current.getDate()}, ${current.getFullYear()}`
-        this.$data.customerData.date = date;
-      }
-
-      
 
       const time = `${current.getHours()}:${current.getMinutes()}`.toString();
       this.$data.customerData.time = time;
@@ -434,26 +446,28 @@ export default {
       });
       const db = getFirestore(app);
 
-      if(this.$data.customerData.temperature == "" | this.$data.customerData.temperature == null){
-        this.$data.tempError = "Temperature Required!"
-      }
-      else{
-            const addRecord = await setDoc(
-        doc(db, "entry-record", id),
-        this.$data.customerData
-      );
-      console.log(addRecord);
+      if (
+        (this.$data.customerData.temperature == "") |
+        (this.$data.customerData.temperature == null)
+      ) {
+        this.$data.tempError = "Temperature Required!";
+      } else {
+        const addRecord = await setDoc(
+          doc(db, "entry-record", id),
+          this.$data.customerData
+        );
+        console.log(addRecord);
 
-      alert("user " + this.$data.customerData.name + " is inserted");
-      this.$router.push(`/estab-scanner/${this.$data.estabID}`);
+        alert("user " + this.$data.customerData.name + " is inserted");
+        this.$router.push(`/estab-scanner/${this.$data.estabID}`);
       }
     },
 
-    back(){
+    back() {
       this.$router.push(`/estab-scanner/${this.$data.estabID}`);
     },
 
-    home(){
+    home() {
       this.$router.push(`/estab-home/${this.$data.estabID}`);
     },
   },

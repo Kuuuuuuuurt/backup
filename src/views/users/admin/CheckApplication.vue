@@ -1,5 +1,5 @@
 <template>
-<nav
+  <nav
     class="
       bg-white
       shadow
@@ -58,22 +58,9 @@
     </a>
   </nav>
 
-
-
-  <div
-    class="
-      flex flex-col
-      items-center
-      justify-center
-      
-      text-gray-700
-    "
-  >
+  <div class="flex flex-col items-center justify-center text-gray-700">
     <div class="leading-loose">
-      <div
-        class="max-w-xl m-4 p-10 bg-white rounded shadow-xl"
-        
-      >
+      <div class="max-w-xl m-4 p-10 bg-white rounded shadow-xl">
         <p class="text-gray-800 font-medium">Application information</p>
         <div class="">
           <label class="block text-sm text-gray-00" for="cus_name"
@@ -221,11 +208,10 @@
           <div class="p-3">
             <div class="overflow-x-auto inline-block"></div>
             <div>
-              <img :src="user.userInfo.vaccinationLink" alt="">
+              <img :src="user.userInfo.vaccinationLink" alt="" />
             </div>
           </div>
         </div>
-
 
         <div
           class="
@@ -245,11 +231,10 @@
           <div class="p-3">
             <div class="overflow-x-auto inline-block"></div>
             <div>
-              <img :src="user.userInfo.validIdLink" alt="">
+              <img :src="user.userInfo.validIdLink" alt="" />
             </div>
           </div>
         </div>
-
 
         <div class="mt-4">
           <button
@@ -300,9 +285,6 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 
-
-
-
 export default {
   data() {
     return {
@@ -324,17 +306,27 @@ export default {
           type: "individual",
           vaccinationLink: null,
           validIdLink: null,
-        }, 
+          password: '',
+        },
       },
-      qrInformation:{
-        info:{
-        name: '',
-        address: '',
-        age: '',
-        gender: '',
-        phoneNumber: '',
-        }
-      }
+      qrInformation: {
+        info: {
+          name: "",
+          address: "",
+          age: "",
+          gender: "",
+          phoneNumber: "",
+        },
+      },
+
+       notification: {
+        header: '',
+        notificationMessage: "",
+        date: "",
+        phoneNumber: "",
+      },
+
+
     };
   },
 
@@ -363,37 +355,51 @@ export default {
       this.$data.user.userInfo.purok = applicationData.userInfo.purok;
       this.$data.user.userInfo.municipality =
         applicationData.userInfo.municipality;
-      this.$data.user.userInfo.vaccinationLink = applicationData.userInfo.vaccinationLink;
-      this.$data.user.userInfo.validIdLink = applicationData.userInfo.validIdLink;
+        this.$data.user.userInfo.password = applicationData.userInfo.password;
+      this.$data.user.userInfo.vaccinationLink =
+        applicationData.userInfo.vaccinationLink;
+      this.$data.user.userInfo.validIdLink =
+        applicationData.userInfo.validIdLink;
 
-      this.$data.qrInformation.info.name = applicationData.userInfo.firstName + " " + applicationData.userInfo.lastName;
-      this.$data.qrInformation.info.address = applicationData.userInfo.purok + ", " + applicationData.userInfo.baranggay + ", " + applicationData.userInfo.municipality;
+      this.$data.qrInformation.info.name =
+        applicationData.userInfo.firstName +
+        " " +
+        applicationData.userInfo.lastName;
+      this.$data.qrInformation.info.address =
+        applicationData.userInfo.purok +
+        ", " +
+        applicationData.userInfo.baranggay +
+        ", " +
+        applicationData.userInfo.municipality;
       this.$data.qrInformation.info.age = applicationData.userInfo.age;
       this.$data.qrInformation.info.gender = applicationData.userInfo.gender;
-      this.$data.qrInformation.info.phoneNumber = applicationData.userInfo.phoneNumber;
+      this.$data.qrInformation.info.phoneNumber =
+        applicationData.userInfo.phoneNumber;
 
-      var randomstring = require("randomstring");
+    },
+
+    async acceptData() {
+
+       var randomstrings = require("randomstring");
 
       let qrDetail =
-        randomstring.generate({
+        randomstrings.generate({
           length: 5,
           charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
         }) +
         "-" +
-        randomstring.generate({
+        randomstrings.generate({
           length: 6,
           charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
         }) +
         "-" +
-        randomstring.generate({
+        randomstrings.generate({
           length: 5,
           charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
         });
       this.$data.user.userInfo.qrData = qrDetail;
       console.log(qrDetail);
-    },
 
-    async acceptData() {
       const db = getFirestore(app);
       const userRef = collection(db, "user");
       const usersRefs = collection(db, "qr-application");
@@ -411,15 +417,23 @@ export default {
 
       //create Qr-code details
       let id = this.$data.user.userInfo.qrData;
-      const addDocs = setDoc(doc(db, "data-record", id), this.$data.qrInformation);
+      const addDocs = setDoc(
+        doc(db, "data-record", id),
+        this.$data.qrInformation
+      );
       console.log(addDocs);
 
-      alert("success");
-      this.$router.push('/admin-home');
+      const addDocu = setDoc(doc(db, "applications", id), this.$data.user);
+      console.log(addDocu);
+
+
+
+
+      this.$router.push("/admin-home");
     },
 
-    async decline(){
-       const db = getFirestore(app);
+    async decline() {
+      const db = getFirestore(app);
       const userRef = collection(db, "user");
       const usersRefs = collection(db, "qr-application");
 
@@ -434,8 +448,37 @@ export default {
       let delApplication = doc(usersRefs, this.$data.applicationID);
       await deleteDoc(delApplication);
 
-      this.$router.push('/admin-home')
-    }
+      
+var randomstrings = require("randomstring");
+      let id = randomstrings.generate({
+        length: 20,
+        charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      });
+
+      const addDocu = setDoc(doc(db, "applications", id), this.$data.user);
+      console.log(addDocu);
+
+       this.$data.notification.header = "Your Application has been Declined";
+      this.$data.notification.notificationMessage = "Your Application has been Declined";
+      this.$data.notification.phoneNumber = "+63" + this.$data.user.userInfo.phoneNumber;
+      this.$data.notification.date = "";
+
+       var randomstring = require("randomstring");
+      let notifID = randomstring.generate({
+        length: 20,
+        charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      });
+
+      const addDocus = setDoc(
+          doc(db, "notification", notifID),
+          this.$data.notification
+        );
+        console.log(addDocus);
+
+        alert("success");
+
+      this.$router.push("/admin-home");
+    },
   },
 
   created() {

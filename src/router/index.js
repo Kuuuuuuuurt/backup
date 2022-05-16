@@ -18,7 +18,6 @@ import LoginPageEstab from '../views/users/estab/LoginPage.vue'
 import CreateAccountEstab from '../views/users/estab/CreateAccount.vue'
 import HomePageEstab from '../views/users/estab/HomePage.vue'
 import Scanner from '../views/users/estab/Scanner.vue'
-import InsertScannedUser from '../views/users/estab/InsertScannedUser.vue'
 import Settings from '../views/users/estab/Settings.vue'
 import EForgotPassword from '../views/users/estab/ForgotPassword.vue'
 
@@ -123,12 +122,6 @@ const routes = [
     path: '/estab-settings/:estabId',
     name: 'Settings',
     component: Settings,
-  },
-
-  {
-    path: '/estab-insert-scanned-data/:estabId/:resultId',
-    name: 'InsertScannedUser',
-    component: InsertScannedUser,
   },
 
   {

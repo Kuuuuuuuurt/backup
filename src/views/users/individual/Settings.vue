@@ -1,24 +1,64 @@
 <template>
+  <nav
+    class="
+      bg-white
+      shadow
+      fixed
+      z-10
+      mx-auto
+      inset-x-0
+      top-0
+      flex
+      justify-between
+      items-center
+    "
+  >
+    <a
+      href="#"
+      class="
+        font-bold
+        m-3
+        inline-flex
+        hover:text-pink-700
+        transition-all
+        duration-500
+      "
+    >
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/3524/3524636.png"
+        style="height: 25px"
+        alt=""
+        class="mr-2"
+        loading="lazy"
+      />
+      Settings
+    </a>
 
-    <nav class="bg-white shadow fixed z-10 mx-auto inset-x-0 top-0 flex justify-between items-center">
-      
-        <a href="#" class="font-bold m-3  inline-flex hover:text-pink-700 transition-all duration-500">
-              <img src="https://cdn-icons-png.flaticon.com/512/3524/3524636.png" style="height: 25px" alt="" class="mr-2"
-      loading="lazy" />
-          Settings
-        </a>
-        
-      
-      <!-- List of nav item -->
-           <a href="#" class="font-extrabold m-3 uppercase inline-flex hover:text-pink-700 transition-all duration-500">
-              <img src="https://cdn-icons-png.flaticon.com/512/1008/1008001.png" style="height: 25px" alt="" class="mr-2"
-      loading="lazy" />
-          TRAFEX
-        </a>
-      
-    </nav>
+    <!-- List of nav item -->
+    <a
+      href="#"
+      class="
+        font-extrabold
+        m-3
+        uppercase
+        inline-flex
+        hover:text-pink-700
+        transition-all
+        duration-500
+      "
+    >
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/1008/1008001.png"
+        style="height: 25px"
+        alt=""
+        class="mr-2"
+        loading="lazy"
+      />
+      TRAFEX
+    </a>
+  </nav>
 
-  <div class=" bg-gray-100 bg-opacity-50 mt-16">
+  <div class="bg-gray-100 bg-opacity-50 mt-16">
     <div class="mx-auto container max-w-2xl md:w-3/4 shadow-md">
       <div
         class="
@@ -32,8 +72,7 @@
       >
         <div class="max-w-sm mx-auto md:w-full md:mx-0">
           <div class="inline-flex items-center space-x-4">
-            <qrcode-vue :value="value" :size="size" level="H" v-if="showQr"/>
-          
+            <qrcode-vue :value="value" :size="size" level="H" v-if="showQr" />
 
             <h1 class="text-gray-600">
               {{ user.userInfo.lastName + ", " + user.userInfo.firstName }}
@@ -75,7 +114,7 @@
         </div>
 
         <hr />
-          <div
+        <div
           class="
             md:inline-flex
             space-y-4
@@ -105,8 +144,8 @@
           </div>
 
           <div class="md:w-2/3 mx-auto max-w-sm space-y-5">
-          <label class="text-sm text-gray-400">Last Name</label>
-          <div class="w-full inline-flex border">
+            <label class="text-sm text-gray-400">Last Name</label>
+            <div class="w-full inline-flex border">
               <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
                 <img
                   class="w-4 ml-2 mt-1"
@@ -115,16 +154,15 @@
                 />
               </div>
               <input
-              v-model="user.userInfo.lastName"
+                v-model="user.userInfo.lastName"
                 type=""
                 class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
               />
             </div>
-            </div>
+          </div>
         </div>
 
-
-              <div
+        <div
           class="
             md:inline-flex
             space-y-4
@@ -146,7 +184,7 @@
                 />
               </div>
               <input
-              v-model="user.userInfo.gender"
+                v-model="user.userInfo.gender"
                 type=""
                 class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
               />
@@ -154,8 +192,8 @@
           </div>
 
           <div class="md:w-2/3 mx-auto max-w-sm space-y-5">
-          <label class="text-sm text-gray-400">Age</label>
-          <div class="w-full inline-flex border">
+            <label class="text-sm text-gray-400">Age</label>
+            <div class="w-full inline-flex border">
               <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
                 <img
                   class="w-4 ml-2 mt-1"
@@ -164,15 +202,15 @@
                 />
               </div>
               <input
-              v-model="user.userInfo.age"
+                v-model="user.userInfo.age"
                 type=""
                 class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
               />
             </div>
-            </div>
+          </div>
         </div>
 
-              <div
+        <div
           class="
             md:inline-flex
             space-y-4
@@ -194,7 +232,7 @@
                 />
               </div>
               <input
-              v-model="user.userInfo.purok"
+                v-model="user.userInfo.purok"
                 type=""
                 class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
               />
@@ -202,8 +240,8 @@
           </div>
 
           <div class="md:w-2/3 mx-auto max-w-sm space-y-5">
-          <label class="text-sm text-gray-400">Establishment baranggay</label>
-          <div class="w-full inline-flex border">
+            <label class="text-sm text-gray-400">Establishment baranggay</label>
+            <div class="w-full inline-flex border">
               <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
                 <img
                   class="w-4 ml-2 mt-1"
@@ -212,16 +250,15 @@
                 />
               </div>
               <input
-              v-model="user.userInfo.baranggay"
+                v-model="user.userInfo.baranggay"
                 type=""
                 class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
               />
             </div>
-            </div>
+          </div>
         </div>
 
-
-             <div
+        <div
           class="
             md:inline-flex
             space-y-4
@@ -243,54 +280,51 @@
                 />
               </div>
               <input
-              v-model="user.userInfo.municipality"
+                v-model="user.userInfo.municipality"
                 type=""
                 class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
               />
             </div>
           </div>
 
-          <div class="md:w-2/3 mx-auto max-w-sm space-y-5">
-          
-            </div>
+          <div class="md:w-2/3 mx-auto max-w-sm space-y-5"></div>
         </div>
 
         <div class="md:w-3/12 text-center md:pl-6">
-            <button
-              class="
-                text-white
-                w-full
-                mx-auto
-                max-w-sm
-                rounded-md
-                text-center
-                bg-indigo-400
-                py-2
-                px-4
-                inline-flex
-                items-center
-                focus:outline-none
-                md:float-right
-              "
-              @click="updateProfile"
+          <button
+            class="
+              text-white
+              w-full
+              mx-auto
+              max-w-sm
+              rounded-md
+              text-center
+              bg-indigo-400
+              py-2
+              px-4
+              inline-flex
+              items-center
+              focus:outline-none
+              md:float-right
+            "
+            @click="updateProfile"
+          >
+            <svg
+              fill="none"
+              class="w-4 text-white mr-2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <svg
-                fill="none"
-                class="w-4 text-white mr-2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                />
-              </svg>
-              Update
-            </button>
-          </div>
-        
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              />
+            </svg>
+            Update
+          </button>
+        </div>
 
         <hr />
         <div
@@ -382,7 +416,10 @@
 
         <hr />
         <div class="w-full p-4 text-right text-gray-500">
-          <button class="inline-flex items-center focus:outline-none mr-4" @click="back">
+          <button
+            class="inline-flex items-center focus:outline-none mr-4"
+            @click="back"
+          >
             Save and Back
           </button>
         </div>
@@ -401,21 +438,21 @@ import {
   getDoc,
   setDoc,
 } from "firebase/firestore";
-import QrcodeVue from 'qrcode.vue'
+import QrcodeVue from "qrcode.vue";
 import { getAuth, updatePassword } from "firebase/auth";
 
 export default defineComponent({
   components: {
-    QrcodeVue
+    QrcodeVue,
   },
 
   data() {
     return {
       userID: null,
       userRefer: null,
-       value: "",
-        size: 50,
-        newPassword: '',
+      value: "",
+      size: 50,
+      newPassword: "",
       user: {
         userInfo: {
           phoneNumber: "",
@@ -464,7 +501,8 @@ export default defineComponent({
 
       this.$data.value = userData.userInfo.qrData;
       this.$data.user.userInfo.password = userData.userInfo.password;
-      this.$data.user.userInfo.vaccinationLink = userData.userInfo.vaccinationLink;
+      this.$data.user.userInfo.vaccinationLink =
+        userData.userInfo.vaccinationLink;
       this.$data.user.userInfo.validIdLink = userData.userInfo.validIdLink;
     },
 
@@ -473,26 +511,29 @@ export default defineComponent({
       this.$router.push(`/individual-home/${this.$data.userID}`);
     },
 
-    back(){
+    back() {
       this.$router.push(`/individual-home/${this.$data.userID}`);
     },
 
-     updatePassword(){
-    const auth = getAuth(app);
+    async updatePassword() {
+      const auth = getAuth(app);
 
-    const user = auth.currentUser;
-    const password = this.$data.newPassword;
+      const user = auth.currentUser;
+      const password = this.$data.newPassword;
+      this.$data.user.userInfo.password = password;
 
-    updatePassword(user, password).then(() => {
-  // Update successful.
-  alert("password updated")
-}).catch((error) => {
-  // An error ocurred
-  alert(error)
-  // ...
-});
-
-  },
+      updatePassword(user, password)
+        .then(() => {
+          // Update successful.
+          setDoc(this.$data.userRefer, this.$data.user);
+          alert("password updated");
+        })
+        .catch((error) => {
+          // An error ocurred
+          alert(error);
+          // ...
+        });
+    },
   },
 
   created() {
@@ -501,16 +542,14 @@ export default defineComponent({
     this.getUser();
   },
 
-
-  computed:{
-    showQr(){
-        if(this.$data.value == "" | this.$data.value == null){
-          return false;
-        }
-        else{
-          return true;
-        }
+  computed: {
+    showQr() {
+      if ((this.$data.value == "") | (this.$data.value == null)) {
+        return false;
+      } else {
+        return true;
       }
-  }
+    },
+  },
 });
 </script>

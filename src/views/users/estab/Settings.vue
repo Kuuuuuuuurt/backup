@@ -117,7 +117,7 @@
           "
         >
           <div class="md:w-2/3 mx-auto max-w-sm space-y-5">
-            <label class="text-sm text-gray-400">Establishment Name</label>
+            <label class="text-sm text-gray-400">Vehicle Identification</label>
             <div class="w-full inline-flex border">
               <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
                 <img
@@ -127,7 +127,7 @@
                 />
               </div>
               <input
-              v-model="user.userInfo.establishmentName"
+                v-model="user.userInfo.vehicleID"
                 type=""
                 class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
               />
@@ -137,7 +137,7 @@
           <div class="md:w-2/3 mx-auto max-w-sm space-y-5"></div>
         </div>
 
-          <div
+        <div
           class="
             md:inline-flex
             space-y-4
@@ -159,7 +159,7 @@
                 />
               </div>
               <input
-              v-model="user.userInfo.purok"
+                v-model="user.userInfo.purok"
                 type=""
                 class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
               />
@@ -167,8 +167,8 @@
           </div>
 
           <div class="md:w-2/3 mx-auto max-w-sm space-y-5">
-          <label class="text-sm text-gray-400">Establishment baranggay</label>
-          <div class="w-full inline-flex border">
+            <label class="text-sm text-gray-400">Establishment baranggay</label>
+            <div class="w-full inline-flex border">
               <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
                 <img
                   class="w-4 ml-2 mt-1"
@@ -177,15 +177,15 @@
                 />
               </div>
               <input
-              v-model="user.userInfo.baranggay"
+                v-model="user.userInfo.baranggay"
                 type=""
                 class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
               />
             </div>
-            </div>
+          </div>
         </div>
 
-         <div
+        <div
           class="
             md:inline-flex
             space-y-4
@@ -207,55 +207,53 @@
                 />
               </div>
               <input
-              v-model="user.userInfo.municipality"
+                v-model="user.userInfo.municipality"
                 type=""
                 class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
               />
             </div>
           </div>
 
-          <div class="md:w-2/3 mx-auto max-w-sm space-y-5">
-            </div>
+          <div class="md:w-2/3 mx-auto max-w-sm space-y-5"></div>
         </div>
 
-             <div class="md:w-3/12 text-center md:pl-6">
-            <button
-              class="
-                text-white
-                w-full
-                mx-auto
-                max-w-sm
-                rounded-md
-                text-center
-                bg-indigo-400
-                py-2
-                px-4
-                inline-flex
-                items-center
-                focus:outline-none
-                md:float-right
-              "
-              @click="updateProfile"
+        <div class="md:w-3/12 text-center md:pl-6">
+          <button
+            class="
+              text-white
+              w-full
+              mx-auto
+              max-w-sm
+              rounded-md
+              text-center
+              bg-indigo-400
+              py-2
+              px-4
+              inline-flex
+              items-center
+              focus:outline-none
+              md:float-right
+            "
+            @click="updateProfile"
+          >
+            <svg
+              fill="none"
+              class="w-4 text-white mr-2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <svg
-                fill="none"
-                class="w-4 text-white mr-2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                />
-              </svg>
-              Update
-            </button>
-          </div>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              />
+            </svg>
+            Update
+          </button>
+        </div>
 
-
-            <hr />
+        <hr />
         <div
           class="
             md:inline-flex
@@ -298,6 +296,7 @@
                 </svg>
               </div>
               <input
+              v-model="newPassword"
                 type="password"
                 class="w-11/12 focus:outline-none focus:text-gray-600 p-2 ml-4"
                 placeholder="New"
@@ -341,14 +340,23 @@
             </button>
           </div>
         </div>
-        
-      </div> 
+      </div>
+        <hr />
+        <div class="w-full p-4 text-right text-gray-500">
+          <button
+            class="inline-flex items-center focus:outline-none mr-4"
+            @click="back"
+          >
+            Save and Back
+          </button>
+        </div>
     </div>
   </div>
 </template>
 
 <script>
-import app from '../../../firebase/auth-individual/firebase'
+import app from "../../../firebase/auth-individual/firebase";
+import {getAuth, updatePassword} from 'firebase/auth'
 import {
   getFirestore,
   collection,
@@ -357,26 +365,27 @@ import {
   setDoc,
 } from "firebase/firestore";
 export default {
-  data(){
-    return{
-      estabId: '',
-      userRefer: '',
-      user:{
+  data() {
+    return {
+      estabId: "",
+      userRefer: "",
+      newPassword: '',
+      user: {
         userInfo: {
-        email: "",
-          establishmentName: "",
+          email: "",
+          vehicleID: "",
           municipality: "",
           baranggay: "",
           purok: "",
           owner: "",
           phoneNumber: "",
           type: "establishment",
-        }
-      }
-    }
+        },
+      },
+    };
   },
-  methods:{
-    async getUser(){
+  methods: {
+    async getUser() {
       const db = getFirestore(app);
       const userRef = collection(db, "user");
 
@@ -388,7 +397,8 @@ export default {
       console.log(userData);
 
       this.$data.user.userInfo.email = userData.userInfo.email;
-      this.$data.user.userInfo.establishmentName = userData.userInfo.establishmentName;
+      this.$data.user.userInfo.vehicleID =
+        userData.userInfo.vehicleID;
       this.$data.user.userInfo.purok = userData.userInfo.purok;
       this.$data.user.userInfo.baranggay = userData.userInfo.baranggay;
       this.$data.user.userInfo.municipality = userData.userInfo.municipality;
@@ -396,19 +406,38 @@ export default {
       this.$data.user.userInfo.phoneNumber = userData.userInfo.phoneNumber;
     },
 
-    async updateProfile(){
+    async updateProfile() {
       await setDoc(this.$data.userRefer, this.$data.user);
-      this.$router.push( `/estab-home/${this.$data.estabId}`);
-    }
+      this.$router.push(`/estab-home/${this.$data.estabId}`);
+    },
 
+    async updatePassword(){
+       const auth = getAuth(app);
+
+      const user = auth.currentUser;
+      const password = this.$data.newPassword;
+
+       updatePassword(user, password)
+        .then(() => {
+          // Update successful.
+          alert("password updated");
+        })
+        .catch((error) => {
+          // An error ocurred
+          alert(error);
+          // ...
+        });
+    },
+
+    back(){
+      this.$router.push(`/estab-home/${this.$data.estabId}`)
+    }
   },
 
-  created(){
+  created() {
     let id = this.$route.params.estabId;
     this.$data.estabId = id;
     this.getUser();
-    
-
-  }
-}
+  },
+};
 </script>

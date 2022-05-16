@@ -98,78 +98,46 @@
           <p>Establishment</p>
         </header>
 
-        <!-- Title -->
-        <h2 class="font-bold text-3xl mt-2">
-          {{ user.vehicleID }}
-        </h2>
-
-        <!-- Tags -->
-        <p class="mt-2">
-          Owner:
-          <a href="#" class="text-red-600"> {{ user.ownerName }} </a>,
-        </p>
-        <p class="-mt-2">
-          Contact Number:
-          <a href="#" class="text-red-600"> {{ user.contactNumber }} </a>,
-        </p>
-
-        <!-- Description -->
-        <h3 class="font-bold text-xl mt-4">Address</h3>
-        <p class="font-light text-red-600">
-          {{ user.address }}
-        </p>
 
         <!-- Button -->
-        <button
-          class="
-            bg-red-600
-            text-white
-            font-semibold
-            py-2
-            px-5
-            text-sm
-            mt-3
-            inline-flex
-            items-center
-            group
-            rounded
-          "
-          @click="toScanner"
-        >
-          <p>Scan QR-Code</p>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="
-              h-4
-              w-4
-              ml-1
-              group-hover:translate-x-2
-              delay-100
-              duration-200
-              ease-in-out
-            "
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </button>
       </div>
     </div>
   </div>
   <body class="antialiased font-sans">
-    <div class="container mx-auto px-4 sm:px-8 mt-10">
+    <div class="container mx-auto px-4 sm:px-8">
       <div class="py-8">
-        <div>
+        <div class="flex justify-between">
+           <div>
           <h2 class="text-2xl font-semibold leading-tight">
-            Entry Data Record
+            {{ user.vehicleID }}
           </h2>
+          <p class="text-blue-600">{{ user.ownerName }}</p>
+        </div>
+
+        <div>
+          <button
+            class="
+              bg-transparent
+              hover:bg-blue-500
+              font-semibold
+              hover:text-white
+              py-2
+              px-4
+              border border-blue-500
+              hover:border-transparent
+              rounded
+              flex
+            "
+            @click="toScanner"
+          >
+            <img
+              class="w-4 mt-1 mr-2"
+              src="https://cdn-icons-png.flaticon.com/512/3126/3126571.png"
+              alt="logo"
+            />
+            Scan Qr-Code
+          </button>
+        </div>
         </div>
         <div class="my-2 flex sm:flex-row flex-col">
           <div class="flex flex-row mb-1 sm:mb-0">
