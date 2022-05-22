@@ -13,7 +13,7 @@
                 type="text"
                 class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
                 required
-                v-model="user.phoneNumber"
+                v-model="users.phoneNumber"
               />
               <label class="font-semibold text-sm text-gray-600 pb-1 block"
                 >Password</label
@@ -22,7 +22,7 @@
                 type="password"
                 class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
                 required
-                v-model="user.password"
+                v-model="users.password"
               />
               <button
                 type="submit"
@@ -244,49 +244,108 @@
       </div>
     </div>
   </div>
+
+
+      <div
+      v-if="errorModal"
+    class="
+      main-modal
+      fixed
+      w-full
+      inset-0
+      z-50
+      overflow-hidden
+      flex
+      justify-center
+      items-center
+      animated
+      fadeIn
+      faster
+    "
+    style="background: rgba(0, 0, 0, 0.7)"
+  >
+  <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal" @click="errorModal=false">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+            </button>
+            <div class="p-6 text-center">
+              <img src="https://cdn-icons-png.flaticon.com/512/463/463612.png" alt="" class="mx-auto mb-4 w-24  text-gray-400 dark:text-gray-200"> 
+                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">{{user.error}}</h3>
+                <button data-modal-toggle="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" @click="errorModal=false">Close</button>
+            </div>
+             </div>
+        </div>
+    </div>
+  </div>
+
 </template>
 
 <script>
 import app from "../../../firebase/auth-individual/firebase";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { getFirestore, collection, doc, getDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, getDoc, setDoc } from "firebase/firestore";
 export default {
   data() {
     return {
+      errorModal: false,
       reference: "",
-      user: {
+      users: {
         phoneNumber: "",
         password: "",
+        error: "",
       },
+      user:{
+        userInfo:{
+          phoneNumber: "",
+          firstName: "",
+          lastName: "",
+          age: "",
+          gender: "",
+          municipality: "",
+          baranggay: "",
+          purok: "",
+          qrStatus: "No Application",
+          qrData: null,
+          type: "individual",
+          password: '',
+          loginToken: "",
+          vaccinationLink: null,
+          validIdLink: null,
+        }
+      }
     };
   },
   methods: {
     login() {
-      console.log("login");
       const auth = getAuth(app);
 
-      const phoneEmail = this.$data.user.phoneNumber + "@gmail.com";
-      const password = this.$data.user.password;
+      const phoneEmail = this.$data.users.phoneNumber + "@gmail.com";
+      const password = this.$data.users.password;
 
       signInWithEmailAndPassword(auth, phoneEmail, password)
-        .then((userCredential) => {
+        .then(() => {
           // Signed in
-          const user = userCredential.user;
-          console.log(user);
-          console.log(auth.currentUser);
+          
 
           this.checkUser();
         })
         .catch((error) => {
            switch(error.code){
           case 'auth/user-not-found':
-            alert("User not found")
+            this.$data.user.error = "User Not Found"
+            this.$data.errorModal = true;
             break
           case 'auth/wrong-password':
-            alert("Wrong password")
+            this.$data.user.error = "Incorrect Password"
+            this.$data.errorModal = true;
             break
           default:
-            alert("Something went wrong")
+          this.$data.user.error = "Something Went Wrong Please Try Again"
+          this.$data.errorModal = true;
         }
         });
     },
@@ -313,7 +372,7 @@ export default {
       const db = getFirestore(app);
       const userRef = collection(db, "user");
 
-      let usersRef = doc(userRef, this.$data.user.phoneNumber);
+      let usersRef = doc(userRef, this.$data.users.phoneNumber);
       this.$data.reference = usersRef;
       let user = await getDoc(this.$data.reference);
 
@@ -322,7 +381,32 @@ export default {
       const identifier = userData.userInfo.type;
 
       if (identifier == "individual") {
-        this.$router.push(`/individual-home/${this.$data.user.phoneNumber}`);
+        if(userData.userInfo.loginToken == "No"){
+          this.$data.user.userInfo.firstName = userData.userInfo.firstName;
+          this.$data.user.userInfo.lastName = userData.userInfo.lastName;
+          this.$data.user.userInfo.municipality = userData.userInfo.municipality;
+          this.$data.user.userInfo.baranggay = userData.userInfo.baranggay;
+          this.$data.user.userInfo.purok = userData.userInfo.purok;
+          this.$data.user.userInfo.gender = userData.userInfo.gender;
+          this.$data.user.userInfo.age = userData.userInfo.age;
+          this.$data.user.userInfo.qrStatus = userData.userInfo.qrStatus;
+          this.$data.user.userInfo.qrData = userData.userInfo.qrData;
+          this.$data.user.userInfo.type = userData.userInfo.type;
+          this.$data.user.userInfo.vaccinationLink = userData.userInfo.vaccinationLink;
+          this.$data.user.userInfo.validIdLink = userData.userInfo.validIdLink;
+          this.$data.user.userInfo.phoneNumber = userData.userInfo.phoneNumber;
+          this.$data.user.userInfo.loginToken = "Yes";
+          this.$data.user.userInfo.password = userData.userInfo.password;
+          
+        setDoc(this.$data.reference, this.$data.user);
+        this.$router.push(`/individual-home/${this.$data.users.phoneNumber}`);
+        }
+        else if(userData.userInfo.loginToken == "Yes"){
+          alert("User Already Logged in")
+        }
+        else{
+          alert("No Token")
+        }
       } else {
         alert("User Does not Exist!");
         signOut(auth)

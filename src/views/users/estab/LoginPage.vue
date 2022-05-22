@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class=" bg-gray-100 flex flex-col justify-center sm:py-12">
+    <div class="bg-gray-100 flex flex-col justify-center sm:py-12">
       <div class="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
         <h1 class="font-bold text-center text-2xl mb-5">Trafex</h1>
         <div class="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
@@ -12,7 +12,8 @@
               <input
                 type="email"
                 class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                required v-model="user.email"
+                required
+                v-model="users.email"
               />
               <label class="font-semibold text-sm text-gray-600 pb-1 block"
                 >Password</label
@@ -20,7 +21,8 @@
               <input
                 type="password"
                 class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                required v-model="user.password"
+                required
+                v-model="users.password"
               />
               <button
                 type="submit"
@@ -247,15 +249,29 @@
 <script>
 import app from "../../../firebase/auth-individual/firebase";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { getFirestore, collection, doc, getDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, getDoc, setDoc } from "firebase/firestore";
 export default {
   data() {
     return {
       reference: "",
-      user: {
+      users: {
         email: "",
         password: "",
       },
+        user:{
+        userInfo: {
+          email: "",
+          vehicleID: "",
+          municipality: "",
+          baranggay: "",
+          purok: "",
+          owner: "",
+          phoneNumber: "",
+          type: "establishment",
+          password: "",
+          loginToken: "",
+      }
+      }
     };
   },
 
@@ -263,27 +279,26 @@ export default {
     login() {
       const auth = getAuth(app);
 
-      const email = this.$data.user.email;
-      const password = this.$data.user.password;
+      const email = this.$data.users.email;
+      const password = this.$data.users.password;
 
       signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          console.log(user);
+        .then(() => {
+        
 
           this.checkUser();
         })
         .catch((error) => {
-           switch(error.code){
-          case 'auth/user-not-found':
-            alert("User not found")
-            break
-          case 'auth/wrong-password':
-            alert("Wrong password")
-            break
-          default:
-            alert("Something went wrong")
-        }
+          switch (error.code) {
+            case "auth/user-not-found":
+              alert("User not found");
+              break;
+            case "auth/wrong-password":
+              alert("Wrong password");
+              break;
+            default:
+              alert("Something went wrong");
+          }
         });
     },
 
@@ -295,21 +310,21 @@ export default {
     },
 
     individual() {
-      this.$router.push('/individual-login')
+      this.$router.push("/individual-login");
     },
-    forgotPassword(){
+    forgotPassword() {
       this.$router.push("/estab-forgot-password");
     },
-    toAdmin(){
-       this.$router.push("/admin-login");
+    toAdmin() {
+      this.$router.push("/admin-login");
     },
 
-    async checkUser(){
+    async checkUser() {
       const auth = getAuth(app);
       const db = getFirestore(app);
       const userRef = collection(db, "user");
 
-      let usersRef = doc(userRef, this.$data.user.email);
+      let usersRef = doc(userRef, this.$data.users.email);
       this.$data.reference = usersRef;
       let user = await getDoc(this.$data.reference);
 
@@ -317,22 +332,38 @@ export default {
 
       const identifier = userData.userInfo.type;
 
-      if(identifier == "establishment"){
-        this.$router.push(`/estab-home/${this.$data.user.email}`);
-      }
-      else{
+      if (identifier == "establishment") {
+        if (userData.userInfo.loginToken == "No") {
+      this.$data.user.userInfo.email = userData.userInfo.email;
+      this.$data.user.userInfo.phoneNumber = userData.userInfo.phoneNumber;
+      this.$data.user.userInfo.vehicleID = userData.userInfo.vehicleID;
+      this.$data.user.userInfo.purok = userData.userInfo.purok;
+      this.$data.user.userInfo.baranggay = userData.userInfo.baranggay;
+      this.$data.user.userInfo.municipality = userData.userInfo.municipality;
+      this.$data.user.userInfo.owner = userData.userInfo.owner;
+      this.$data.user.userInfo.type = userData.userInfo.type;
+      this.$data.user.userInfo.password = userData.userInfo.password;
+      this.$data.user.userInfo.loginToken = "Yes";
+
+      setDoc(this.$data.reference, this.$data.user)
+      this.$router.push(`/estab-home/${this.$data.users.email}`);
+        } else if (userData.userInfo.loginToken == "Yes") {
+          alert("Already Logged in");
+        } else {
+          console.log("No Token");
+        }
+      } else {
         alert("User Does not Exist");
         signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        console.log(auth.currentUser)
-      })
-      .catch((error) => {
-        // An error happened.
-        console.log(error);
-      });
+          .then(() => {
+            // Sign-out successful.
+          })
+          .catch((error) => {
+            // An error happened.
+            console.log(error);
+          });
       }
-    }
+    },
   },
 };
 </script>

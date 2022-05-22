@@ -652,54 +652,7 @@
     </div>
   </div>
   
-    <div
-    v-if="notificationModal"
-    class="
-      main-modal
-      fixed
-      w-full
-      inset-0
-      z-50
-      overflow-hidden
-      flex
-      justify-center
-      items-center
-      animated
-      fadeIn
-      faster
-    "
-    style="background: rgba(0, 0, 0, 0.7)"
-  >
-  <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <!-- Modal header -->
-            <div class="flex justify-between items-center p-5 rounded-t border-b dark:border-gray-600">
-                <h3 class="text-xl font-medium text-gray-900 dark:text-white">
-                    Notification
-                </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="small-modal" 
-                @click="notificationModal=false">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
-                </button>
-            </div>
-            <!-- Modal body -->
-            <div class="" v-for="notif in notifications" :key="notif.id">
-              <div class="bg-gray-100 p-6 space-y-6 border">
-                 <img src="https://cdn-icons-png.flaticon.com/512/2645/2645897.png" style="height: 25px" alt="">
-                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">{{notif.header}}
-                </p>
-                <button class="text-sm text-blue-500" @click="notifID=notif.id"><button @click="view">View Details </button></button>
-                </div>
-            </div>
-            <!-- Modal footer -->
-            <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                <button data-modal-toggle="small-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" @click="notificationModal=false">Close</button>
-            </div>
-        </div>
-    </div>
-  </div>
-  
+    
 
       <div
       v-if="logoutModal"
@@ -793,6 +746,147 @@
     </div>
   </div>
 
+<div
+v-if="notificationModal"
+    class="
+      main-modal
+      fixed
+      inset-0
+      z-50
+      overflow-hidden
+      flex
+      justify-center
+      items-center
+      animated
+      fadeIn
+      faster
+    "
+    style="background: rgba(0, 0, 0, 0.7)"
+  >
+    <div
+      class="
+        modal
+        fade
+        fixed
+        w-auto
+        h-full
+        outline-none
+        overflow-x-hidden overflow-y-auto
+      "
+    >
+      <div class="modal-dialog relative w-auto pointer-events-none">
+        <div
+          class="
+            modal-content
+            border-none
+            shadow-lg
+            relative
+            flex flex-col
+            w-full
+            pointer-events-auto
+            bg-white bg-clip-padding
+            rounded-md
+            outline-none
+            text-current
+          "
+        >
+          <div
+            class="
+              modal-header
+              flex flex-shrink-0
+              items-center
+              justify-between
+              p-4
+              border-b border-gray-200
+              rounded-t-md
+            "
+          >
+            <h5
+              class="text-xl font-medium leading-normal text-gray-800"
+              id="exampleModalXlLabel"
+            >
+              Notification
+            </h5>
+            <button
+              type="button"
+              @click="notificationModal = false"
+              class="
+                btn-close
+                box-content
+                w-4
+                h-4
+                p-1
+                text-black
+                border-none
+                rounded-none
+                opacity-50
+                focus:shadow-none focus:outline-none focus:opacity-100
+                hover:text-black hover:opacity-75 hover:no-underline
+              "
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              X
+            </button>
+          </div>
+
+
+             <div class="" v-for="notif in notifications" :key="notif.id">
+              <div class="bg-gray-100 p-6 space-y-6 border">
+                 <img src="https://cdn-icons-png.flaticon.com/512/2645/2645897.png" style="height: 25px" alt="">
+                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">{{notif.header}}
+                </p>
+                <button class="text-sm text-blue-500" @click="notifID=notif.id"><button @click="view">View Details </button></button>
+                </div>
+            </div>
+           
+            <!-- Modal footer -->
+            <div
+              class="
+                flex
+                items-center
+                p-6
+                space-x-2
+                rounded-b
+                border-t border-gray-200
+                dark:border-gray-600
+              "
+            >
+              <button
+                data-modal-toggle="extralarge-modal"
+                type="button"
+                class="
+                  text-gray-500
+                  bg-white
+                  hover:bg-gray-100
+                  focus:ring-4 focus:outline-none focus:ring-gray-200
+                  rounded-lg
+                  border border-gray-200
+                  text-sm
+                  font-medium
+                  px-5
+                  py-2.5
+                  hover:text-gray-900
+                  focus:z-10
+                  dark:bg-gray-700
+                  dark:text-gray-300
+                  dark:border-gray-500
+                  dark:hover:text-white
+                  dark:hover:bg-gray-600
+                  dark:focus:ring-gray-600
+                "
+                @click="notificationModal = false"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  
 
 </template>
 
@@ -901,22 +995,16 @@ export default defineComponent({
 
   methods: {
     async getUser() {
-      console.log(this.userID);
       const db = getFirestore(app);
       const userRef = collection(db, "user");
-      console.log(userRef);
 
       let usersRef = doc(userRef, this.userID);
       this.$data.userRefer = usersRef;
 
-      console.log(this.$data.userRefer);
-
       let user = await getDoc(this.$data.userRefer);
-      console.log(user);
 
       let userData = user.data();
 
-      console.log(userData);
 
       this.$data.user.name =
         userData.userInfo.firstName + " " + userData.userInfo.lastName;
@@ -960,13 +1048,13 @@ export default defineComponent({
       this.$data.users.userInfo.validIdLink = userData.userInfo.validIdLink;
       this.$data.users.userInfo.password = userData.userInfo.password;
       
-      if(userData.userInfo.loginToken == "No"){
+      if(userData.userInfo.loginToken == "Yes"){
          setDoc(this.$data.userRefer, this.$data.users);
       }
-      if(userData.userInfo.loginToken == "Yes"){
-        this.$data.users.userInfo.loginToken = "No"
-        alert("Unauthorized Login: Please Login Again")
-        setDoc(this.$data.userRefer, this.$data.users);
+      else if(userData.userInfo.loginToken == "No"){
+        this.$router.push(`/individual-login`)
+      }
+      else{
         this.$router.push(`/individual-login`)
       }
 
@@ -989,21 +1077,13 @@ export default defineComponent({
           ) {
             myEntries.push(entryData);
           } else {
-            console.log("no data");
+            console.log();
           }
         } else {
           console.log();
         }
       });
       this.$data.myEntry = myEntries;
-      console.log(myEntries);
-      const add = "Madasigon, TInago, Ozamiz City";
-      if(add == myEntries){
-        console.log(myEntries);
-      }
-      else{
-        console.log("error")
-      }
       
     },
 
@@ -1067,7 +1147,6 @@ export default defineComponent({
       this.$router.push(`/individual-settings/${id}`);
     },
     logoutProfile() {
-      console.log("logged out");
       this.$data.users.userInfo.loginToken = "No"
       const auth = getAuth(app);
       signOut(auth)
@@ -1075,7 +1154,6 @@ export default defineComponent({
           // Sign-out successful.
           setDoc(this.$data.userRefer, this.$data.users);
           this.$router.push("/individual-login");
-          console.log(auth.currentUser);
         })
         .catch((error) => {
           // An error happened.
@@ -1187,8 +1265,7 @@ export default defineComponent({
       this.$data.report.reportInfo.id = id;
 
        const db = getFirestore(app);
-       const addDocs = setDoc(doc(db, "reports", id), this.$data.report);
-       console.log(addDocs);
+       setDoc(doc(db, "reports", id), this.$data.report);
        alert("submitted")
     },
 
@@ -1208,8 +1285,6 @@ export default defineComponent({
       });
 
       this.$data.notifications = notifications;
-      console.log(this.$data.notifCount)
-      console.log(this.$data.notifications);
     },
 
     async view(){
@@ -1232,7 +1307,10 @@ export default defineComponent({
     closeNotif(){
       this.$data.viewNotifModal = false;
       this.$data.notificationModal = true;
-    }
+    },
+
+
+
   },
 
   computed: {

@@ -307,6 +307,7 @@ export default {
           vaccinationLink: null,
           validIdLink: null,
           password: '',
+          loginToken: '',
         },
       },
       qrInformation: {
@@ -355,6 +356,7 @@ export default {
       this.$data.user.userInfo.purok = applicationData.userInfo.purok;
       this.$data.user.userInfo.municipality =
         applicationData.userInfo.municipality;
+        this.$data.user.userInfo.loginToken = applicationData.userInfo.loginToken;
         this.$data.user.userInfo.password = applicationData.userInfo.password;
       this.$data.user.userInfo.vaccinationLink =
         applicationData.userInfo.vaccinationLink;

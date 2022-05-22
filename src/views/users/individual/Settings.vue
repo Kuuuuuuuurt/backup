@@ -469,6 +469,7 @@ export default defineComponent({
           password: "",
           vaccinationLink: null,
           validIdLink: null,
+          loginToken: "",
         },
       },
     };
@@ -477,7 +478,6 @@ export default defineComponent({
     async getUser() {
       const db = getFirestore(app);
       const userRef = collection(db, "user");
-      console.log(userRef);
 
       let usersRef = doc(userRef, this.$data.userID);
       this.$data.userRefer = usersRef;
@@ -486,9 +486,8 @@ export default defineComponent({
 
       let userData = user.data();
 
-      console.log(userData);
-
-      this.$data.user.userInfo.phoneNumber = userData.userInfo.phoneNumber;
+      if(userData.userInfo.loginToken == "Yes"){
+        this.$data.user.userInfo.phoneNumber = userData.userInfo.phoneNumber;
       this.$data.user.userInfo.municipality = userData.userInfo.municipality;
       this.$data.user.userInfo.gender = userData.userInfo.gender;
       this.$data.user.userInfo.age = userData.userInfo.age;
@@ -504,6 +503,14 @@ export default defineComponent({
       this.$data.user.userInfo.vaccinationLink =
         userData.userInfo.vaccinationLink;
       this.$data.user.userInfo.validIdLink = userData.userInfo.validIdLink;
+      this.$data.user.userInfo.loginToken = userData.userInfo.loginToken;
+      }
+      else if(userData.userInfo.loginToken == "No"){
+        this.$router.push(`/individual-login`)
+      }
+      else{
+        this.$router.push(`/individual-login`)
+      }
     },
 
     async updateProfile() {

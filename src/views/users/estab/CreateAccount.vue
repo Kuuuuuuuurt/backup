@@ -655,6 +655,7 @@ export default {
           phoneNumber: "",
           type: "establishment",
           password: "",
+          loginToken: "Yes",
         },
       },
     };

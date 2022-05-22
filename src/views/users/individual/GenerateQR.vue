@@ -20,9 +20,6 @@
   <div class="flex flex-wrap items-center justify-center -mt-5">
     <div class="w-full md:w-3/5 bg-white p-6">
       <div class="mt-5 text-2xl">
-        <p class="text-center">
-          <span class="">Setup QR Information</span>
-        </p>
       </div>
       <div class="flex items-center border-b py-4"></div>
       <section class="antialiased text-gray-600 h-screen px-2">
@@ -325,15 +322,13 @@ export default {
           vaccinationLink: null,
           validIdLink: null,
           password: "",
+          loginToken: '',
         },
       },
     };
   },
   methods: {
     async getUser() {
-      console.log("generator");
-      console.log(this.userID);
-
       const db = getFirestore(app);
       const userRef = collection(db, "user");
 
@@ -344,9 +339,9 @@ export default {
 
       let userData = user.data();
 
-      console.log(userData);
+if(userData.userInfo.loginToken == "Yes"){
 
-      this.$data.name =
+this.$data.name =
         userData.userInfo.firstName + " " + userData.userInfo.lastName;
       this.$data.address =
         userData.userInfo.purok +
@@ -358,16 +353,30 @@ export default {
       this.$data.gender = userData.userInfo.gender;
       this.$data.contactNumber = "+63" + userData.userInfo.phoneNumber;
 
-      // data setting for collection
-      this.$data.user.userInfo.phoneNumber = userData.userInfo.phoneNumber;
+        this.$data.user.userInfo.phoneNumber = userData.userInfo.phoneNumber;
+      this.$data.user.userInfo.municipality = userData.userInfo.municipality;
+      this.$data.user.userInfo.gender = userData.userInfo.gender;
+      this.$data.user.userInfo.age = userData.userInfo.age;
+      this.$data.user.userInfo.baranggay = userData.userInfo.baranggay;
+      this.$data.user.userInfo.purok = userData.userInfo.purok;
       this.$data.user.userInfo.firstName = userData.userInfo.firstName;
       this.$data.user.userInfo.lastName = userData.userInfo.lastName;
-      this.$data.user.userInfo.age = userData.userInfo.age;
-      this.$data.user.userInfo.gender = userData.userInfo.gender;
-      this.$data.user.userInfo.baranggay = userData.userInfo.baranggay;
-      this.$data.user.userInfo.municipality = userData.userInfo.municipality;
-      this.$data.user.userInfo.purok = userData.userInfo.purok;
+      this.$data.user.userInfo.qrData = userData.userInfo.qrData;
+      this.$data.user.userInfo.qrStatus = userData.userInfo.qrStatus;
+
+      this.$data.value = userData.userInfo.qrData;
       this.$data.user.userInfo.password = userData.userInfo.password;
+      this.$data.user.userInfo.loginToken = userData.userInfo.loginToken;
+      }
+      else if(userData.userInfo.loginToken == "No"){
+        this.$router.push(`/individual-login`)
+      }
+      else{
+        this.$router.push(`/individual-login`)
+      }
+
+
+      // data setting for collection
     },
 
     cancel() {
@@ -375,6 +384,10 @@ export default {
     },
 
     submitData() {
+      if(this.$data.user.userInfo.vaccinationLink == "" | this.$data.user.userInfo.vaccinationLink == null | this.$data.user.userInfo.validIdLink == "" | this.$data.user.userInfo.validIdLink == null){
+        console.log("ew")
+      }
+      else{
       var randomstring = require("randomstring");
       let id = randomstring.generate({
         length: 30,
@@ -383,17 +396,15 @@ export default {
       console.log(id);
 
       const db = getFirestore(app);
-      const addDocs = setDoc(doc(db, "qr-application", id), this.$data.user);
+      setDoc(doc(db, "qr-application", id), this.$data.user);
 
-      const addDocu = setDoc(
+      setDoc(
         doc(db, "user", this.$data.userID),
         this.$data.user
       );
-      console.log(addDocu);
-
-      console.log(addDocs);
       alert("Application for Qr-Code Submitted, Please wait for the response!");
       this.$router.push(`/individual-home/${this.$data.userID}`);
+      }
     },
 
     previewVaxx(event) {

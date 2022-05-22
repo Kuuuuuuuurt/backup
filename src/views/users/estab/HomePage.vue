@@ -98,7 +98,6 @@
           <p>Establishment</p>
         </header>
 
-
         <!-- Button -->
       </div>
     </div>
@@ -107,37 +106,37 @@
     <div class="container mx-auto px-4 sm:px-8">
       <div class="py-8">
         <div class="flex justify-between">
-           <div>
-          <h2 class="text-2xl font-semibold leading-tight">
-            {{ user.vehicleID }}
-          </h2>
-          <p class="text-blue-600">{{ user.ownerName }}</p>
-        </div>
+          <div>
+            <h2 class="text-2xl font-semibold leading-tight">
+              {{ users.vehicleID }}
+            </h2>
+            <p class="text-blue-600">{{ users.ownerName }}</p>
+          </div>
 
-        <div>
-          <button
-            class="
-              bg-transparent
-              hover:bg-blue-500
-              font-semibold
-              hover:text-white
-              py-2
-              px-4
-              border border-blue-500
-              hover:border-transparent
-              rounded
-              flex
-            "
-            @click="toScanner"
-          >
-            <img
-              class="w-4 mt-1 mr-2"
-              src="https://cdn-icons-png.flaticon.com/512/3126/3126571.png"
-              alt="logo"
-            />
-            Scan Qr-Code
-          </button>
-        </div>
+          <div>
+            <button
+              class="
+                bg-transparent
+                hover:bg-blue-500
+                font-semibold
+                hover:text-white
+                py-2
+                px-4
+                border border-blue-500
+                hover:border-transparent
+                rounded
+                flex
+              "
+              @click="toScanner"
+            >
+              <img
+                class="w-4 mt-1 mr-2"
+                src="https://cdn-icons-png.flaticon.com/512/3126/3126571.png"
+                alt="logo"
+              />
+              Scan Qr-Code
+            </button>
+          </div>
         </div>
         <div class="my-2 flex sm:flex-row flex-col">
           <div class="flex flex-row mb-1 sm:mb-0">
@@ -512,6 +511,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  setDoc,
 } from "firebase/firestore";
 import { getAuth, signOut } from "firebase/auth";
 export default {
@@ -523,11 +523,25 @@ export default {
       customers: [],
       estabID: "",
       reference: "",
-      user: {
+      users: {
         vehicleID: "",
         ownerName: "",
         address: "",
         contactNumber: "",
+      },
+      user: {
+        userInfo: {
+          email: "",
+          vehicleID: "",
+          municipality: "",
+          baranggay: "",
+          purok: "",
+          owner: "",
+          phoneNumber: "",
+          type: "establishment",
+          password: "",
+          loginToken: "",
+        },
       },
     };
   },
@@ -544,17 +558,34 @@ export default {
 
       let userData = user.data();
 
-      this.$data.user.vehicleID = userData.userInfo.vehicleID;
-      this.$data.user.address =
-        userData.userInfo.purok +
-        ", " +
-        userData.userInfo.baranggay +
-        ", " +
-        userData.userInfo.municipality +
-        ", " +
-        "Misamis Occidental";
-      this.$data.user.contactNumber = userData.userInfo.phoneNumber;
-      this.$data.user.ownerName = userData.userInfo.owner;
+      this.$data.user.userInfo.email = userData.userInfo.email;
+      this.$data.user.userInfo.phoneNumber = userData.userInfo.phoneNumber;
+      this.$data.user.userInfo.vehicleID = userData.userInfo.vehicleID;
+      this.$data.user.userInfo.purok = userData.userInfo.purok;
+      this.$data.user.userInfo.baranggay = userData.userInfo.baranggay;
+      this.$data.user.userInfo.municipality = userData.userInfo.municipality;
+      this.$data.user.userInfo.owner = userData.userInfo.owner;
+      this.$data.user.userInfo.type = userData.userInfo.type;
+      this.$data.user.userInfo.password = userData.userInfo.password;
+      this.$data.user.userInfo.loginToken = userData.userInfo.loginToken;
+
+      if (userData.userInfo.loginToken == "Yes") {
+        this.$data.users.vehicleID = userData.userInfo.vehicleID;
+        this.$data.users.address =
+          userData.userInfo.purok +
+          ", " +
+          userData.userInfo.baranggay +
+          ", " +
+          userData.userInfo.municipality +
+          ", " +
+          "Misamis Occidental";
+        this.$data.users.contactNumber = userData.userInfo.phoneNumber;
+        this.$data.users.ownerName = userData.userInfo.owner;
+      } else if (userData.userInfo.loginToken == "No") {
+        this.$router.push("/estab-login");
+      } else {
+        alert("No token");
+      }
 
       //display all data in table
       const customerRef = collection(db, "entry-record");
@@ -604,14 +635,16 @@ export default {
       customerSnap.forEach((customer) => {
         let customerData = customer.data();
         customerData.id = customer.id;
-        if (customerData.visitedEstab == this.$data.user.vehicleID) {
-           if(customerData.month == this.$data.month & customerData.day == `${current.getDate()}` & customerData.year == `${current.getFullYear()}`){
-             customers.push(customerData);
+        if (customerData.visitedEstab == this.$data.users.vehicleID) {
+          if (
+            (customerData.month == this.$data.month) &
+            (customerData.day == `${current.getDate()}`) &
+            (customerData.year == `${current.getFullYear()}`)
+          ) {
+            customers.push(customerData);
+          } else {
+            console.log();
           }
-          else{
-            console.log()
-          }
-          
         } else {
           console.log();
         }
@@ -629,8 +662,9 @@ export default {
       signOut(auth)
         .then(() => {
           // Sign-out successful.
+          this.$data.user.userInfo.loginToken = "No";
+          setDoc(this.$data.reference, this.$data.user);
           this.$router.push("/estab-login");
-          console.log(auth.currentUser);
         })
         .catch((error) => {
           // An error happened.

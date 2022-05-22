@@ -380,6 +380,7 @@ export default {
           owner: "",
           phoneNumber: "",
           type: "establishment",
+          loginToken: '',
         },
       },
     };
@@ -394,9 +395,11 @@ export default {
 
       let user = await getDoc(this.$data.userRefer);
       let userData = user.data();
-      console.log(userData);
 
-      this.$data.user.userInfo.email = userData.userInfo.email;
+      
+
+      if(userData.userInfo.loginToken == "Yes"){
+        this.$data.user.userInfo.email = userData.userInfo.email;
       this.$data.user.userInfo.vehicleID =
         userData.userInfo.vehicleID;
       this.$data.user.userInfo.purok = userData.userInfo.purok;
@@ -404,6 +407,12 @@ export default {
       this.$data.user.userInfo.municipality = userData.userInfo.municipality;
       this.$data.user.userInfo.owner = userData.userInfo.owner;
       this.$data.user.userInfo.phoneNumber = userData.userInfo.phoneNumber;
+      this.$data.user.userInfo.loginToken = userData.userInfo.loginToken;
+      }
+      else if(userData.userInfo.loginToken == "No"){
+        this.$router.push("/estab-login")
+      }
+      else{console.log()}
     },
 
     async updateProfile() {
