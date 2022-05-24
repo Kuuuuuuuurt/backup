@@ -551,6 +551,8 @@ export default {
         let estabData = estabSnap.data();
         this.$data.customerData.visitedEstab = estabData.userInfo.vehicleID;
         console.log(this.$data.customerData.visitedEstab )
+
+
        }
        else{
          console.log("No")
@@ -669,11 +671,30 @@ export default {
        this.$data.resultModal = false;
        this.$data.scannerToggle = true;
     },
+
+    async getEstab(){
+      const db = getFirestore(app);
+       const estabRef = doc(db, "user", this.$data.estabID);
+        const estabSnap = await getDoc(estabRef);
+        let estabData = estabSnap.data();
+        this.$data.customerData.visitedEstab = estabData.userInfo.vehicleID;
+        
+        if(estabData.userInfo.loginToken == "Yes"){
+          console.log();
+        }
+        else if(estabData.userInfo.loginToken == "No"){
+          this.$router.push("/estab-login");
+        }
+        else{
+          this.$router.push("/estab-login");
+        }
+    }
   },
 
   created() {
     let id = this.$route.params.estabId;
     this.$data.estabID = id;
+    this.getEstab();
   },
 };
 </script>

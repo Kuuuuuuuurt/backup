@@ -393,9 +393,10 @@ this.$data.name =
         length: 30,
         charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
       });
-      console.log(id);
+      console.log(id); 
 
       const db = getFirestore(app);
+      this.$data.user.userInfo.qrStatus = "Pending Application"
       setDoc(doc(db, "qr-application", id), this.$data.user);
 
       setDoc(

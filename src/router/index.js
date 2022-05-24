@@ -130,35 +130,35 @@ const routes = [
     component: LoginPageAdmin
   },
   {
-    path: '/admin-home',
+    path: '/admin-home/:id',
     name: 'AdminHome',
     component: AdminHome
   },
 
   {
-    path: '/admin-entry-record',
+    path: '/admin-entry-record/:id',
     name: 'EntryRecord',
     component: EntryRecord
   },
 
   {
-    path: '/admin-application',
+    path: '/admin-application/:id',
     name: 'Application',
     component: Application
   },
   {
-    path: '/admin-report',
+    path: '/admin-report/:id',
     name: 'Report',
     component: Report
   },
   {
-    path: '/admin/report/view-report/:reportId',
+    path: '/admin-report/view-report/:id/:reportId',
     name: 'ViewReport',
     component: ViewReport
   },
 
    {
-    path: '/admin-check/:applicationID',
+    path: '/admin-check/:id/:applicationID',
     name: 'CheckApplication',
     component: CheckApplication
   },

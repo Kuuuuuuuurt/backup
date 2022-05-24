@@ -424,6 +424,8 @@ import {
   getFirestore,
   collection,
   getDocs,
+  getDoc,
+  doc,
 } from "firebase/firestore";
 export default {
   data(){
@@ -431,6 +433,15 @@ export default {
       dataRecord: [],
       searchName: "",
       selectMonth: "January",
+      id: '',
+      reference: '',
+         user:{
+          userName: '',
+          password: '',
+          type: '',
+          loginToken:'',
+          
+      }
     }
   },
 
@@ -449,8 +460,28 @@ export default {
     
       });
       this.$data.dataRecord = dataRecord;
-      console.log(this.$data.dataRecord)
-      
+
+
+      const userRef = collection(db, "user");
+
+      let usersRef = doc(userRef, this.id);
+      this.$data.reference = usersRef;
+      let user = await getDoc(this.$data.reference);
+
+      let userData = user.data();
+
+       if(userData.loginToken == "Yes"){
+        this.$data.user.userName = userData.userName;
+        this.$data.user.password = userData.password;
+        this.$data.user.loginToken = userData.loginToken;
+        this.$data.user.type = userData.type;
+      }
+      else if(userData.loginToken == "No"){
+        this.$router.push("/admin-login")
+      }
+      else{
+        this.$router.push("/admin-login")
+      }
     },
 
     async findByName(){
@@ -464,14 +495,12 @@ export default {
         let recordData = dataRec.data();
         if(recordData.name == this.$data.searchName){
           dataRecord.push(recordData);
-          console.log("Succ");
         }
         else{
-          console.log("Yucc");
+          alert("No Record");
         }
       });
       this.$data.dataRecord = dataRecord;
-      console.log(this.$data.dataRecord)
     },
 
     async findByMonth(){
@@ -485,21 +514,21 @@ export default {
         let recordData = dataRec.data();
         if(recordData.month == this.$data.selectMonth){
           dataRecord.push(recordData);
-          console.log("Succ");
         }
         else{
-          console.log("Yucc");
+          console.log();
         }
       });
       this.$data.dataRecord = dataRecord;
-      console.log(this.$data.dataRecord)
 
     },
     home(){
-      this.$router.push('/admin-home')
+      this.$router.push(`/admin-home/${this.id}`)
     }
   },
   created(){
+    const id = this.$route.params.id;
+    this.id = id;
     this.getData();
   }
 }

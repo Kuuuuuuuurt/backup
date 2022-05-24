@@ -31,12 +31,11 @@
         class="mr-2"
         loading="lazy"
       />
-      Home
+      Trafex
     </a>
 
     <!-- List of nav item -->
-    <a
-      href="#"
+   <div
       class="
         font-extrabold
         m-3
@@ -47,15 +46,34 @@
         duration-500
       "
     >
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/1008/1008001.png"
-        style="height: 25px"
-        alt=""
-        class="mr-2"
-        loading="lazy"
-      />
-      TRAFEX
-    </a>
+      <button>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png"
+          style="height: 25px"
+          alt=""
+          class="mr-2"
+          loading="lazy"
+        />
+      </button>
+      <button>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/2099/2099058.png"
+          style="height: 25px"
+          alt=""
+          class="mr-2"
+          loading="lazy"
+        />
+      </button>
+      <button @click="logout">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/450/450387.png"
+          style="height: 25px"
+          alt=""
+          class="mr-2"
+          loading="lazy"
+        />
+      </button>
+    </div>
   </nav>
 
   <div class="py-16">
@@ -177,21 +195,83 @@
 </template>
 
 <script>
+import app from '../../../firebase/auth-individual/firebase'
+import {signOut, getAuth} from 'firebase/auth'
+import {
+  getFirestore,
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+} from "firebase/firestore";
 export default {
+  data(){
+    return{
+      id: "",
+      reference: '',
+       user:{
+          userName: '',
+          password: '',
+          type: '',
+          loginToken:'',
+          
+      }
+    }
+  },
  methods:{
+   async getUser(){
+     const db = getFirestore(app);
+      const userRef = collection(db, "user");
+
+      let usersRef = doc(userRef, this.id);
+      this.$data.reference = usersRef;
+      let user = await getDoc(this.$data.reference);
+
+      let userData = user.data();
+
+      if(userData.loginToken == "Yes"){
+        this.$data.user.userName = userData.userName;
+        this.$data.user.password = userData.password;
+        this.$data.user.loginToken = userData.loginToken;
+        this.$data.user.type = userData.type;
+      }
+      else if(userData.loginToken == "No"){
+        this.$router.push("/admin-login")
+      }
+      else{
+        this.$router.push("/admin-login")
+      }
+   },
    toApplication(){
-     this.$router.push(`/admin-application`);
+     this.$router.push(`/admin-application/${this.id}`);
    },
    toRecords(){
-     this.$router.push(`/admin-entry-record`);
+     this.$router.push(`/admin-entry-record/${this.id}`);
    },
    toReports(){
-     this.$router.push(`/admin-report`)
+     this.$router.push(`/admin-report/${this.id}`)
+   },
+   logout(){
+      const auth = getAuth(app);
+      signOut(auth)
+        .then(() => {
+          // Sign-out successful.
+          this.$data.user.loginToken = "No"
+          setDoc(this.$data.reference, this.$data.user);
+          this.$router.push("/admin-login");
+        })
+        .catch((error) => {
+          // An error happened.
+          console.log(error);
+        });
    }
 
  },
 
  created(){
+   let id = this.$route.params.id;
+   this.id = id;
+   this.getUser();
  }
 }
 </script>

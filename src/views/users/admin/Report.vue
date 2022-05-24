@@ -128,7 +128,7 @@
                           rounded
                           shadow
                         "
-                        :to="{ path: `/admin/report/view-report/${report.id}` }"
+                        :to="{ path: `/admin-report/view-report/${this.id2}/${report.id}` }"
                         >View
                       </router-link>
                     </div>
@@ -145,12 +145,21 @@
 
 <script>
 import app from "../../../firebase/auth-individual/firebase";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs, getDoc, doc } from "firebase/firestore";
 export default {
   data() {
     return {
       reports: [],
       id: "",
+      id2: '',
+       reference: '',
+       user:{
+          userName: '',
+          password: '',
+          type: '',
+          loginToken:'',
+          
+      }
     };
   },
 
@@ -168,13 +177,38 @@ export default {
         this.$data.id = reportData.reportInfo.id;
       });
       this.$data.reports = reports;
-    },
-    viewReport() {
-      this.$router.push(`/admin/report/view-report/${this.$data.id}`);
+
+
+
+      //
+      const userRef = collection(db, "user");
+
+      let usersRef = doc(userRef, this.id2);
+      this.$data.reference = usersRef;
+      let user = await getDoc(this.$data.reference);
+
+      let userData = user.data();
+
+      if(userData.loginToken == "Yes"){
+        this.$data.user.userName = userData.userName;
+        this.$data.user.password = userData.password;
+        this.$data.user.loginToken = userData.loginToken;
+        this.$data.user.type = userData.type;
+      }
+      else if(userData.loginToken == "No"){
+        this.$router.push("/admin-login")
+      }
+      else{
+        this.$router.push("/admin-login")
+      }
+
+
     },
   },
 
   created() {
+    let id = this.$route.params.id;
+    this.id2 = id;
     this.getReports();
   },
 };

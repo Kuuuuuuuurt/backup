@@ -288,6 +288,8 @@ import {
 export default {
   data() {
     return {
+      reference: "",
+      id: "",
       applicationID: "",
       userRefer: "",
       usersRefer: "",
@@ -306,8 +308,14 @@ export default {
           type: "individual",
           vaccinationLink: null,
           validIdLink: null,
-          password: '',
-          loginToken: '',
+          password: "",
+          loginToken: "",
+        },
+        user: {
+          userName: "",
+          password: "",
+          type: "",
+          loginToken: "",
         },
       },
       qrInformation: {
@@ -320,14 +328,12 @@ export default {
         },
       },
 
-       notification: {
-        header: '',
+      notification: {
+        header: "",
         notificationMessage: "",
         date: "",
         phoneNumber: "",
       },
-
-
     };
   },
 
@@ -356,8 +362,8 @@ export default {
       this.$data.user.userInfo.purok = applicationData.userInfo.purok;
       this.$data.user.userInfo.municipality =
         applicationData.userInfo.municipality;
-        this.$data.user.userInfo.loginToken = applicationData.userInfo.loginToken;
-        this.$data.user.userInfo.password = applicationData.userInfo.password;
+      this.$data.user.userInfo.loginToken = applicationData.userInfo.loginToken;
+      this.$data.user.userInfo.password = applicationData.userInfo.password;
       this.$data.user.userInfo.vaccinationLink =
         applicationData.userInfo.vaccinationLink;
       this.$data.user.userInfo.validIdLink =
@@ -378,11 +384,31 @@ export default {
       this.$data.qrInformation.info.phoneNumber =
         applicationData.userInfo.phoneNumber;
 
+      //
+       const userRefs = collection(db, "user");
+
+      let usersRefs = doc(userRefs, this.id);
+      this.$data.reference = usersRefs;
+      let users = await getDoc(this.$data.reference);
+
+      let userData = users.data();
+
+      if(userData.loginToken == "Yes"){
+        this.$data.user.userName = userData.userName;
+        this.$data.user.password = userData.password;
+        this.$data.user.loginToken = userData.loginToken;
+        this.$data.user.type = userData.type;
+      }
+      else if(userData.loginToken == "No"){
+        this.$router.push("/admin-login")
+      }
+      else{
+        this.$router.push("/admin-login")
+      }
     },
 
     async acceptData() {
-
-       var randomstrings = require("randomstring");
+      var randomstrings = require("randomstring");
 
       let qrDetail =
         randomstrings.generate({
@@ -428,9 +454,6 @@ export default {
       const addDocu = setDoc(doc(db, "applications", id), this.$data.user);
       console.log(addDocu);
 
-
-
-
       this.$router.push("/admin-home");
     },
 
@@ -450,8 +473,7 @@ export default {
       let delApplication = doc(usersRefs, this.$data.applicationID);
       await deleteDoc(delApplication);
 
-      
-var randomstrings = require("randomstring");
+      var randomstrings = require("randomstring");
       let id = randomstrings.generate({
         length: 20,
         charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
@@ -460,24 +482,26 @@ var randomstrings = require("randomstring");
       const addDocu = setDoc(doc(db, "applications", id), this.$data.user);
       console.log(addDocu);
 
-       this.$data.notification.header = "Your Application has been Declined";
-      this.$data.notification.notificationMessage = "Your Application has been Declined";
-      this.$data.notification.phoneNumber = "+63" + this.$data.user.userInfo.phoneNumber;
+      this.$data.notification.header = "Your Application has been Declined";
+      this.$data.notification.notificationMessage =
+        "Your Application has been Declined";
+      this.$data.notification.phoneNumber =
+        "+63" + this.$data.user.userInfo.phoneNumber;
       this.$data.notification.date = "";
 
-       var randomstring = require("randomstring");
+      var randomstring = require("randomstring");
       let notifID = randomstring.generate({
         length: 20,
         charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
       });
 
       const addDocus = setDoc(
-          doc(db, "notification", notifID),
-          this.$data.notification
-        );
-        console.log(addDocus);
+        doc(db, "notification", notifID),
+        this.$data.notification
+      );
+      console.log(addDocus);
 
-        alert("success");
+      alert("success");
 
       this.$router.push("/admin-home");
     },
@@ -485,6 +509,8 @@ var randomstrings = require("randomstring");
 
   created() {
     let id = this.$route.params.applicationID;
+    let id2 = this.$route.params.id;
+    this.id = id2;
     this.$data.applicationID = id;
     this.getApplication();
   },

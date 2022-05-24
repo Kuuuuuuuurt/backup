@@ -131,7 +131,7 @@
                           dark:text-green-500
                           hover:underline
                         "
-                        :to="{ path: `/admin-check/${user.id}` }"
+                        :to="{ path: `/admin-check/${this.id}/${user.id}` }"
                         >View</router-link
                       >
                     </div>
@@ -148,11 +148,20 @@
 
 <script>
 import app from "../../../firebase/auth-individual/firebase";
-import { getDocs, collection, getFirestore } from "firebase/firestore";
+import { getDocs, collection, getFirestore, getDoc, doc } from "firebase/firestore";
 export default {
   data() {
     return {
       users: [],
+      id: '',
+      reference: '',
+       user:{
+          userName: '',
+          password: '',
+          type: '',
+          loginToken:'',
+          
+      }
     };
   },
 
@@ -170,12 +179,33 @@ export default {
         console.log(userData.id);
         users.push(userData);
       });
-      console.log(users);
       this.$data.users = users;
+
+       const userRefs = collection(db, "user");
+       let usersRef = doc(userRefs, this.id);
+      this.$data.reference = usersRef;
+      let user = await getDoc(this.$data.reference);
+
+      let userData = user.data();
+
+      if(userData.loginToken == "Yes"){
+        this.$data.user.userName = userData.userName;
+        this.$data.user.password = userData.password;
+        this.$data.user.loginToken = userData.loginToken;
+        this.$data.user.type = userData.type;
+      }
+      else if(userData.loginToken == "No"){
+        this.$router.push("/admin-login")
+      }
+      else{
+        this.$router.push("/admin-login")
+      }
     },
   },
 
   created() {
+    const id = this.$route.params.id;
+    this.id = id;
     this.fetchUser();
   },
 };
