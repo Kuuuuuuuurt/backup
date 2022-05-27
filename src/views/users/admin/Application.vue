@@ -13,8 +13,8 @@
       items-center
     "
   >
-    <a
-      href="#"
+    <button
+      @click="home"
       class="
         font-bold
         m-3
@@ -25,18 +25,17 @@
       "
     >
       <img
-        src="https://cdn-icons-png.flaticon.com/512/2681/2681062.png"
+        src="https://cdn-icons-png.flaticon.com/512/709/709624.png"
         style="height: 25px"
         alt=""
         class="mr-2"
         loading="lazy"
       />
-      QR Application
-    </a>
+    </button>
 
     <!-- List of nav item -->
-    <a
-      href="/admin-home"
+    <button
+      @click="home"
       class="
         font-extrabold
         m-3
@@ -55,7 +54,7 @@
         loading="lazy"
       />
       TRAFEX
-    </a>
+    </button>
   </nav>
 
   <section class="antialiased text-gray-600 px-2 mt-10">
@@ -175,8 +174,6 @@ export default {
       userSnapshot.forEach((user) => {
         let userData = user.data();
         userData.id = user.id;
-
-        console.log(userData.id);
         users.push(userData);
       });
       this.$data.users = users;
@@ -201,6 +198,10 @@ export default {
         this.$router.push("/admin-login")
       }
     },
+
+    home(){
+      this.$router.push(`/admin-home/${this.id}`)
+    }
   },
 
   created() {

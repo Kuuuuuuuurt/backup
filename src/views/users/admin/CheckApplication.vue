@@ -272,6 +272,92 @@
       </div>
     </div>
   </div>
+
+
+
+   <div
+    v-if="acceptedModal"
+    class="
+      main-modal
+      fixed
+      w-full
+      inset-0
+      z-50
+      overflow-hidden
+      flex
+      justify-center
+      items-center
+      animated
+      fadeIn
+      faster
+    "
+    style="background: rgba(0, 0, 0, 0.7)"
+  >
+  <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal" @click="back">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+            </button>
+            <div class="p-6 text-center">
+                <svg class="mx-auto mb-4 w-14 h-14 text-green-400 dark:text-green-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M5 13l4 4L19 7"
+				></path></svg>
+                <h3 class=" text-lg font-normal text-gray-500 dark:text-gray-400">Success </h3>
+                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Application Accepted </h3>
+                <button data-modal-toggle="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" @click="back">Okay</button>
+            </div>
+             </div>
+        </div>
+    </div>
+  </div>
+
+   <div
+    v-if="declineModal"
+    class="
+      main-modal
+      fixed
+      w-full
+      inset-0
+      z-50
+      overflow-hidden
+      flex
+      justify-center
+      items-center
+      animated
+      fadeIn
+      faster
+    "
+    style="background: rgba(0, 0, 0, 0.7)"
+  >
+  <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal" @click="back">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+            </button>
+            <div class="p-6 text-center">
+                <svg class="mx-auto mb-4 w-14 h-14 text-green-400 dark:text-green-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M5 13l4 4L19 7"
+				></path></svg>
+                <h3 class=" text-lg font-normal text-gray-500 dark:text-gray-400">Success </h3>
+                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Application Declined </h3>
+                <button data-modal-toggle="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" @click="back">Okay</button>
+            </div>
+             </div>
+        </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -288,6 +374,8 @@ import {
 export default {
   data() {
     return {
+      declineModal: false,
+      acceptedModal: false,
       reference: "",
       id: "",
       applicationID: "",
@@ -349,11 +437,8 @@ export default {
 
       let applicationData = user.data();
 
-      console.log(applicationData);
-
       this.$data.user.userInfo.phoneNumber =
         applicationData.userInfo.phoneNumber;
-      console.log(this.$data.user.userInfo.phoneNumber);
       this.$data.user.userInfo.firstName = applicationData.userInfo.firstName;
       this.$data.user.userInfo.lastName = applicationData.userInfo.lastName;
       this.$data.user.userInfo.gender = applicationData.userInfo.gender;
@@ -426,7 +511,6 @@ export default {
           charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
         });
       this.$data.user.userInfo.qrData = qrDetail;
-      console.log(qrDetail);
 
       const db = getFirestore(app);
       const userRef = collection(db, "user");
@@ -434,7 +518,6 @@ export default {
 
       let usersRef = doc(userRef, this.$data.user.userInfo.phoneNumber);
       this.$data.usersRefer = usersRef;
-      console.log(this.usersRefer);
       this.$data.user.userInfo.qrStatus = "Approved";
       //update qrData
       await setDoc(this.$data.usersRefer, this.$data.user);
@@ -445,16 +528,30 @@ export default {
 
       //create Qr-code details
       let id = this.$data.user.userInfo.qrData;
-      const addDocs = setDoc(
+      setDoc(
         doc(db, "data-record", id),
         this.$data.qrInformation
       );
-      console.log(addDocs);
 
-      const addDocu = setDoc(doc(db, "applications", id), this.$data.user);
-      console.log(addDocu);
+      this.$data.notification.header = "Your Application has been Declined";
+      this.$data.notification.notificationMessage =
+        "Your Application has been Approved";
+      this.$data.notification.phoneNumber =
+        "+63" + this.$data.user.userInfo.phoneNumber;
+      this.$data.notification.date = "";
 
-      this.$router.push("/admin-home");
+      var randomstring = require("randomstring");
+      let notifID = randomstring.generate({
+        length: 20,
+        charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      });
+
+      setDoc(
+        doc(db, "notification", notifID),
+        this.$data.notification
+      );
+      
+       this.acceptedModal = true;
     },
 
     async decline() {
@@ -464,7 +561,6 @@ export default {
 
       let usersRef = doc(userRef, this.$data.user.userInfo.phoneNumber);
       this.$data.usersRefer = usersRef;
-      console.log(this.usersRefer);
       this.$data.user.userInfo.qrStatus = "Declined";
       //update qrData
       await setDoc(this.$data.usersRefer, this.$data.user);
@@ -479,8 +575,7 @@ export default {
         charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
       });
 
-      const addDocu = setDoc(doc(db, "applications", id), this.$data.user);
-      console.log(addDocu);
+      setDoc(doc(db, "applications", id), this.$data.user);
 
       this.$data.notification.header = "Your Application has been Declined";
       this.$data.notification.notificationMessage =
@@ -495,16 +590,18 @@ export default {
         charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
       });
 
-      const addDocus = setDoc(
+      setDoc(
         doc(db, "notification", notifID),
         this.$data.notification
       );
-      console.log(addDocus);
 
-      alert("success");
+      this.declineModal = true;
 
-      this.$router.push("/admin-home");
     },
+
+    back(){
+      this.$router.push(`/admin-home/${this.id}`);
+    }
   },
 
   created() {

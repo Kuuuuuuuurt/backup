@@ -13,8 +13,8 @@
       items-center
     "
   >
-    <a
-      href="#"
+    <button
+    @click="home"
       class="
         font-bold
         m-3
@@ -25,14 +25,13 @@
       "
     >
       <img
-        src="https://cdn-icons-png.flaticon.com/512/2681/2681062.png"
+        src="https://cdn-icons-png.flaticon.com/512/709/709624.png"
         style="height: 25px"
         alt=""
         class="mr-2"
         loading="lazy"
       />
-      Record
-    </a>
+    </button>
 
     <!-- List of nav item -->
     <button

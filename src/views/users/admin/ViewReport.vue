@@ -1,4 +1,63 @@
 <template>
+<nav
+    class="
+      bg-white
+      shadow
+      fixed
+      z-10
+      mx-auto
+      inset-x-0
+      top-0
+      flex
+      justify-between
+      items-center
+    "
+  >
+    <button
+    @click="back"
+      class="
+        font-bold
+        m-3
+        inline-flex
+        hover:text-pink-700
+        transition-all
+        duration-500
+      "
+    >
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/709/709624.png"
+        style="height: 25px"
+        alt=""
+        class="mr-2"
+        loading="lazy"
+      />
+    </button>
+
+    <!-- List of nav item -->
+    <button
+      class="
+        font-extrabold
+        m-3
+        uppercase
+        inline-flex
+        hover:text-pink-700
+        transition-all
+        duration-500
+      "
+      @click="back"
+    >
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/1008/1008001.png"
+        style="height: 25px"
+        alt=""
+        class="mr-2"
+        loading="lazy"
+      />
+      TRAFEX
+    </button>
+  </nav>
+
+
   <div v-if="pageShow">
     <div class="bg-white p-6 my-10 relative">
       <div class="flex justify-between">
@@ -85,23 +144,6 @@
         </p>
         <img :src="report.rtpcrImageLink" alt="" />
       </div>
-
-      <div class="flex">
-        <button
-          class="
-            w-full
-            mt-6
-            bg-blue-600
-            hover:bg-blue-500
-            text-white
-            font-semibold
-            p-3
-          "
-          @click="back"
-        >
-          Back
-        </button>
-      </div>
     </div>
   </div>
 
@@ -145,7 +187,7 @@
                   class="py-2 px-8 bg-indigo-100 text-indigo-700 rounded-full"
                   @click="showPeople"
                 >
-                  <p>Contacted Person</p>
+                  <p>Vehicle Entered</p>
                 </div>
               </a>
               <a
@@ -170,7 +212,7 @@
                   "
                   @click="vehiclesShow"
                 >
-                  <p>Vehicle Entered</p>
+                  <p>Contacted Person</p>
                 </div>
               </a>
             </div>
@@ -364,7 +406,7 @@
                   "
                   @click="showPeople"
                 >
-                  <p>Contacted Person</p>
+                  <p> Vehicle Entered</p>
                 </div>
               </a>
               <a
@@ -383,7 +425,7 @@
                   class="py-2 px-8 bg-indigo-100 text-indigo-700 rounded-full"
                   @click="vehiclesShow"
                 >
-                  <p>Vehicle Entered</p>
+                  <p>Contacted Person</p>
                 </div>
               </a>
             </div>
@@ -826,7 +868,7 @@ export default {
       this.$data.traceContact = false;
     },
     back() {
-      this.$router.push("/admin-report");
+      this.$router.push(`/admin-report/${this.id}`);
     },
   },
 

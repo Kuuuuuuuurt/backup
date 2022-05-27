@@ -68,6 +68,8 @@
       </button>
       <!-- Component End  -->
     </form>
+
+    <button @click="back">Back</button>
   </div>
 </template>
 
@@ -93,6 +95,9 @@ export default {
   },
 
   methods: {
+     back(){
+    this.$router.push(`/`)
+  },
     login() {
       const email = this.$data.username +"@gmail.com";
       const password = this.$data.password;
