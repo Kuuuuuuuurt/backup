@@ -425,7 +425,7 @@
 <script>
 import { QrcodeStream } from "vue3-qrcode-reader";
 import { doc, getDoc, getFirestore, setDoc} from "firebase/firestore";
-import app from "../../../firebase/auth-individual/firebase";
+import app from "../../../firebase/db/firebase";
 export default {
   components: {
     QrcodeStream,
@@ -527,7 +527,7 @@ export default {
     },
 
     back() {
-      this.$router.push(`/estab-home/${this.$data.estabID}`);
+      this.$router.push(`/operator/home/${this.$data.estabID}`);
     },
 
     //
@@ -683,10 +683,10 @@ export default {
           console.log();
         }
         else if(estabData.userInfo.loginToken == "No"){
-          this.$router.push("/estab-login");
+          this.$router.push("/operator/login");
         }
         else{
-          this.$router.push("/estab-login");
+          this.$router.push("/operator/login");
         }
     }
   },

@@ -39,7 +39,7 @@
           required
         />
         <input
-          type="tel"
+          type="text"
           placeholder="Baranggay"
           class="border p-2 w-1/2"
           v-model="user.userInfo.baranggay"
@@ -297,7 +297,7 @@
                   text-xl
                 "
               >
-                For individuals:
+                For Passenger:
               </p>
               <p
                 class="
@@ -321,7 +321,7 @@
                   text-xl
                 "
               >
-                For establishment:
+                For Operator:
               </p>
               <p
                 class="
@@ -637,7 +637,7 @@
 </template>
 
 <script>
-import app from "../../../firebase/auth-individual/firebase";
+import app from "../../../firebase/db/firebase";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, setDoc, doc } from "firebase/firestore";
 export default {
@@ -653,7 +653,7 @@ export default {
           purok: "",
           owner: "",
           phoneNumber: "",
-          type: "establishment",
+          type: "operator",
           password: "",
           loginToken: "Yes",
         },
@@ -681,7 +681,7 @@ export default {
           let id = this.$data.user.userInfo.email;
           const addDocs = setDoc(doc(db, "user", id), this.$data.user);
           console.log(addDocs);
-          this.$router.push(`/estab-home/${id}`);
+          this.$router.push(`/operator/home/${id}`);
         })
         .catch((error) => {
           switch (error.code) {

@@ -497,8 +497,15 @@
               <p>Go</p>
             </button>
           </div>
+        
+        
+        
+        
+        
         </div>
-      </div>
+    
+    
+    </div>
     </div>
   </body>
 
@@ -546,7 +553,7 @@
 </template>
 
 <script>
-import app from "../../../firebase/auth-individual/firebase";
+import app from "../../../firebase/db/firebase";
 import {
   getFirestore,
   collection,
@@ -625,7 +632,7 @@ export default {
         this.$data.users.contactNumber = userData.userInfo.phoneNumber;
         this.$data.users.ownerName = userData.userInfo.owner;
       } else if (userData.userInfo.loginToken == "No") {
-        this.$router.push("/estab-login");
+        this.$router.push("/operator/login");
       } else {
         alert("No token");
       }
@@ -697,7 +704,7 @@ export default {
 
     toScanner() {
       let id = this.$data.estabID;
-      this.$router.push(`/estab-scanner/${id}`);
+      this.$router.push(`/operator/scanner/${id}`);
     },
 
     signOut() {
@@ -707,7 +714,7 @@ export default {
           // Sign-out successful.
           this.$data.user.userInfo.loginToken = "No";
           setDoc(this.$data.reference, this.$data.user);
-          this.$router.push("/estab-login");
+          this.$router.push("/operator/login");
         })
         .catch((error) => {
           // An error happened.
@@ -717,7 +724,7 @@ export default {
 
     toSettings() {
       const id = this.$data.estabID;
-      this.$router.push(`/estab-settings/${id}`);
+      this.$router.push(`/operator/settings/${id}`);
     },
 
     async findByName() {

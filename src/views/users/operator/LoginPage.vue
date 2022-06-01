@@ -1,19 +1,19 @@
 <template>
   <div>
-    <div class="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
+    <div class="bg-gray-100 flex flex-col justify-center sm:py-12">
       <div class="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
         <h1 class="font-bold text-center text-2xl mb-5">Trafex</h1>
         <div class="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
-          <form class="" @submit.prevent="login">
+          <form @submit.prevent="login">
             <div class="px-5 py-7">
               <label class="font-semibold text-sm text-gray-600 pb-1 block"
-                >Phone Number</label
+                >E-mail</label
               >
               <input
-                type="text"
+                type="email"
                 class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
                 required
-                v-model="users.phoneNumber"
+                v-model="users.email"
               />
               <label class="font-semibold text-sm text-gray-600 pb-1 block"
                 >Password</label
@@ -85,7 +85,7 @@
                   text-center
                   inline-block
                 "
-                @click="toregister"
+                @click="register"
               >
                 Register
               </button>
@@ -106,9 +106,9 @@
                   text-center
                   inline-block
                 "
-                @click="estab"
+                @click="individual"
               >
-                Establishment
+                Passenger
               </button>
             </div>
           </div>
@@ -220,7 +220,7 @@
                   focus:ring-opacity-50
                   ring-inset
                 "
-                @click="admin"
+                @click="toAdmin"
               >
                 <span class="inline-block ml-1">Continue as admin</span>
                 <svg
@@ -244,127 +244,79 @@
       </div>
     </div>
   </div>
-
-
-      <div
-      v-if="errorModal"
-    class="
-      main-modal
-      fixed
-      w-full
-      inset-0
-      z-50
-      overflow-hidden
-      flex
-      justify-center
-      items-center
-      animated
-      fadeIn
-      faster
-    "
-    style="background: rgba(0, 0, 0, 0.7)"
-  >
-  <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <!-- Modal header -->
-             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal" @click="errorModal=false">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
-            </button>
-            <div class="p-6 text-center">
-              <img src="https://cdn-icons-png.flaticon.com/512/463/463612.png" alt="" class="mx-auto mb-4 w-24  text-gray-400 dark:text-gray-200"> 
-                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">{{user.error}}</h3>
-                <button data-modal-toggle="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" @click="errorModal=false">Close</button>
-            </div>
-             </div>
-        </div>
-    </div>
-  </div>
-
 </template>
 
 <script>
-import app from "../../../firebase/auth-individual/firebase";
+import app from "../../../firebase/db/firebase";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { getFirestore, collection, doc, getDoc, setDoc } from "firebase/firestore";
 export default {
   data() {
     return {
-      errorModal: false,
       reference: "",
       users: {
-        phoneNumber: "",
+        email: "",
         password: "",
-        error: "",
       },
-      user:{
-        userInfo:{
-          phoneNumber: "",
-          firstName: "",
-          lastName: "",
-          age: "",
-          gender: "",
+        user:{
+        userInfo: {
+          email: "",
+          vehicleID: "",
           municipality: "",
           baranggay: "",
           purok: "",
-          qrStatus: "No Application",
-          qrData: null,
-          type: "individual",
-          password: '',
+          owner: "",
+          phoneNumber: "",
+          type: "operator",
+          password: "",
           loginToken: "",
-          vaccinationLink: null,
-          validIdLink: null,
-        }
+      }
       }
     };
   },
+
   methods: {
     login() {
       const auth = getAuth(app);
 
-      const phoneEmail = this.$data.users.phoneNumber + "@gmail.com";
+      const email = this.$data.users.email;
       const password = this.$data.users.password;
 
-      signInWithEmailAndPassword(auth, phoneEmail, password)
+      signInWithEmailAndPassword(auth, email, password)
         .then(() => {
-          // Signed in
-          
+        
 
           this.checkUser();
         })
         .catch((error) => {
-           switch(error.code){
-          case 'auth/user-not-found':
-            this.$data.user.error = "User Not Found"
-            this.$data.errorModal = true;
-            break
-          case 'auth/wrong-password':
-            this.$data.user.error = "Incorrect Password"
-            this.$data.errorModal = true;
-            break
-          default:
-          this.$data.user.error = "Something Went Wrong Please Try Again"
-          this.$data.errorModal = true;
-        }
+          switch (error.code) {
+            case "auth/user-not-found":
+              alert("User not found");
+              break;
+            case "auth/wrong-password":
+              alert("Wrong password");
+              break;
+            default:
+              alert("Something went wrong");
+          }
         });
     },
 
-    toregister() {
-      this.$router.push("/individual-verify-user");
-    },
-    estab() {
-      this.$router.push("/estab-login");
+    register() {
+      this.$router.push("/operator/create-account");
     },
     about() {
       this.$router.push("/");
     },
-    admin() {
-      this.$router.push("/admin-login");
-    },
 
-    forgotPassword(){
-      this.$router.push("/individual-forgot-pass")
+    individual() {
+      this.$router.push("/passenger/login");
+    },
+    forgotPassword() {
+      this.$router.push("/operator/forgot-password");
+    },
+    toAdmin() {
+      this.$router.push("/admin-login");
     },
 
     async checkUser() {
@@ -372,7 +324,7 @@ export default {
       const db = getFirestore(app);
       const userRef = collection(db, "user");
 
-      let usersRef = doc(userRef, this.$data.users.phoneNumber);
+      let usersRef = doc(userRef, this.$data.users.email);
       this.$data.reference = usersRef;
       let user = await getDoc(this.$data.reference);
 
@@ -380,39 +332,31 @@ export default {
 
       const identifier = userData.userInfo.type;
 
-      if (identifier == "individual") {
-        if(userData.userInfo.loginToken == "No"){
-          this.$data.user.userInfo.firstName = userData.userInfo.firstName;
-          this.$data.user.userInfo.lastName = userData.userInfo.lastName;
-          this.$data.user.userInfo.municipality = userData.userInfo.municipality;
-          this.$data.user.userInfo.baranggay = userData.userInfo.baranggay;
-          this.$data.user.userInfo.purok = userData.userInfo.purok;
-          this.$data.user.userInfo.gender = userData.userInfo.gender;
-          this.$data.user.userInfo.age = userData.userInfo.age;
-          this.$data.user.userInfo.qrStatus = userData.userInfo.qrStatus;
-          this.$data.user.userInfo.qrData = userData.userInfo.qrData;
-          this.$data.user.userInfo.type = userData.userInfo.type;
-          this.$data.user.userInfo.vaccinationLink = userData.userInfo.vaccinationLink;
-          this.$data.user.userInfo.validIdLink = userData.userInfo.validIdLink;
-          this.$data.user.userInfo.phoneNumber = userData.userInfo.phoneNumber;
-          this.$data.user.userInfo.loginToken = "Yes";
-          this.$data.user.userInfo.password = userData.userInfo.password;
-          
-        setDoc(this.$data.reference, this.$data.user);
-        this.$router.push(`/individual-home/${this.$data.users.phoneNumber}`);
-        }
-        else if(userData.userInfo.loginToken == "Yes"){
-          alert("User Already Logged in")
-        }
-        else{
-          alert("No Token")
+      if (identifier == "operator") {
+        if (userData.userInfo.loginToken == "No") {
+      this.$data.user.userInfo.email = userData.userInfo.email;
+      this.$data.user.userInfo.phoneNumber = userData.userInfo.phoneNumber;
+      this.$data.user.userInfo.vehicleID = userData.userInfo.vehicleID;
+      this.$data.user.userInfo.purok = userData.userInfo.purok;
+      this.$data.user.userInfo.baranggay = userData.userInfo.baranggay;
+      this.$data.user.userInfo.municipality = userData.userInfo.municipality;
+      this.$data.user.userInfo.owner = userData.userInfo.owner;
+      this.$data.user.userInfo.type = userData.userInfo.type;
+      this.$data.user.userInfo.password = userData.userInfo.password;
+      this.$data.user.userInfo.loginToken = "Yes";
+
+      setDoc(this.$data.reference, this.$data.user)
+      this.$router.push(`/operator/home/${this.$data.users.email}`);
+        } else if (userData.userInfo.loginToken == "Yes") {
+          alert("Already Logged in");
+        } else {
+          console.log("No Token");
         }
       } else {
-        alert("User Does not Exist!");
+        alert("User Does not Exist");
         signOut(auth)
           .then(() => {
             // Sign-out successful.
-            console.log(auth.currentUser);
           })
           .catch((error) => {
             // An error happened.

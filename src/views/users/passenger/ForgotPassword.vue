@@ -274,7 +274,7 @@
 </template>
 
 <script>
-import app from "../../../firebase/auth-individual/firebase";
+import app from "../../../firebase/db/firebase";
 import {
   getFirestore,
   collection,
@@ -451,7 +451,7 @@ export default {
             this.$data.user.userInfo.password = newPass;
             setDoc(this.$data.userRefer, this.$data.user);
             alert("password updated");
-            this.$router.push("/individual-login");
+            this.$router.push("/passenger/slogin");
           })
           .catch((error) => {
             // An error ocurred

@@ -143,7 +143,7 @@
 </template>
 
 <script>
-import app from "../../../firebase/auth-individual/firebase";
+import app from "../../../firebase/db/firebase";
 import { getFirestore, collection, getDocs, getDoc, doc } from "firebase/firestore";
 export default {
   data() {

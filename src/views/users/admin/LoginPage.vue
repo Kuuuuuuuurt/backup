@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import app from "../../../firebase/auth-individual/firebase";
+import app from "../../../firebase/db/firebase";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, collection, doc, getDoc, setDoc } from "firebase/firestore";
 export default {

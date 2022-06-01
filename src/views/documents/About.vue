@@ -28,13 +28,13 @@
                 <h2 class="text-3xl font-semibold text-gray-800 md:text-4xl">About <span class="text-indigo-600">TRAFEX</span></h2>
                 <p class="mt-2 text-sm text-gray-500 md:text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis commodi cum cupiditate ducimus, fugit harum id necessitatibus odio quam quasi, quibusdam rem tempora voluptates. Cumque debitis dignissimos id quam vel!</p>
                 <div class="flex justify-center lg:justify-start mt-6">
-                    <a class="px-4 py-3 bg-gray-900 text-gray-200 text-xs font-semibold rounded hover:bg-gray-800" href="/individual-login">Individual</a>
-                    <a class="mx-4 px-4 py-3 bg-gray-300 text-gray-900 text-xs font-semibold rounded hover:bg-gray-400" href="estab-login">Establishment</a>
+                    <a class="px-4 py-3 bg-gray-900 text-gray-200 text-xs font-semibold rounded hover:bg-gray-800" href="/passenger/login">Passenger</a>
+                    <a class="mx-4 px-4 py-3 bg-gray-300 text-gray-900 text-xs font-semibold rounded hover:bg-gray-400" href="operator/login">Operator</a>
                 </div>
             </div>
         </div>
         <div class="hidden lg:block lg:w-1/2" style="clip-path:polygon(10% 0, 100% 0%, 100% 100%, 0 100%)">
-            <div class="h-full object-cover" style="background-image: url(https://skopelos.com/wp-content/uploads/2021/05/Skopelos-covid-19-travellers-safe-travel-new-rules-3.jpg)">
+            <div class="h-full object-cover" style="background-image: url(https://cdn.dribbble.com/users/2272987/screenshots/6299869/dribbble_3.gif)">
                 <div class="h-full bg-black opacity-25"></div>
             </div>
         </div>

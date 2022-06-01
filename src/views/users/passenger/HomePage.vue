@@ -100,7 +100,7 @@
               d="M20 12H4"
             />
           </svg>
-          <p>Individual</p>
+          <p>Passenger</p>
         </header>
       </div>
       <div class="flex pb-4 mt-4 items-center border-b flex">
@@ -282,7 +282,7 @@
                   duration-150
                 "
                 type="button"
-                @click="hide"
+                @click="viewAllEntry"
               >
                 See all
               </button>
@@ -886,7 +886,302 @@ v-if="notificationModal"
     </div>
 
 
-  
+  <div
+  v-if="allEntryModal"
+    class="
+      main-modal
+      fixed
+      inset-0
+      z-50
+      overflow-hidden
+      flex
+      justify-center
+      items-center
+      animated
+      fadeIn
+      faster
+    "
+    style="background: rgba(0, 0, 0, 0.7)"
+  >
+    <div
+      class="
+        modal
+        fade
+        fixed
+        top-0
+        left-0
+        w-full
+        h-full
+        outline-none
+        overflow-x-hidden overflow-y-auto
+      "
+      id="exampleModalXl"
+      tabindex="-1"
+      aria-labelledby="exampleModalXlLabel"
+      aria-modal="true"
+      role="dialog"
+    >
+      <div class="modal-dialog modal-xl relative w-auto pointer-events-none">
+        <div
+          class="
+            modal-content
+            border-none
+            shadow-lg
+            relative
+            flex flex-col
+            w-full
+            pointer-events-auto
+            bg-white bg-clip-padding
+            rounded-md
+            outline-none
+            text-current
+          "
+        >
+          <div
+            class="
+              modal-header
+              flex flex-shrink-0
+              items-center
+              justify-between
+              p-4
+              border-b border-gray-200
+              rounded-t-md
+            "
+          >
+            <h5
+              class="text-xl font-medium leading-normal text-gray-800"
+              id="exampleModalXlLabel"
+            >
+              Entry History
+            </h5>
+            <button
+              type="button"
+              @click="allEntryModal = false"
+              class="
+                btn-close
+                box-content
+                w-4
+                h-4
+                p-1
+                text-black
+                border-none
+                rounded-none
+                opacity-50
+                focus:shadow-none focus:outline-none focus:opacity-100
+                hover:text-black hover:opacity-75 hover:no-underline
+              "
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              X
+            </button>
+          </div>
+
+          <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+          <div
+            class="inline-block min-w-full shadow rounded-lg overflow-hidden"
+          >
+            <table class="min-w-full leading-normal">
+              <thead>
+                <tr>
+                  <th
+                    class="
+                      px-5
+                      py-3
+                      border-b-2 border-gray-200
+                      bg-gray-100
+                      text-left text-xs
+                      font-semibold
+                      text-gray-600
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Name
+                  </th>
+                  <th
+                    class="
+                      px-5
+                      py-3
+                      border-b-2 border-gray-200
+                      bg-gray-100
+                      text-left text-xs
+                      font-semibold
+                      text-gray-600
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Contact Number
+                  </th>
+                  <th
+                    class="
+                      px-5
+                      py-3
+                      border-b-2 border-gray-200
+                      bg-gray-100
+                      text-left text-xs
+                      font-semibold
+                      text-gray-600
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Address
+                  </th>
+                  <th
+                    class="
+                      px-5
+                      py-3
+                      border-b-2 border-gray-200
+                      bg-gray-100
+                      text-left text-xs
+                      font-semibold
+                      text-gray-600
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Vehicle Entered
+                  </th>
+
+                  <th
+                    class="
+                      px-5
+                      py-3
+                      border-b-2 border-gray-200
+                      bg-gray-100
+                      text-left text-xs
+                      font-semibold
+                      text-gray-600
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Time
+                  </th>
+
+                  <th
+                    class="
+                      px-5
+                      py-3
+                      border-b-2 border-gray-200
+                      bg-gray-100
+                      text-left text-xs
+                      font-semibold
+                      text-gray-600
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Date
+                  </th>
+
+                  <th
+                    class="
+                      px-5
+                      py-3
+                      border-b-2 border-gray-200
+                      bg-gray-100
+                      text-left text-xs
+                      font-semibold
+                      text-gray-600
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Temperature
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="entry in allEntry" :key="entry.id">
+                  <td
+                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                  >
+                    <div class="">
+                      <div class="flex-shrink-0"></div>
+                      <div class="">
+                        <p class="text-gray-900 whitespace-no-wrap">
+                          {{ entry.name }}
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td
+                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                  >
+                    <p class="text-gray-900 whitespace-no-wrap">
+                      {{ entry.phoneNumber }}
+                    </p>
+                  </td>
+                  <td
+                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                  >
+                    <p class="text-gray-900 whitespace-no-wrap">
+                      {{ entry.address }}
+                    </p>
+                  </td>
+                  <td
+                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                  >
+                    <span
+                      class="
+                        relative
+                        inline-block
+                        px-3
+                        py-1
+                        font-semibold
+                        text-green-900
+                        leading-tight
+                      "
+                    >
+                      <span
+                        aria-hidden
+                        class="absolute inset-0 opacity-50 rounded-full"
+                      ></span>
+                      <span class="relative">{{ entry.visitedEstab }}</span>
+                    </span>
+                  </td>
+
+                  <td
+                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                  >
+                    <p class="text-gray-900 whitespace-no-wrap">
+                      {{ entry.time }}
+                    </p>
+                  </td>
+
+                  <td
+                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                  >
+                    <p class="text-gray-900 whitespace-no-wrap">
+                      {{
+                      entry.month + " " + entry.day + ", " + entry.year
+                      }}
+                    </p>
+                  </td>
+                  <td
+                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                  >
+                    <p class="text-gray-900 whitespace-no-wrap">
+                      {{ entry.temperature}}
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="my-2 flex sm:flex-row flex-col">
+            <div class="flex flex-row mb-1 sm:mb-0">
+              <div class="relative"></div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+      </div>
+    </div>
 
 </template>
 
@@ -909,7 +1204,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import app from "../../../firebase/auth-individual/firebase";
+import app from "../../../firebase/db/firebase";
 import { getAuth, signOut } from "firebase/auth";
 
 export default defineComponent({
@@ -919,6 +1214,7 @@ export default defineComponent({
   },
   data() {
     return {
+      allEntryModal: false,
       viewNotifModal: false,
       notifID: '',
       notifRefer: '',
@@ -931,6 +1227,7 @@ export default defineComponent({
       reportModal: false,
       month: "",
       myEntry: [],
+      allEntry: [],
       toggleEntryRecord: false,
       value: "",
       size: 200,
@@ -983,7 +1280,7 @@ export default defineComponent({
           purok: "",
           qrStatus: "",
           qrData: null,
-          type: "individual",
+          type: "passenger",
           password: '',
           loginToken: "Yes",
           vaccinationLink: null,
@@ -1052,10 +1349,10 @@ export default defineComponent({
          setDoc(this.$data.userRefer, this.$data.users);
       }
       else if(userData.userInfo.loginToken == "No"){
-        this.$router.push(`/individual-login`)
+        this.$router.push(`/passenger/login`)
       }
       else{
-        this.$router.push(`/individual-login`)
+        this.$router.push(`/passenger/login`)
       }
 
 
@@ -1066,10 +1363,13 @@ export default defineComponent({
 
       const current = new Date();
       let myEntries = [];
+      let allEntries = [];
       entrySnap.forEach((entry) => {
         let entryData = entry.data();
         entryData.id = entry.id;
+
         if (entryData.name == this.$data.user.name) {
+          allEntries.push(entryData);
           if (
             (entryData.month == this.$data.month) &
             (entryData.day == `${current.getDate()}`) &
@@ -1084,7 +1384,12 @@ export default defineComponent({
         }
       });
       this.$data.myEntry = myEntries;
+      this.$data.allEntry = allEntries;
       
+    },
+    viewAllEntry(){
+      this.allEntryModal = true;
+      this.toggleEntryRecord = false;
     },
 
     toGenerator() {
@@ -1092,9 +1397,9 @@ export default defineComponent({
       if (this.$data.user.qrStatus == "Pending Application") {
         alert("Already have an application");
       } else if (this.$data.user.qrStatus == "No Application") {
-        this.$router.push(`/individual-generate-qr/${id}`);
+        this.$router.push(`/passenger/generate-qr/${id}`);
       } else if (this.$data.user.qrStatus == "Declined") {
-        this.$router.push(`/individual-generate-qr/${id}`);
+        this.$router.push(`/passenger/generate-qr/${id}`);
       } else {
         alert("Already have a QR Code");
       }
@@ -1144,7 +1449,7 @@ export default defineComponent({
 
     editProfile() {
       const id = this.$data.userID;
-      this.$router.push(`/individual-settings/${id}`);
+      this.$router.push(`/passenger/settings/${id}`);
     },
     logoutProfile() {
       this.$data.users.userInfo.loginToken = "No"
@@ -1153,7 +1458,7 @@ export default defineComponent({
         .then(() => {
           // Sign-out successful.
           setDoc(this.$data.userRefer, this.$data.users);
-          this.$router.push("/individual-login");
+          this.$router.push("/passenger/login");
         })
         .catch((error) => {
           // An error happened.

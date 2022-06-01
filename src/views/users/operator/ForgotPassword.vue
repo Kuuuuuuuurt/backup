@@ -85,7 +85,7 @@
           <p class="text-sm text-center text-gray-400">
             Continue?
             <a
-              href="/estab-login"
+              href="/operator/login"
               class="
                 font-semibold
                 text-indigo-500
@@ -101,7 +101,7 @@
 </template>
 
 <script>
-import app from "../../../firebase/auth-individual/firebase";
+import app from "../../../firebase/db/firebase";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 export default {
   data() {

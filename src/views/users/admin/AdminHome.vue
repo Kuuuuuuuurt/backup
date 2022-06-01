@@ -234,7 +234,7 @@
 </template>
 
 <script>
-import app from '../../../firebase/auth-individual/firebase'
+import app from '../../../firebase/db/firebase'
 import {signOut, getAuth} from 'firebase/auth'
 import {
   getFirestore,

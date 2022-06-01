@@ -400,7 +400,7 @@ v-if="errorImageModal"
 </template>
 
 <script>
-import app from "../../../firebase/auth-individual/firebase";
+import app from "../../../firebase/db/firebase";
 import {
   getFirestore,
   collection,
@@ -445,7 +445,7 @@ export default {
           purok: "",
           qrStatus: "Pending Application",
           qrData: null,
-          type: "individual",
+          type: "passenger",
           vaccinationLink: null,
           validIdLink: null,
           password: "",
@@ -496,10 +496,10 @@ this.$data.name =
       this.$data.user.userInfo.loginToken = userData.userInfo.loginToken;
       }
       else if(userData.userInfo.loginToken == "No"){
-        this.$router.push(`/individual-login`)
+        this.$router.push(`/passenger/login`)
       }
       else{
-        this.$router.push(`/individual-login`)
+        this.$router.push(`/passenger/login`)
       }
 
 
@@ -507,7 +507,7 @@ this.$data.name =
     },
 
     cancel() {
-      this.$router.push(`/individual-home/${this.$data.userID}`);
+      this.$router.push(`/passenger/home/${this.$data.userID}`);
     },
 
     submitData() {

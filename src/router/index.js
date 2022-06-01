@@ -1,25 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 //individual import
-import LoginPage from '../views/users/individual/LoginPage.vue'
-import CreateAccount from '../views/users/individual/CreateAccount.vue'
+import LoginPage from '../views/users/passenger/LoginPage.vue'
+import CreateAccount from '../views/users/passenger/CreateAccount.vue'
 import About from '../views/documents/About.vue'
 import PrivacyPolicy from '../views/documents/PrivacyPolicy.vue'
-import HomeIndi from '../views/users/individual/HomePage.vue'
-import SettingsIndi from '../views/users/individual/Settings.vue'
-import GenerateQR from '../views/users/individual/GenerateQR.vue'
-import PhoneVerification from '../views/users/individual/PhoneVerification.vue'
-import ForgotPassword from '../views/users/individual/ForgotPassword.vue'
+import HomeIndi from '../views/users/passenger/HomePage.vue'
+import SettingsIndi from '../views/users/passenger/Settings.vue'
+import GenerateQR from '../views/users/passenger/GenerateQR.vue'
+import PhoneVerification from '../views/users/passenger/PhoneVerification.vue'
+import ForgotPassword from '../views/users/passenger/ForgotPassword.vue'
 
 
 
 //estab import
-import LoginPageEstab from '../views/users/estab/LoginPage.vue'
-import CreateAccountEstab from '../views/users/estab/CreateAccount.vue'
-import HomePageEstab from '../views/users/estab/HomePage.vue'
-import Scanner from '../views/users/estab/Scanner.vue'
-import Settings from '../views/users/estab/Settings.vue'
-import EForgotPassword from '../views/users/estab/ForgotPassword.vue'
+import LoginPageEstab from '../views/users/operator/LoginPage.vue'
+import CreateAccountEstab from '../views/users/operator/CreateAccount.vue'
+import HomePageEstab from '../views/users/operator/HomePage.vue'
+import Scanner from '../views/users/operator/Scanner.vue'
+import Settings from '../views/users/operator/Settings.vue'
+import EForgotPassword from '../views/users/operator/ForgotPassword.vue'
 
 //admin import
 import LoginPageAdmin from '../views/users/admin/LoginPage.vue'
@@ -30,52 +30,47 @@ import Application from '../views/users/admin/Application.vue'
 import Report from '../views/users/admin/Report.vue'
 import ViewReport from '../views/users/admin/ViewReport.vue'
 
-// import {getAuth} from 'firebase/auth'
-// import app from '../firebase/auth-individual/firebase'
-
-// const auth = getAuth(app);
-
 const routes = [
 
   {
-    path: '/individual-home/:phoneId',
+    path: '/passenger/home/:phoneId',
     name: 'HomeIndi',
     component: HomeIndi,
   },
 
   {
-    path: '/individual-settings/:phoneId',
+    path: '/passenger/settings/:phoneId',
     name: 'SettingsIndi',
     component: SettingsIndi,
   },
 
   {
-    path: '/individual-generate-qr/:phoneId',
+    path: '/passenger/generate-qr/:phoneId',
     name: 'GenerateQR',
     component: GenerateQR,
   },
 
   {
-    path: '/individual-login',
+    path: '/passenger/login',
     name: 'LoginPage',
     component: LoginPage
   },
 
   
   {
-    path: '/individual-forgot-pass',
+    path: '/passenger/forgot-pass',
     name: 'ForgotPassword',
     component: ForgotPassword
   },
 
   {
-    path: '/individual-verify-user',
+    path: '/passenger/verify-user',
     name: 'PhoneVerification',
     component: PhoneVerification
   },
 
   {
-    path: '/individual-create-account/:phone',
+    path: '/passenger/create-account/:phone',
     name: 'CreateAccount',
     component: CreateAccount,
   },
@@ -92,34 +87,34 @@ const routes = [
   },
 
   {
-    path: '/estab-create-account',
+    path: '/operator/create-account',
     name: 'CreateAccountEstab',
     component: CreateAccountEstab,
   },
   {
-    path: '/estab-forgot-password',
+    path: '/operator/forgot-password',
     name: 'EForgotPassword',
     component: EForgotPassword,
   },
   {
-    path: '/estab-login',
+    path: '/operator/login',
     name: 'LoginPageEstab',
     component: LoginPageEstab
   },
   {
-    path: '/estab-home/:estabId',
+    path: '/operator/home/:estabId',
     name: 'HomePageEstab',
     component: HomePageEstab,
   },
 
   {
-    path: '/estab-scanner/:estabId',
+    path: '/operator/scanner/:estabId',
     name: 'Scanner',
     component: Scanner,
   },
 
   {
-    path: '/estab-settings/:estabId',
+    path: '/operator/settings/:estabId',
     name: 'Settings',
     component: Settings,
   },
