@@ -74,7 +74,7 @@
             placeholder="Your Name"
             aria-label="Name"
             disabled
-            v-model="user.userInfo.firstName"
+            v-model="user.users.userInfo.firstName"
           />
         </div>
         <div class="">
@@ -90,7 +90,7 @@
             placeholder="Your Name"
             aria-label="Name"
             disabled
-            v-model="user.userInfo.lastName"
+            v-model="user.users.userInfo.lastName"
           />
         </div>
         <div class="mt-2">
@@ -106,7 +106,7 @@
             placeholder="Number"
             aria-label="Email"
             disabled
-            v-model="user.userInfo.phoneNumber"
+            v-model="user.users.userInfo.phoneNumber"
           />
         </div>
         <div class="mt-2">
@@ -122,7 +122,7 @@
             placeholder="Municipality"
             aria-label="Email"
             disabled
-            v-model="user.userInfo.municipality"
+            v-model="user.users.userInfo.municipality"
           />
         </div>
         <div class="mt-2">
@@ -138,7 +138,7 @@
             placeholder="Baranggay"
             aria-label="Email"
             disabled
-            v-model="user.userInfo.baranggay"
+            v-model="user.users.userInfo.baranggay"
           />
         </div>
         <div class="inline-block mt-2 w-1/2 pr-1">
@@ -154,7 +154,7 @@
             placeholder="Purok"
             aria-label="Email"
             disabled
-            v-model="user.userInfo.purok"
+            v-model="user.users.userInfo.purok"
           />
         </div>
         <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
@@ -170,7 +170,7 @@
             placeholder="Gender"
             aria-label="Email"
             disabled
-            v-model="user.userInfo.gender"
+            v-model="user.users.userInfo.gender"
           />
         </div>
         <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
@@ -186,7 +186,7 @@
             placeholder="Age"
             aria-label="Email"
             disabled
-            v-model="user.userInfo.age"
+            v-model="user.users.userInfo.age"
           />
         </div>
         <div
@@ -207,7 +207,7 @@
           <div class="p-3">
             <div class="overflow-x-auto inline-block"></div>
             <div>
-              <img :src="user.userInfo.vaccinationLink" alt="" />
+              <img :src="user.users.userInfo.vaccinationLink" alt="" />
             </div>
           </div>
         </div>
@@ -230,7 +230,7 @@
           <div class="p-3">
             <div class="overflow-x-auto inline-block"></div>
             <div>
-              <img :src="user.userInfo.validIdLink" alt="" />
+              <img :src="user.users.userInfo.validIdLink" alt="" />
             </div>
           </div>
         </div>
@@ -381,6 +381,7 @@ export default {
       userRefer: "",
       usersRefer: "",
       user: {
+        users:{
         userInfo: {
           phoneNumber: "",
           firstName: "",
@@ -392,11 +393,12 @@ export default {
           purok: "",
           qrData: "",
           qrStatus: "",
-          type: "individual",
+          type: "passenger",
           vaccinationLink: null,
           validIdLink: null,
           password: "",
           loginToken: "",
+        }
         },
         user: {
           userName: "",
@@ -436,21 +438,21 @@ export default {
 
       let applicationData = user.data();
 
-      this.$data.user.userInfo.phoneNumber =
+      this.$data.user.users.userInfo.phoneNumber =
         applicationData.userInfo.phoneNumber;
-      this.$data.user.userInfo.firstName = applicationData.userInfo.firstName;
-      this.$data.user.userInfo.lastName = applicationData.userInfo.lastName;
-      this.$data.user.userInfo.gender = applicationData.userInfo.gender;
-      this.$data.user.userInfo.age = applicationData.userInfo.age;
-      this.$data.user.userInfo.baranggay = applicationData.userInfo.baranggay;
-      this.$data.user.userInfo.purok = applicationData.userInfo.purok;
-      this.$data.user.userInfo.municipality =
+      this.$data.user.users.userInfo.firstName = applicationData.userInfo.firstName;
+      this.$data.user.users.userInfo.lastName = applicationData.userInfo.lastName;
+      this.$data.user.users.userInfo.gender = applicationData.userInfo.gender;
+      this.$data.user.users.userInfo.age = applicationData.userInfo.age;
+      this.$data.user.users.userInfo.baranggay = applicationData.userInfo.baranggay;
+      this.$data.user.users.userInfo.purok = applicationData.userInfo.purok;
+      this.$data.user.users.userInfo.municipality =
         applicationData.userInfo.municipality;
-      this.$data.user.userInfo.loginToken = applicationData.userInfo.loginToken;
-      this.$data.user.userInfo.password = applicationData.userInfo.password;
-      this.$data.user.userInfo.vaccinationLink =
+      this.$data.user.users.userInfo.loginToken = applicationData.userInfo.loginToken;
+      this.$data.user.users.userInfo.password = applicationData.userInfo.password;
+      this.$data.user.users.userInfo.vaccinationLink =
         applicationData.userInfo.vaccinationLink;
-      this.$data.user.userInfo.validIdLink =
+      this.$data.user.users.userInfo.validIdLink =
         applicationData.userInfo.validIdLink;
 
       this.$data.qrInformation.info.name =
@@ -509,35 +511,37 @@ export default {
           length: 5,
           charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
         });
-      this.$data.user.userInfo.qrData = qrDetail;
+      this.$data.user.users.userInfo.qrData = qrDetail;
 
       const db = getFirestore(app);
       const userRef = collection(db, "user");
       const usersRefs = collection(db, "qr-application");
 
-      let usersRef = doc(userRef, this.$data.user.userInfo.phoneNumber);
+      let usersRef = doc(userRef, this.$data.user.users.userInfo.phoneNumber);
       this.$data.usersRefer = usersRef;
-      this.$data.user.userInfo.qrStatus = "Approved";
+      this.$data.user.users.userInfo.qrStatus = "Approved";
       //update qrData
-      await setDoc(this.$data.usersRefer, this.$data.user);
+      await setDoc(this.$data.usersRefer, this.$data.user.users);
 
       //delete User
       let delApplication = doc(usersRefs, this.$data.applicationID);
       await deleteDoc(delApplication);
 
       //create Qr-code details
-      let id = this.$data.user.userInfo.qrData;
+      let id = this.$data.user.users.userInfo.qrData;
       setDoc(
         doc(db, "data-record", id),
         this.$data.qrInformation
       );
 
-      this.$data.notification.header = "Your Application has been Declined";
+      this.$data.notification.header = "QR-Code Application Update.";
       this.$data.notification.notificationMessage =
-        "Your Application has been Approved";
+        "Ang mensahing ito ay nagpapaalam sa iyo na ang iyong QR Code Application ay naaprubahan ng TRAFEX Admin.";
       this.$data.notification.phoneNumber =
-        "+63" + this.$data.user.userInfo.phoneNumber;
-      this.$data.notification.date = "";
+        "+63" + this.$data.user.users.userInfo.phoneNumber;
+           const current = new Date();
+      let date = `${current.getMonth()}` + " " + `${current.getDay()}` + ", " + `${current.getFullYear()}` ;
+      this.$data.notification.date = date;
 
       var randomstring = require("randomstring");
       let notifID = randomstring.generate({
@@ -558,11 +562,11 @@ export default {
       const userRef = collection(db, "user");
       const usersRefs = collection(db, "qr-application");
 
-      let usersRef = doc(userRef, this.$data.user.userInfo.phoneNumber);
+      let usersRef = doc(userRef, this.$data.user.users.userInfo.phoneNumber);
       this.$data.usersRefer = usersRef;
-      this.$data.user.userInfo.qrStatus = "Declined";
+      this.$data.user.users.userInfo.qrStatus = "Declined";
       //update qrData
-      await setDoc(this.$data.usersRefer, this.$data.user);
+      await setDoc(this.$data.usersRefer, this.$data.user.users);
 
       //delete User
       let delApplication = doc(usersRefs, this.$data.applicationID);
@@ -575,13 +579,15 @@ export default {
       });
 
       setDoc(doc(db, "applications", id), this.$data.user);
+      const current = new Date();
+      let date = `${current.getMonth()}` + " " + `${current.getDay()}` + ", " + `${current.getFullYear()}` ;
 
-      this.$data.notification.header = "Your Application has been Declined";
+      this.$data.notification.header = "QR-Code Application Update.";
       this.$data.notification.notificationMessage =
-        "Your Application has been Declined";
+        "Ang mensahing ito ay nagpapaalam sa iyo na ang iyong QR Code Application ay hindi inaprubahan ng TRAFEX Admin. Maaring ang iyong mga ibinigay na impormasyon ay hindi wasto.";
       this.$data.notification.phoneNumber =
-        "+63" + this.$data.user.userInfo.phoneNumber;
-      this.$data.notification.date = "";
+        "+63" + this.$data.user.users.userInfo.phoneNumber;
+      this.$data.notification.date = date;
 
       var randomstring = require("randomstring");
       let notifID = randomstring.generate({

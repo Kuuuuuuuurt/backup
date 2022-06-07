@@ -1,40 +1,116 @@
 <template>
-   <div>
-            <form action="" class="form bg-white p-6 my-10 relative" @submit.prevent="register">
-                <h3 class="text-2xl text-gray-900 font-semibold">Create an Account!</h3>
-                <p class="text-gray-600"> Please enter your information below!</p>
-                <div class="flex space-x-5 mt-3">
-                    <input type="text"  placeholder="First Name" class="border p-2  w-1/2" v-model="user.userInfo.firstName" required>
-                    <input type="text"  placeholder="Last Name" class="border p-2 w-1/2" v-model="user.userInfo.lastName" required>
-                </div>
-                <input type="tel"  placeholder="" class="border p-2 w-full mt-3" disabled v-model="user.userInfo.phoneNumber" required>
-                 <div class="flex space-x-5 mt-3">
-                    <input type="text"  placeholder="Gender" class="border p-2  w-1/2" v-model="user.userInfo.gender" required>
-                    <input type="tel"  placeholder="Age" class="border p-2 w-1/2" v-model="user.userInfo.age" required>
-                </div>
-                 <div class="flex space-x-5 mt-3">
-                    <input type="text"  placeholder="Purok" class="border p-2  w-1/2" v-model="user.userInfo.purok" required>
-                    <input type="tel"  placeholder="Baranggay" class="border p-2 w-1/2" v-model="user.userInfo.baranggay" required>
-                </div>
-                 <div class="flex space-x-5 mt-3">
-                    <input type="text"  placeholder="Municipality" class="border p-2  w-1/2" v-model="user.userInfo.municipality" required>
-                    <input type="tel"  placeholder="" class=" p-2 w-1/2 bg-white" disabled>
-                </div>
+  <div>
+    <form
+      action=""
+      class="form bg-white p-6 my-10 relative"
+      @submit.prevent="register"
+    >
+      <h3 class="text-2xl text-gray-900 font-semibold">Create an Account!</h3>
+      <p class="text-gray-600">Please enter your information below!</p>
+      <div class="flex space-x-5 mt-3">
+        <input
+          type="text"
+          placeholder="First Name"
+          class="border p-2 w-1/2"
+          v-model="user.userInfo.firstName"
+          required
+        />
+        <input
+          type="text"
+          placeholder="Last Name"
+          class="border p-2 w-1/2"
+          v-model="user.userInfo.lastName"
+          required
+        />
+      </div>
+      <input
+        type="tel"
+        placeholder=""
+        class="border p-2 w-full mt-3"
+        disabled
+        v-model="user.userInfo.phoneNumber"
+        required
+      />
+      <div class="flex space-x-5 mt-3">
+        <select
+          v-model="user.userInfo.gender"
+          id="gender"
+          class="border p-2 w-1/2"
+        >
+          <option selected>Male</option>
+          <option value="US">Female</option>
+          <option value="CA">Others</option>
+        </select>
+        <input
+          type="tel"
+          placeholder="Age"
+          class="border p-2 w-1/2"
+          v-model="user.userInfo.age"
+          required
+        />
+      </div>
+      <div class="flex space-x-5 mt-3">
+        <input
+          type="text"
+          placeholder="Purok"
+          class="border p-2 w-1/2"
+          v-model="user.userInfo.purok"
+          required
+        />
+        <input
+          type="tel"
+          placeholder="Baranggay"
+          class="border p-2 w-1/2"
+          v-model="user.userInfo.baranggay"
+          required
+        />
+      </div>
+      <div class="flex space-x-5 mt-3">
+        <input
+          type="text"
+          placeholder="Municipality"
+          class="border p-2 w-1/2"
+          v-model="user.userInfo.municipality"
+          required
+        />
+        <input type="tel" placeholder="" class="p-2 w-1/2 bg-white" disabled />
+      </div>
 
-                <div class="flex space-x-5 mt-3">
-                    <input type="password"  placeholder="Password" class="border p-2  w-1/2" v-model="user.userInfo.password" required>
-                    <input type="tel"  placeholder="" class=" p-2 w-1/2 bg-white" disabled>
-                </div>
-                <p class="font-bold text-sm mt-3">Privacy Policy *</p>
-                <div class="flex items-baseline space-x-2 mt-2">
-                    <p class="text-gray-600 text-sm">by clicking create account, you agree to our <a class="text-blue-700" @click="privacyPolicyModal=true"
-                          >Privay Policy.</a
-                        ></p>
-                </div>
-                <button value="Submit" class="w-full mt-6 bg-blue-600 hover:bg-blue-500 text-white font-semibold p-3">Create Account</button>
-
-            </form>
-  </div> 
+      <div class="flex space-x-5 mt-3">
+        <input
+          type="password"
+          placeholder="Password"
+          class="border p-2 w-1/2"
+          v-model="user.userInfo.password"
+          required
+        />
+        <input type="tel" placeholder="" class="p-2 w-1/2 bg-white" disabled />
+      </div>
+      <p class="font-bold text-sm mt-3">Privacy Policy *</p>
+      <div class="flex items-baseline space-x-2 mt-2">
+        <p class="text-gray-600 text-sm">
+          by clicking create account, you agree to our
+          <a class="text-blue-700" @click="privacyPolicyModal = true"
+            >Privay Policy.</a
+          >
+        </p>
+      </div>
+      <button
+        value="Submit"
+        class="
+          w-full
+          mt-6
+          bg-blue-600
+          hover:bg-blue-500
+          text-white
+          font-semibold
+          p-3
+        "
+      >
+        Create Account
+      </button>
+    </form>
+  </div>
 
   <div
     v-if="privacyPolicyModal"
@@ -224,7 +300,7 @@
                 identifiable information may include, but is not limited to:
               </p>
 
-               <p
+              <p
                 class="
                   text-base
                   leading-relaxed
@@ -244,11 +320,11 @@
                   dark:text-gray-400
                 "
               >
-                 1. Your name and other particulars such as: your gender, contact
-              details, address
+                1. Your name and other particulars such as: your gender, contact
+                details, address
               </p>
 
-                <p
+              <p
                 class="
                   text-base
                   leading-relaxed
@@ -268,7 +344,7 @@
                   dark:text-gray-400
                 "
               >
-                 1. Name of the Owner, its address and contact details;
+                1. Name of the Owner, its address and contact details;
               </p>
               <p
                 class="
@@ -278,10 +354,10 @@
                   dark:text-gray-400
                 "
               >
-                 2. Vehicle informations
+                2. Vehicle informations
               </p>
 
-               <p
+              <p
                 class="
                   text-base
                   leading-relaxed
@@ -301,15 +377,15 @@
                   dark:text-gray-400
                 "
               >
-                  Your personal data may be used, stored, processed, shared and
-              disclosed only by the researcher. We shall ensure that the
-              personal information collected are used only for the purpose of
-              implementing our programs and initiatives specifically COVID-19
-              contact-tracing measures and the integration of the TRAFEX System
-              QR Code.
+                Your personal data may be used, stored, processed, shared and
+                disclosed only by the researcher. We shall ensure that the
+                personal information collected are used only for the purpose of
+                implementing our programs and initiatives specifically COVID-19
+                contact-tracing measures and the integration of the TRAFEX
+                System QR Code.
               </p>
 
-               <p
+              <p
                 class="
                   text-base
                   leading-relaxed
@@ -329,16 +405,17 @@
                   dark:text-gray-400
                 "
               >
-                  We have put in place appropriate physical, organizational, and
-              technical controls to maintain the confidentiality, integrity, and
-              availability of your personal data. All personal data collected
-              for the purpose of implementation of programs and projects of the
-              Transportation group of the City shall be stored only for as long
-              as necessary or until the purpose for their processing no longer
-              exists. After this duration, the Transportation group of the City
-              shall dispose your personal information in a secure manner in
-              order to prevent further processing, unauthorized access, or
-              disclosure to any other party.
+                We have put in place appropriate physical, organizational, and
+                technical controls to maintain the confidentiality, integrity,
+                and availability of your personal data. All personal data
+                collected for the purpose of implementation of programs and
+                projects of the Transportation group of the City shall be stored
+                only for as long as necessary or until the purpose for their
+                processing no longer exists. After this duration, the
+                Transportation group of the City shall dispose your personal
+                information in a secure manner in order to prevent further
+                processing, unauthorized access, or disclosure to any other
+                party.
               </p>
 
               <p
@@ -361,13 +438,13 @@
                   dark:text-gray-400
                 "
               >
-                 The researcher will take all the steps reasonably necessary to
-              ensure that your data is treated securely and in accordance with
-              this Data Privacy Statement and no transfer of your personal data
-              will take place to an organization or a country outside the
-              Philippines.
+                The researcher will take all the steps reasonably necessary to
+                ensure that your data is treated securely and in accordance with
+                this Data Privacy Statement and no transfer of your personal
+                data will take place to an organization or a country outside the
+                Philippines.
               </p>
-                <p
+              <p
                 class="
                   text-base
                   leading-relaxed
@@ -375,15 +452,15 @@
                   dark:text-gray-400
                 "
               >
-                 If you are a resident outside the Philippines and choose to
-              provide information to us, please note that we transfer the data,
-              including personal data, to the Philippines and process it here.
-              Your consent to this Data Privacy Statement followed by your
-              submission of such information represents your agreement to that
-              transfer.
+                If you are a resident outside the Philippines and choose to
+                provide information to us, please note that we transfer the
+                data, including personal data, to the Philippines and process it
+                here. Your consent to this Data Privacy Statement followed by
+                your submission of such information represents your agreement to
+                that transfer.
               </p>
 
-               <p
+              <p
                 class="
                   text-base
                   leading-relaxed
@@ -403,23 +480,9 @@
                   dark:text-gray-400
                 "
               >
-                 1. Right to be informed – you may demand the details as to how
-              your personal information is being processed or have been
-              processed by us;
-              </p>
-                <p
-                class="
-                  text-base
-                  leading-relaxed
-                  text-gray-500
-                  dark:text-gray-400
-                "
-              >
-                  2. Right to access – upon written request, you may demand
-              reasonable access to your personal information, which may include
-              the contents of your processed personal information, the manner of
-              processing, sources where they were obtained, recipients and
-              reason of disclosure;
+                1. Right to be informed – you may demand the details as to how
+                your personal information is being processed or have been
+                processed by us;
               </p>
               <p
                 class="
@@ -429,12 +492,13 @@
                   dark:text-gray-400
                 "
               >
-                  3. Right to dispute – you may dispute inaccuracy or error in your
-              personal information in our systems through our Data Protection
-              Officer;
+                2. Right to access – upon written request, you may demand
+                reasonable access to your personal information, which may
+                include the contents of your processed personal information, the
+                manner of processing, sources where they were obtained,
+                recipients and reason of disclosure;
               </p>
-
-                <p
+              <p
                 class="
                   text-base
                   leading-relaxed
@@ -442,8 +506,9 @@
                   dark:text-gray-400
                 "
               >
-                   4. Right to object – you may suspend, withdraw, and remove your
-              personal information in certain further processing, upon demand;
+                3. Right to dispute – you may dispute inaccuracy or error in
+                your personal information in our systems through our Data
+                Protection Officer;
               </p>
 
               <p
@@ -454,11 +519,8 @@
                   dark:text-gray-400
                 "
               >
-                    5. Right to data erasure – based on reasonable grounds, you have
-              the right to suspend, withdraw or order blocking, removal or
-              destruction of your personal data from our filing system, without
-              prejudice to our continuous processing for health, legal, and
-              regulatory purposes;
+                4. Right to object – you may suspend, withdraw, and remove your
+                personal information in certain further processing, upon demand;
               </p>
 
               <p
@@ -469,23 +531,11 @@
                   dark:text-gray-400
                 "
               >
-                   6. Right to secure data portability – you have the right to obtain
-              from us your personal information in an electronic or structured
-              format that is commonly used and allows for further use;
-              </p>
-
-               <p
-                class="
-                  text-base
-                  leading-relaxed
-                  text-gray-500
-                  dark:text-gray-400
-                "
-              >
-                   7. Right to be indemnified for damages – as data subject, you have
-              every right to be indemnified for any damages sustained due to
-              such violation of your right to privacy through inaccurate, false,
-              unlawfully obtained or unauthorized use of your information; and,
+                5. Right to data erasure – based on reasonable grounds, you have
+                the right to suspend, withdraw or order blocking, removal or
+                destruction of your personal data from our filing system,
+                without prejudice to our continuous processing for health,
+                legal, and regulatory purposes;
               </p>
 
               <p
@@ -496,13 +546,39 @@
                   dark:text-gray-400
                 "
               >
-                   8. Right to file a complaint – you may file your complaint or any
-              concerns with our office at the City Hall of Ozamiz and/or the
-              National Privacy Commission through www.privacy.gov.ph.
+                6. Right to secure data portability – you have the right to
+                obtain from us your personal information in an electronic or
+                structured format that is commonly used and allows for further
+                use;
               </p>
-              
 
-              
+              <p
+                class="
+                  text-base
+                  leading-relaxed
+                  text-gray-500
+                  dark:text-gray-400
+                "
+              >
+                7. Right to be indemnified for damages – as data subject, you
+                have every right to be indemnified for any damages sustained due
+                to such violation of your right to privacy through inaccurate,
+                false, unlawfully obtained or unauthorized use of your
+                information; and,
+              </p>
+
+              <p
+                class="
+                  text-base
+                  leading-relaxed
+                  text-gray-500
+                  dark:text-gray-400
+                "
+              >
+                8. Right to file a complaint – you may file your complaint or
+                any concerns with our office at the City Hall of Ozamiz and/or
+                the National Privacy Commission through www.privacy.gov.ph.
+              </p>
             </div>
             <!-- Modal footer -->
             <div
@@ -593,7 +669,7 @@ export default {
           qrStatus: "No Application",
           qrData: null,
           type: "passenger",
-          password: '',
+          password: "",
           loginToken: "Yes",
           vaccinationLink: null,
           validIdLink: null,
@@ -604,8 +680,7 @@ export default {
 
   methods: {
     register() {
-      const emailPhone =
-        this.$data.user.userInfo.phoneNumber + "@gmail.com";
+      const emailPhone = this.$data.user.userInfo.phoneNumber + "@gmail.com";
       const password = this.$data.user.userInfo.password;
       const auth = getAuth(app);
       const db = getFirestore(app);
@@ -624,29 +699,29 @@ export default {
           this.$router.push(`/passenger/home/${id}`);
         })
         .catch((error) => {
-         switch(error.code){
-          case 'auth/user-already-in-used':
-            alert("Email already in used")
-            break
-          case 'auth/operation-not-allowed':
-            alert("Operation not allowed")
-            break
-          case 'auth/weak-password':
-            alert("Weak Password")
-            break
-          case 'auth/invalid-email':
-            alert("Invalid email")
-            break
-          default:
-            alert("Something went wrong")
-        }
+          switch (error.code) {
+            case "auth/user-already-in-used":
+              alert("Email already in used");
+              break;
+            case "auth/operation-not-allowed":
+              alert("Operation not allowed");
+              break;
+            case "auth/weak-password":
+              alert("Weak Password");
+              break;
+            case "auth/invalid-email":
+              alert("Invalid email");
+              break;
+            default:
+              alert("Something went wrong");
+          }
         });
     },
   },
 
-  created(){
+  created() {
     let phone = this.$route.params.phone;
     this.$data.user.userInfo.phoneNumber = phone;
-  }
+  },
 };
 </script>

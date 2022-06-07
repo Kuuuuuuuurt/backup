@@ -46,13 +46,13 @@
       "
       @click="back"
     >
-       <img
-          src="../../../../src/assets/283863145_544721900556893_7583603897868082993_n.png"
-          style="height: 30px"
-          alt=""
-          class="mr-2"
-          loading="lazy"
-        />
+      <img
+        src="../../../../src/assets/283863145_544721900556893_7583603897868082993_n.png"
+        style="height: 30px"
+        alt=""
+        class="mr-2"
+        loading="lazy"
+      />
     </button>
   </nav>
 
@@ -766,6 +766,7 @@ import {
 export default {
   data() {
     return {
+      visited: "",
       notifSendModal: false,
       pageShow: true,
       vehicleShow: false,
@@ -886,6 +887,7 @@ export default {
               (recordData.year == this.$data.report.yearTested) &
               (recordData.day == this.$data.report.dayTested))
           ) {
+            this.visited = recordData.visitedEstab;
             enteredVehicle.push(recordData.visitedEstab);
             enteredVehicleList.push(recordData);
           }
@@ -918,23 +920,21 @@ export default {
       this.$data.peopleEncountered = peopleEncountered;
       this.$data.listPeople = listPeople;
 
-      this.$data.notification.header =
-        "You have contacted a confirm COVID-19 Positive";
+      this.$data.notification.header = "TRAFEX ALERT!";
       this.$data.notification.notificationMessage =
-        "You have encountered an Confirm Covid-19 Positive patient @" +
+        "Ito ay para ipaalam sa iyo na sa " +
         this.$data.report.monthTested +
         " " +
         this.$data.report.dayTested +
         ", " +
-        this.$data.report.yearTested +
-        " Upon entering the establishment";
-
-      this.$data.notification.date =
-        this.$data.report.monthTested +
-        " " +
-        this.$data.report.dayTested +
-        ", " +
-        this.$data.report.yearTested;
+        this.$data.report.yearTested
+      +"ikaw ay naging closed contact ng isang Covid19 Positive na pasahero sa Ozamiz Tudela Balik-Balik Transport Vehicle na may plate number na " +
+        this.visited +
+        ". " +
+        "Hinihikayat ka namin na mag-self quarantine kaagad.";
+const current = new Date();
+      let date = `${current.getMonth()}` + " " + `${current.getDay()}` + ", " + `${current.getFullYear()}` ;
+      this.$data.notification.date = date;
     },
 
     async sendNotif() {
@@ -958,7 +958,7 @@ export default {
         setDoc(doc(db, "notification", id), this.$data.notification);
       }
 
-       for (let x = 0; x < this.enteredVehicle.length; x++) {
+      for (let x = 0; x < this.enteredVehicle.length; x++) {
         this.$data.notification.phoneNumber = this.enteredVehicle[x];
         var random = require("randomstring");
         let id2 = random.generate({

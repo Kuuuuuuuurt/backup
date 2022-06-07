@@ -54,15 +54,7 @@
           loading="lazy"
         />
       </button>
-      <button>
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/2099/2099058.png"
-          style="height: 25px"
-          alt=""
-          class="mr-2"
-          loading="lazy"
-        />
-      </button>
+  
       <button @click="logoutModal=true">
         <img
           src="https://cdn-icons-png.flaticon.com/512/450/450387.png"
