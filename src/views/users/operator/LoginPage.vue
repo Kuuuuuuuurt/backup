@@ -2,7 +2,15 @@
   <div>
     <div class="bg-gray-100 flex flex-col justify-center sm:py-12">
       <div class="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
-        <h1 class="font-bold text-center text-2xl mb-5">Trafex</h1>
+         <div class=" flex justify-center mb-5">
+           <img
+          src="../../../../src/assets/283863145_544721900556893_7583603897868082993_n.png"
+          style="height: 40px"
+          alt=""
+          class="mr-2"
+          loading="lazy"
+        />
+         </div>
         <div class="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
           <form @submit.prevent="login">
             <div class="px-5 py-7">
@@ -29,9 +37,9 @@
                 class="
                   transition
                   duration-200
-                  bg-blue-500
-                  hover:bg-blue-600
-                  focus:bg-blue-700
+                  bg-black
+                  hover:bg-gray-600
+                  focus:bg-gray-900
                   focus:shadow-sm
                   focus:ring-4
                   focus:ring-blue-500
@@ -244,6 +252,150 @@
       </div>
     </div>
   </div>
+
+<div
+v-if="existingModal"
+    class="
+      main-modal
+      fixed
+      w-full
+      inset-0
+      z-50
+      overflow-hidden
+      flex
+      justify-center
+      items-center
+      animated
+      fadeIn
+      faster
+    "
+    style="background: rgba(0, 0, 0, 0.7)"
+  >
+    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <!-- Modal header -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <button
+            type="button"
+            class="
+              absolute
+              top-3
+              right-2.5
+              text-gray-400
+              bg-transparent
+              hover:bg-gray-200 hover:text-gray-900
+              rounded-lg
+              text-sm
+              p-1.5
+              ml-auto
+              inline-flex
+              items-center
+              dark:hover:bg-gray-800 dark:hover:text-white
+            "
+            data-modal-toggle="popup-modal"
+            @click="existingModal = false"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+          <div class="p-6 text-center">
+            <svg
+              class="mx-auto mb-4 w-14 h-14 text-yellow-400 dark:yellow-red-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            <h3
+              class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"
+            >
+              {{"User " + user.userInfo.owner + " is already Logged in. Please type the password to confirm and continue."}}
+            </h3>
+
+              <label class="font-semibold text-sm text-gray-600 pb-1 block"
+                >Password</label
+              >
+              <span class="text-red-400 font-xs">{{users.error}}</span>
+              <input
+                type="password"
+                class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                required
+                v-model="alreadyPassword"
+              />
+            <button
+              data-modal-toggle="popup-modal"
+              type="button"
+              class="
+                text-white
+                bg-blue-600
+                hover:bg-blue-800
+                focus:ring-4 focus:outline-none focus:ring-blue-300
+                dark:focus:ring-blue-800
+                font-medium
+                rounded-lg
+                text-sm
+                inline-flex
+                items-center
+                px-5
+                py-2.5
+                text-center
+                mr-2
+              "
+              @click="alreadyLogin"
+            >
+              Login
+            </button>
+            <button
+              data-modal-toggle="popup-modal"
+              type="button"
+              class="
+                text-gray-500
+                bg-white
+                hover:bg-gray-100
+                focus:ring-4 focus:outline-none focus:ring-gray-200
+                rounded-lg
+                border border-gray-200
+                text-sm
+                font-medium
+                px-5
+                py-2.5
+                hover:text-gray-900
+                focus:z-10
+                dark:bg-gray-700
+                dark:text-gray-300
+                dark:border-gray-500
+                dark:hover:text-white
+                dark:hover:bg-gray-600
+                dark:focus:ring-gray-600
+              "
+              @click="existingModal = false"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <script>
@@ -253,10 +405,13 @@ import { getFirestore, collection, doc, getDoc, setDoc } from "firebase/firestor
 export default {
   data() {
     return {
+      alreadyPassword: "",
+      existingModal: false,
       reference: "",
       users: {
         email: "",
         password: "",
+        error: "",
       },
         user:{
         userInfo: {
@@ -331,9 +486,6 @@ export default {
       let userData = user.data();
 
       const identifier = userData.userInfo.type;
-
-      if (identifier == "operator") {
-        if (userData.userInfo.loginToken == "No") {
       this.$data.user.userInfo.email = userData.userInfo.email;
       this.$data.user.userInfo.phoneNumber = userData.userInfo.phoneNumber;
       this.$data.user.userInfo.vehicleID = userData.userInfo.vehicleID;
@@ -343,12 +495,15 @@ export default {
       this.$data.user.userInfo.owner = userData.userInfo.owner;
       this.$data.user.userInfo.type = userData.userInfo.type;
       this.$data.user.userInfo.password = userData.userInfo.password;
+
+      if (identifier == "operator") {
+        if (userData.userInfo.loginToken == "No") {
       this.$data.user.userInfo.loginToken = "Yes";
 
       setDoc(this.$data.reference, this.$data.user)
       this.$router.push(`/operator/home/${this.$data.users.email}`);
         } else if (userData.userInfo.loginToken == "Yes") {
-          alert("Already Logged in");
+         this.existingModal = true;
         } else {
           console.log("No Token");
         }
@@ -364,6 +519,34 @@ export default {
           });
       }
     },
+
+    alreadyLogin(){
+     const auth = getAuth(app);
+
+      const phoneEmail = this.$data.user.userInfo.email;
+      const password = this.$data.alreadyPassword;
+
+       signInWithEmailAndPassword(auth, phoneEmail, password)
+        .then(() => {
+          // Signed in
+          this.$data.user.userInfo.loginToken = "Yes";
+          setDoc(this.$data.reference, this.$data.user);
+          this.$router.push(`/operator/home/${this.$data.user.userInfo.email}`);
+
+        })
+        .catch((error) => {
+           switch(error.code){
+          case 'auth/user-not-found':
+            this.$data.users.error = "User Not Found"
+            break
+          case 'auth/wrong-password':
+            this.$data.users.error = "Incorrect Password"
+            break
+          default:
+          this.$data.users.error = "Something Went Wrong Please Try Again"
+        }
+        });
+    }
   },
 };
 </script>

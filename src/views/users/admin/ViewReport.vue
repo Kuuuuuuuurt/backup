@@ -1,5 +1,5 @@
 <template>
-<nav
+  <nav
     class="
       bg-white
       shadow
@@ -14,7 +14,7 @@
     "
   >
     <button
-    @click="back"
+      @click="back"
       class="
         font-bold
         m-3
@@ -46,17 +46,15 @@
       "
       @click="back"
     >
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/1008/1008001.png"
-        style="height: 25px"
-        alt=""
-        class="mr-2"
-        loading="lazy"
-      />
-      TRAFEX
+       <img
+          src="../../../../src/assets/283863145_544721900556893_7583603897868082993_n.png"
+          style="height: 30px"
+          alt=""
+          class="mr-2"
+          loading="lazy"
+        />
     </button>
   </nav>
-
 
   <div v-if="pageShow">
     <div class="bg-white p-6 my-10 relative">
@@ -212,12 +210,11 @@
                   "
                   @click="vehiclesShow"
                 >
-                  <p>Contacted Person</p>
+                  <p>Close Contact</p>
                 </div>
               </a>
             </div>
             <button
-              onclick="popuphandler(true)"
               class="
                 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600
                 mt-4
@@ -406,7 +403,7 @@
                   "
                   @click="showPeople"
                 >
-                  <p> Vehicle Entered</p>
+                  <p>Vehicle Entered</p>
                 </div>
               </a>
               <a
@@ -425,7 +422,7 @@
                   class="py-2 px-8 bg-indigo-100 text-indigo-700 rounded-full"
                   @click="vehiclesShow"
                 >
-                  <p>Contacted Person</p>
+                  <p>Close Contact</p>
                 </div>
               </a>
             </div>
@@ -642,8 +639,8 @@
     </div>
   </div>
 
-   <div
-   v-if="notifSendModal"
+  <div
+    v-if="notifSendModal"
     class="
       main-modal
       fixed
@@ -660,27 +657,97 @@
     "
     style="background: rgba(0, 0, 0, 0.7)"
   >
-  <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-        <!-- Modal content -->
+    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <!-- Modal header -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <!-- Modal header -->
-             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal" @click="back">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+          <button
+            type="button"
+            class="
+              absolute
+              top-3
+              right-2.5
+              text-gray-400
+              bg-transparent
+              hover:bg-gray-200 hover:text-gray-900
+              rounded-lg
+              text-sm
+              p-1.5
+              ml-auto
+              inline-flex
+              items-center
+              dark:hover:bg-gray-800 dark:hover:text-white
+            "
+            data-modal-toggle="popup-modal"
+            @click="back"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+          <div class="p-6 text-center">
+            <svg
+              class="mx-auto mb-4 w-14 h-14 text-green-400 dark:text-green-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"
+              ></path>
+            </svg>
+            <h3 class="text-lg font-normal text-gray-500 dark:text-gray-400">
+              Success
+            </h3>
+            <h3
+              class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"
+            >
+              Notification Sent Successfully
+            </h3>
+            <button
+              data-modal-toggle="popup-modal"
+              type="button"
+              class="
+                text-gray-500
+                bg-white
+                hover:bg-gray-100
+                focus:ring-4 focus:outline-none focus:ring-gray-200
+                rounded-lg
+                border border-gray-200
+                text-sm
+                font-medium
+                px-5
+                py-2.5
+                hover:text-gray-900
+                focus:z-10
+                dark:bg-gray-700
+                dark:text-gray-300
+                dark:border-gray-500
+                dark:hover:text-white
+                dark:hover:bg-gray-600
+                dark:focus:ring-gray-600
+              "
+              @click="back"
+            >
+              Okay
             </button>
-            <div class="p-6 text-center">
-                <svg class="mx-auto mb-4 w-14 h-14 text-green-400 dark:text-green-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M5 13l4 4L19 7"
-				></path></svg>
-                <h3 class=" text-lg font-normal text-gray-500 dark:text-gray-400">Success </h3>
-                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Notification Sent Successfully</h3>
-                <button data-modal-toggle="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" @click="back">Okay</button>
-            </div>
-             </div>
+          </div>
         </div>
+      </div>
     </div>
   </div>
 </template>
@@ -707,6 +774,7 @@ export default {
       enteredVehicle: [],
       enteredVehicleList: [],
       peopleEncountered: [],
+      operatorsEncountered: [],
       listPeople: [],
       userRefer: "",
       reportID: "",
@@ -849,6 +917,7 @@ export default {
       });
       this.$data.peopleEncountered = peopleEncountered;
       this.$data.listPeople = listPeople;
+
       this.$data.notification.header =
         "You have contacted a confirm COVID-19 Positive";
       this.$data.notification.notificationMessage =
@@ -858,7 +927,7 @@ export default {
         this.$data.report.dayTested +
         ", " +
         this.$data.report.yearTested +
-        "Upon entering the establishment";
+        " Upon entering the establishment";
 
       this.$data.notification.date =
         this.$data.report.monthTested +
@@ -877,11 +946,7 @@ export default {
         length: 20,
         charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
       });
-      setDoc(
-        doc(db, "reports-info", reportedID),
-        this.$data.report
-      );
-      
+      setDoc(doc(db, "reports-info", reportedID), this.$data.report);
 
       for (let i = 0; i < this.peopleEncountered.length; i++) {
         this.$data.notification.phoneNumber = this.peopleEncountered[i];
@@ -890,10 +955,17 @@ export default {
           length: 20,
           charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
         });
-       setDoc(
-          doc(db, "notification", id),
-          this.$data.notification
-        );
+        setDoc(doc(db, "notification", id), this.$data.notification);
+      }
+
+       for (let x = 0; x < this.enteredVehicle.length; x++) {
+        this.$data.notification.phoneNumber = this.enteredVehicle[x];
+        var random = require("randomstring");
+        let id2 = random.generate({
+          length: 20,
+          charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+        });
+        setDoc(doc(db, "notification", id2), this.$data.notification);
       }
 
       const userRef = collection(db, "reports");

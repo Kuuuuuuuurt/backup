@@ -25,13 +25,12 @@
       "
     >
       <img
-        src="https://cdn-icons-png.flaticon.com/512/2681/2681062.png"
-        style="height: 25px"
-        alt=""
-        class="mr-2"
-        loading="lazy"
-      />
-      Trafex
+          src="../../../../src/assets/283863145_544721900556893_7583603897868082993_n.png"
+          style="height: 30px"
+          alt=""
+          class="mr-2"
+          loading="lazy"
+        />
     </a>
 
     <!-- List of nav item -->
@@ -76,122 +75,35 @@
     </div>
   </nav>
 
-  <div class="py-16">
-    <div class="container m-auto px-6 text-gray-500 md:px-12 xl:px-0">
-      <div class="mx-auto grid gap-6 md:w-3/4 lg:w-full lg:grid-cols-3">
-        <div class="rounded-2xl px-8 py-12 sm:px-12 lg:px-8 h-30">
-          <div class="mb-12 space-y-4" @click="toApplication">
-            <div
-              class="
-                bg-white
-                max-w-sm
-                mx-auto
-                rounded-2xl
-                overflow-hidden
-                shadow-lg
-                hover:shadow-2xl
-                transition
-                duration-500
-                transform
-                hover:scale-105
-                cursor-pointer
-              "
-            >
-              <div class="h-20 bg-red-500 flex items-center justify-between">
-                <h1 class="text-white ml-4 border-2 py-2 px-4 rounded-full">
-                  A
-                </h1>
-                <p class="mr-20 text-white text-lg">Qr-code Application</p>
-                <p class="mr-4 text-white font-thin text-lg">Click</p>
-              </div>
-
-              <p class="py-6 text-lg tracking-wide ml-16">
-                View Applications
-              </p>
-              <!-- <hr > -->
-              <div class="flex justify-between px-5 mb-2 text-sm text-gray-600">
-                <p>View Record</p>
-              </div>
+  <div class="mt-12 p-4 w-full text-center bg-white rounded-lg sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <h5 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">Welcome to Trafex System</h5>
+    <p class="mb-5 text-base text-gray-500 sm:text-lg dark:text-gray-400">Please select Activity you wish to perform</p>
+    <div class="justify-center items-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
+        <a @click="toRecords" class="w-full sm:w-auto bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
+            <svg class="mr-3 w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+            <div class="text-left">
+                <div class="mb-1 text-xs">Entry Record</div>
+                <div class="-mt-1 font-sans text-sm font-semibold">View Record</div>
             </div>
-          </div>
-        </div>
-        <div class="rounded-2xl px-8 py-12 sm:px-12 lg:px-8">
-          <div class="mb-12 space-y-4" @click="toRecords">
-            <div
-              class="
-                bg-white
-                max-w-sm
-                mx-auto
-                rounded-2xl
-                overflow-hidden
-                shadow-lg
-                hover:shadow-2xl
-                transition
-                duration-500
-                transform
-                hover:scale-105
-                cursor-pointer
-              "
-            >
-              <div class="h-20 bg-green-500 flex items-center justify-between">
-                <h1 class="text-white ml-4 border-2 py-2 px-4 rounded-full">
-                  B
-                </h1>
-                <p class="mr-20 text-white text-lg">Entry Record</p>
-                <p class="mr-4 text-white font-thin text-lg">Click</p>
-              </div>
-
-              <p class="py-6 text-lg tracking-wide ml-16">
-                View Records
-              </p>
-              <!-- <hr > -->
-              <div class="flex justify-between px-5 mb-2 text-sm text-gray-600">
-                <p>View Record</p>
-              </div>
+        </a>
+                <a @click="toReports" class="w-full sm:w-auto bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
+            <svg class="mr-3 w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+            <div class="text-left">
+                <div class="mb-1 text-xs">Reports</div>
+                <div class="-mt-1 font-sans text-sm font-semibold">View Reports</div>
             </div>
-          </div>
-        </div>
+        </a>
 
-        <div class="rounded-2xl px-8 py-12 sm:px-12 lg:px-8">
-          <div class="mb-12 space-y-4" @click="toReports">
-            <div
-              class="
-                bg-white
-                max-w-sm
-                mx-auto
-                rounded-2xl
-                overflow-hidden
-                shadow-lg
-                hover:shadow-2xl
-                transition
-                duration-500
-                transform
-                hover:scale-105
-                cursor-pointer
-              "
-            >
-              <div class="h-20 bg-blue-500 flex items-center justify-between">
-                <h1 class="text-white ml-4 border-2 py-2 px-4 rounded-full">
-                  C
-                </h1>
-                <p class="mr-20 text-white text-lg">Reports</p>
-                <p class="mr-4 text-white font-thin text-lg">Click</p>
-              </div>
-
-              <p class="py-6 text-lg tracking-wide ml-16">
-                View Records
-              </p>
-              <!-- <hr > -->
-              <div class="flex justify-between px-5 mb-2 text-sm text-gray-600">
-                <p>View Reports</p>
-              </div>
+         <a @click="toApplication" class="w-full sm:w-auto bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
+            <svg class="mr-3 w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+            <div class="text-left">
+                <div class="mb-1 text-xs">QR-Code Applications</div>
+                <div class="-mt-1 font-sans text-sm font-semibold">View Applications</div>
             </div>
-          </div>
-        </div>
+        </a>
 
-      </div>
     </div>
-  </div>
+</div>
 
    <div
    v-if="logoutModal"

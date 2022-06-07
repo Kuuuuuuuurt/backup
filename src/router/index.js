@@ -4,7 +4,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LoginPage from '../views/users/passenger/LoginPage.vue'
 import CreateAccount from '../views/users/passenger/CreateAccount.vue'
 import About from '../views/documents/About.vue'
-import PrivacyPolicy from '../views/documents/PrivacyPolicy.vue'
 import HomeIndi from '../views/users/passenger/HomePage.vue'
 import SettingsIndi from '../views/users/passenger/Settings.vue'
 import GenerateQR from '../views/users/passenger/GenerateQR.vue'
@@ -78,12 +77,6 @@ const routes = [
     path: '/',
     name: 'About',
     component: About
-  },
-
-  {
-    path: '/privacy-policy',
-    name: 'PrivacyPolicy',
-    component: PrivacyPolicy
   },
 
   {

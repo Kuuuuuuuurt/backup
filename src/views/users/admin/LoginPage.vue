@@ -56,7 +56,7 @@
           h-12
           px-6
           w-64
-          bg-blue-600
+          bg-black
           mt-8
           rounded
           font-semibold
@@ -69,7 +69,10 @@
       <!-- Component End  -->
     </form>
 
-    <button @click="back">Back</button>
+   <button @click="back" type="button" class="text-black bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 mr-2 mb-2">
+  <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"></path></svg>
+    Sign in as User
+</button>
   </div>
 </template>
 

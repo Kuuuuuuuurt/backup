@@ -25,22 +25,20 @@
       "
     >
       <img
-        src="https://cdn-icons-png.flaticon.com/512/3524/3524636.png"
-        style="height: 25px"
-        alt=""
-        class="mr-2"
-        loading="lazy"
-      />
-      Settings
+          src="../../../../src/assets/283863145_544721900556893_7583603897868082993_n.png"
+          style="height: 30px"
+          alt=""
+          class="mr-2"
+          loading="lazy"
+        />
     </a>
 
     <!-- List of nav item -->
-    <a
+     <a
       href="#"
       class="
-        font-extrabold
+        font-bold
         m-3
-        uppercase
         inline-flex
         hover:text-pink-700
         transition-all
@@ -48,13 +46,13 @@
       "
     >
       <img
-        src="https://cdn-icons-png.flaticon.com/512/1008/1008001.png"
+        src="https://cdn-icons-png.flaticon.com/512/3524/3524636.png"
         style="height: 25px"
         alt=""
         class="mr-2"
         loading="lazy"
       />
-      TRAFEX
+      Settings
     </a>
   </nav>
 

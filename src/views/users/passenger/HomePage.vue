@@ -24,18 +24,17 @@
         duration-500
       "
     >
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/1008/1008001.png"
-        style="height: 25px"
-        alt=""
-        class="mr-2"
-        loading="lazy"
-      />
-      Trafex
+     <img
+          src="../../../../src/assets/283863145_544721900556893_7583603897868082993_n.png"
+          style="height: 30px"
+          alt=""
+          class="mr-2"
+          loading="lazy"
+        />
     </a>
 
     <!-- List of nav item -->
-  <div
+    <div
       class="
         font-extrabold
         m-3
@@ -46,18 +45,39 @@
         duration-500
       "
     >
-      <button @click="notificationModal=true" class="flex">
-        <p class="text-red-500">{{notifications.length}}</p>
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/3602/3602145.png"
-          style="height: 25px"
-          alt=""
-          class="mr-2"
-          loading="lazy"
-        />
-
-        
+      <button class="relative inline-block" @click="notificationModal = true">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-9 h-9 text-black"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+          />
+        </svg>
+        <span
+          class="
+            absolute
+            top-0
+            right-0
+            px-2
+            py-1
+            text-xs
+            leading-none
+            text-red-100
+            transform
+            bg-red-600
+            rounded-full
+          "
+          >{{ notifications.length }}</span
+        >
       </button>
+
       <button @click="editProfile">
         <img
           src="https://cdn-icons-png.flaticon.com/512/2099/2099058.png"
@@ -127,7 +147,7 @@
         </button>
         <button
           class="bg-gray-200 py-2 px-4 rounded ml-2"
-          @click="logoutModal=true"
+          @click="logoutModal = true"
         >
           <img
             class="w-5"
@@ -457,205 +477,195 @@
           Report Problem
         </h1>
         <p class="text-sm text-gray-500 text-center w-5/6">
-           Please fill out the form below completely and truthfully to prevent
-            unnecessary panic.
+          Please fill out the form below completely and truthfully to prevent
+          unnecessary panic.
         </p>
-         <form class="w-full">
+        <form class="w-full">
+          <div class="">
             <div class="">
-              <div class="">
-                <label for="names" class="text-md text-gray-600"
-                  >Date tested positive</label
-                >
-                <div class="flex">
+              <label for="names" class="text-md text-gray-600"
+                >Date tested positive</label
+              >
+              <div class="flex">
                 <select
-                class="
-                  border-2 rounded-lg w-full h-12 px-4
-                "
-                v-model="report.reportInfo.monthTested"
-              >
-                <option>January</option>
-                <option>February</option>
-                <option>March</option>
-                <option>April</option>
-                <option>May</option>
-                <option>June</option>
-                <option>July</option>
-                <option>August</option>
-                <option>September</option>
-                <option>October</option>
-                <option>November</option>
-                <option>December</option>
-              </select>
-
-                  <select
-                class="
-                  border-2 rounded-lg w-full h-12 px-4
-                "
-                v-model="report.reportInfo.dayTested"
-              >
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-                <option>11</option>
-                <option>12</option>
-                <option>13</option>
-                <option>14</option>
-                <option>15</option>
-                <option>16</option>
-                <option>17</option>
-                <option>18</option>
-                <option>19</option>
-                <option>20</option>
-                <option>21</option>
-                <option>22</option>
-                <option>23</option>
-                <option>24</option>
-                <option>25</option>
-                <option>26</option>
-                <option>27</option>
-                <option>28</option>
-                <option>29</option>
-                <option>30</option>
-                <option>31</option>
-              </select>
-
-               <select
-                class="
-                  border-2 rounded-lg w-full h-12 px-4
-                "
-                v-model="report.reportInfo.yearTested"
-              >
-                <option>2022</option>
-                <option>2023</option>
-                <option>2024</option>
-                <option>2025</option>
-                <option>2026</option>
-                <option>2027</option>
-                <option>2028</option>
-              </select>
-              </div>
-              </div>
-                <div class="">
-                  <label for="names" class="text-md text-gray-600"
-                  >Classification</label
+                  class="border-2 rounded-lg w-full h-12 px-4"
+                  v-model="report.reportInfo.monthTested"
                 >
-                 <select
-                class="
-                  border-2 rounded-lg w-full h-12 px-4
-                "
+                  <option>January</option>
+                  <option>February</option>
+                  <option>March</option>
+                  <option>April</option>
+                  <option>May</option>
+                  <option>June</option>
+                  <option>July</option>
+                  <option>August</option>
+                  <option>September</option>
+                  <option>October</option>
+                  <option>November</option>
+                  <option>December</option>
+                </select>
+
+                <select
+                  class="border-2 rounded-lg w-full h-12 px-4"
+                  v-model="report.reportInfo.dayTested"
+                >
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                  <option>11</option>
+                  <option>12</option>
+                  <option>13</option>
+                  <option>14</option>
+                  <option>15</option>
+                  <option>16</option>
+                  <option>17</option>
+                  <option>18</option>
+                  <option>19</option>
+                  <option>20</option>
+                  <option>21</option>
+                  <option>22</option>
+                  <option>23</option>
+                  <option>24</option>
+                  <option>25</option>
+                  <option>26</option>
+                  <option>27</option>
+                  <option>28</option>
+                  <option>29</option>
+                  <option>30</option>
+                  <option>31</option>
+                </select>
+
+                <select
+                  class="border-2 rounded-lg w-full h-12 px-4"
+                  v-model="report.reportInfo.yearTested"
+                >
+                  <option>2022</option>
+                  <option>2023</option>
+                  <option>2024</option>
+                  <option>2025</option>
+                  <option>2026</option>
+                  <option>2027</option>
+                  <option>2028</option>
+                </select>
+              </div>
+            </div>
+            <div class="">
+              <label for="names" class="text-md text-gray-600"
+                >Classification</label
+              >
+              <select
+                class="border-2 rounded-lg w-full h-12 px-4"
                 v-model="report.reportInfo.classification"
               >
                 <option>Symptomatic</option>
                 <option>Pre-symptomatic</option>
                 <option>Asymptomatic</option>
               </select>
-              </div>
+            </div>
 
-              <div class="mt-4">
-                  <label for="names" class="text-md text-gray-600"
-                  >RtPCR Test</label
+            <div class="mt-4">
+              <label for="names" class="text-md text-gray-600"
+                >RtPCR Test</label
+              >
+              <div>
+                <label
+                  class="
+                    block
+                    text-sm
+                    font-medium
+                    text-gray-900
+                    dark:text-gray-300
+                  "
+                  for="vaccination_cards"
+                  >Upload Image</label
                 >
-                  <div>
-              <label
-                class="
-                  block
-                  text-sm
-                  font-medium
-                  text-gray-900
-                  dark:text-gray-300
-                "
-                for="vaccination_cards"
-                >Upload Image</label
-              >
-              <input
-                class="
-                  block
-                  w-full
-                  text-sm text-gray-900
-                  bg-gray-50
-                  rounded-lg
-                  border border-gray-300
-                  cursor-pointer
-                  dark:text-gray-400
-                  focus:outline-none focus:border-transparent
-                  dark:bg-gray-700
-                  dark:border-gray-600
-                  dark:placeholder-gray-400
-                "
-                aria-describedby="vaccination_card"
-                id="vaccination_cards"
-                type="file"
-                accept="image/*"
-                @change="previewRtPCR"
-              />
-              <div
-                class="mt-1 text-sm text-gray-500 dark:text-gray-300"
-                id="vaccination_card"
-              >
-                RtPCR Test Captured in Landscape
+                <input
+                  class="
+                    block
+                    w-full
+                    text-sm text-gray-900
+                    bg-gray-50
+                    rounded-lg
+                    border border-gray-300
+                    cursor-pointer
+                    dark:text-gray-400
+                    focus:outline-none focus:border-transparent
+                    dark:bg-gray-700
+                    dark:border-gray-600
+                    dark:placeholder-gray-400
+                  "
+                  aria-describedby="vaccination_card"
+                  id="vaccination_cards"
+                  type="file"
+                  accept="image/*"
+                  @change="previewRtPCR"
+                />
+                <div
+                  class="mt-1 text-sm text-gray-500 dark:text-gray-300"
+                  id="vaccination_card"
+                >
+                  RtPCR Test Captured in Landscape
+                </div>
               </div>
             </div>
-              </div>
 
-              <div class="mt-4">
-                  <label for="names" class="text-md text-gray-600"
-                  >Other Details</label
-                >
-                <textarea
-                  class="border-2 rounded-lg w-full h-24 px-4"
-                  placeholder="details"
-                  v-model="report.reportInfo.message"
-                ></textarea>
-              </div>
+            <div class="mt-4">
+              <label for="names" class="text-md text-gray-600"
+                >Other Details</label
+              >
+              <textarea
+                class="border-2 rounded-lg w-full h-24 px-4"
+                placeholder="details"
+                v-model="report.reportInfo.message"
+              ></textarea>
             </div>
-          </form>
-          <div class="">
-           <div class="flex justify-end pt-2 space-x-4">
-          <button
-            class="
-              px-4
-              bg-gray-200
-              p-3
-              rounded
-              text-black
-              hover:bg-gray-300
-              font-semibold
-            "
-            @click="closeModal"
-          >
-            Cancel
-          </button>
-          <button
-            class="
-              px-4
-              bg-green-500
-              p-3
-              ml-3
-              rounded-lg
-              text-white
-              hover:bg-green-600
-            "
-            @click="submit"
-          >
-            Submit
-          </button>
-        </div>
+          </div>
+        </form>
+        <div class="">
+          <div class="flex justify-end pt-2 space-x-4">
+            <button
+              class="
+                px-4
+                bg-gray-200
+                p-3
+                rounded
+                text-black
+                hover:bg-gray-300
+                font-semibold
+              "
+              @click="closeModal"
+            >
+              Cancel
+            </button>
+            <button
+              class="
+                px-4
+                bg-green-500
+                p-3
+                ml-3
+                rounded-lg
+                text-white
+                hover:bg-green-600
+              "
+              @click="submit"
+            >
+              Submit
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  
-    
 
-      <div
-      v-if="logoutModal"
+  <div
+    v-if="logoutModal"
     class="
       main-modal
       fixed
@@ -672,30 +682,122 @@
     "
     style="background: rgba(0, 0, 0, 0.7)"
   >
-  <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-        <!-- Modal content -->
+    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <!-- Modal header -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <!-- Modal header -->
-             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal" @click="logoutModal=false">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+          <button
+            type="button"
+            class="
+              absolute
+              top-3
+              right-2.5
+              text-gray-400
+              bg-transparent
+              hover:bg-gray-200 hover:text-gray-900
+              rounded-lg
+              text-sm
+              p-1.5
+              ml-auto
+              inline-flex
+              items-center
+              dark:hover:bg-gray-800 dark:hover:text-white
+            "
+            data-modal-toggle="popup-modal"
+            @click="logoutModal = false"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+          <div class="p-6 text-center">
+            <svg
+              class="mx-auto mb-4 w-14 h-14 text-red-400 dark:text-red-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            <h3
+              class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"
+            >
+              Are you sure you want to logout?
+            </h3>
+            <button
+              data-modal-toggle="popup-modal"
+              type="button"
+              class="
+                text-white
+                bg-red-600
+                hover:bg-red-800
+                focus:ring-4 focus:outline-none focus:ring-red-300
+                dark:focus:ring-red-800
+                font-medium
+                rounded-lg
+                text-sm
+                inline-flex
+                items-center
+                px-5
+                py-2.5
+                text-center
+                mr-2
+              "
+              @click="logoutProfile"
+            >
+              Yes, I'm sure
             </button>
-            <div class="p-6 text-center">
-                <svg class="mx-auto mb-4 w-14 h-14 text-red-400 dark:text-red-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to logout?</h3>
-                <button data-modal-toggle="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2" @click="logoutProfile">
-                    Yes, I'm sure
-                </button>
-                <button data-modal-toggle="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" @click="logoutModal=false">No, cancel</button>
-            </div>
-             </div>
+            <button
+              data-modal-toggle="popup-modal"
+              type="button"
+              class="
+                text-gray-500
+                bg-white
+                hover:bg-gray-100
+                focus:ring-4 focus:outline-none focus:ring-gray-200
+                rounded-lg
+                border border-gray-200
+                text-sm
+                font-medium
+                px-5
+                py-2.5
+                hover:text-gray-900
+                focus:z-10
+                dark:bg-gray-700
+                dark:text-gray-300
+                dark:border-gray-500
+                dark:hover:text-white
+                dark:hover:bg-gray-600
+                dark:focus:ring-gray-600
+              "
+              @click="logoutModal = false"
+            >
+              No, cancel
+            </button>
+          </div>
         </div>
+      </div>
     </div>
   </div>
 
-
-   <div
-   v-if="viewNotifModal"
+  <div
+    v-if="viewNotifModal"
     class="
       main-modal
       fixed
@@ -712,42 +814,128 @@
     "
     style="background: rgba(0, 0, 0, 0.7)"
   >
-  <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <!-- Modal header -->
-            <div class="flex justify-between items-center p-5 rounded-t border-b dark:border-gray-600">
-              <img src="https://cdn-icons-png.flaticon.com/512/2645/2645897.png" style="height: 25px" alt="">
-                <h3 class="text-xl font-medium text-gray-900 dark:text-white">
-                    Notification
-                </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="small-modal" @click="closeNotif"
-                >
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
-                </button>
-            </div>
-            <!-- Modal body -->
-            <div class="">
-              <div class="space-y-6 border">
-                <p class="text-base leading-relaxed text-green-500 dark:text-green-400">{{notification.header}}
-                </p>
-                </div>
-                 <div class="p-3 space-y-6">
-                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">{{notification.notifMessage}}
-                </p>
-                </div>
-            </div>
-            <!-- Modal footer -->
-            <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-              
-                <button data-modal-toggle="small-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" @click="closeNotif">Close</button>
-            </div>
+    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <!-- Modal header -->
+        <div
+          class="
+            flex
+            justify-between
+            items-center
+            p-5
+            rounded-t
+            border-b
+            dark:border-gray-600
+          "
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2645/2645897.png"
+            style="height: 25px"
+            alt=""
+          />
+          <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+            Notification
+          </h3>
+          <button
+            type="button"
+            class="
+              text-gray-400
+              bg-transparent
+              hover:bg-gray-200 hover:text-gray-900
+              rounded-lg
+              text-sm
+              p-1.5
+              ml-auto
+              inline-flex
+              items-center
+              dark:hover:bg-gray-600 dark:hover:text-white
+            "
+            data-modal-toggle="small-modal"
+            @click="closeNotif"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
         </div>
+        <!-- Modal body -->
+        <div class="">
+          <div class="space-y-6 border">
+            <p
+              class="
+                text-base
+                leading-relaxed
+                text-green-500
+                dark:text-green-400
+              "
+            >
+              {{ notification.header }}
+            </p>
+          </div>
+          <div class="p-3 space-y-6">
+            <p
+              class="text-base leading-relaxed text-gray-500 dark:text-gray-400"
+            >
+              {{ notification.notifMessage }}
+            </p>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div
+          class="
+            flex
+            items-center
+            p-6
+            space-x-2
+            rounded-b
+            border-t border-gray-200
+            dark:border-gray-600
+          "
+        >
+          <button
+            data-modal-toggle="small-modal"
+            type="button"
+            class="
+              text-gray-500
+              bg-white
+              hover:bg-gray-100
+              focus:ring-4 focus:outline-none focus:ring-gray-200
+              rounded-lg
+              border border-gray-200
+              text-sm
+              font-medium
+              px-5
+              py-2.5
+              hover:text-gray-900
+              focus:z-10
+              dark:bg-gray-700
+              dark:text-gray-300
+              dark:border-gray-500
+              dark:hover:text-white
+              dark:hover:bg-gray-600
+              dark:focus:ring-gray-600
+            "
+            @click="closeNotif"
+          >
+            Close
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
-<div
-v-if="notificationModal"
+  <div
+    v-if="notificationModal"
     class="
       main-modal
       fixed
@@ -829,65 +1017,100 @@ v-if="notificationModal"
               X
             </button>
           </div>
-
-
-             <div class="" v-for="notif in notifications" :key="notif.id">
-              <div class="bg-gray-100 p-6 space-y-6 border">
-                 <img src="https://cdn-icons-png.flaticon.com/512/2645/2645897.png" style="height: 25px" alt="">
-                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">{{notif.header}}
-                </p>
-                <button class="text-sm text-blue-500" @click="notifID=notif.id"><button @click="view">View Details </button></button>
-                </div>
-            </div>
-           
-            <!-- Modal footer -->
-            <div
-              class="
-                flex
-                items-center
-                p-6
-                space-x-2
-                rounded-b
-                border-t border-gray-200
-                dark:border-gray-600
-              "
-            >
-              <button
-                data-modal-toggle="extralarge-modal"
-                type="button"
-                class="
-                  text-gray-500
-                  bg-white
-                  hover:bg-gray-100
-                  focus:ring-4 focus:outline-none focus:ring-gray-200
-                  rounded-lg
-                  border border-gray-200
-                  text-sm
-                  font-medium
-                  px-5
-                  py-2.5
-                  hover:text-gray-900
-                  focus:z-10
-                  dark:bg-gray-700
-                  dark:text-gray-300
-                  dark:border-gray-500
-                  dark:hover:text-white
-                  dark:hover:bg-gray-600
-                  dark:focus:ring-gray-600
-                "
-                @click="notificationModal = false"
+          <!-- <div class="" v-for="notif in notifications" :key="notif.id"> -->
+          <div class="col-span-12">
+            <div class="overflow-auto lg:overflow-visible">
+              <table
+                class="table text-gray-400 border-separaet space-y-6 text-sm"
               >
-                Close
-              </button>
+                <thead></thead>
+                <tbody>
+                  <tr class="" v-for="notif in notifications" :key="notif.id">
+                    <td class="p-3">
+                      <div class="flex align-items-center">
+                        <img
+                          class="rounded-full h-6 w-6 object-cover"
+                          src="https://cdn-icons-png.flaticon.com/512/3602/3602145.png"
+                          alt="unsplash image"
+                        />
+                        <div class="ml-3">
+                          <div class="">Trafex System</div>
+                          <div class="text-gray-500">{{ notif.header }}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-1 font-bold">
+                      {{ notif.date }}
+                    </td>
+                    <td class="p-1">
+                      <button
+                        class="text-gray-400 hover:text-gray-100 mr-6"
+                        @click="notifID = notif.id"
+                      >
+                        <button @click="view">
+                          <img
+                            src="https://cdn-icons-png.flaticon.com/512/633/633633.png"
+                            style="height: 15px"
+                            alt=""
+                            class=""
+                            loading="lazy"
+                          />
+                        </button>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div
+            class="
+              flex
+              items-center
+              p-6
+              space-x-2
+              rounded-b
+              border-t border-gray-200
+              dark:border-gray-600
+            "
+          >
+            <button
+              data-modal-toggle="extralarge-modal"
+              type="button"
+              class="
+                text-gray-500
+                bg-white
+                hover:bg-gray-100
+                focus:ring-4 focus:outline-none focus:ring-gray-200
+                rounded-lg
+                border border-gray-200
+                text-sm
+                font-medium
+                px-5
+                py-2.5
+                hover:text-gray-900
+                focus:z-10
+                dark:bg-gray-700
+                dark:text-gray-300
+                dark:border-gray-500
+                dark:hover:text-white
+                dark:hover:bg-gray-600
+                dark:focus:ring-gray-600
+              "
+              @click="notificationModal = false"
+            >
+              Close
+            </button>
           </div>
         </div>
       </div>
     </div>
-
+  </div>
 
   <div
-  v-if="allEntryModal"
+    v-if="allEntryModal"
     class="
       main-modal
       fixed
@@ -978,211 +1201,250 @@ v-if="notificationModal"
           </div>
 
           <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-          <div
-            class="inline-block min-w-full shadow rounded-lg overflow-hidden"
-          >
-            <table class="min-w-full leading-normal">
-              <thead>
-                <tr>
-                  <th
-                    class="
-                      px-5
-                      py-3
-                      border-b-2 border-gray-200
-                      bg-gray-100
-                      text-left text-xs
-                      font-semibold
-                      text-gray-600
-                      uppercase
-                      tracking-wider
-                    "
-                  >
-                    Name
-                  </th>
-                  <th
-                    class="
-                      px-5
-                      py-3
-                      border-b-2 border-gray-200
-                      bg-gray-100
-                      text-left text-xs
-                      font-semibold
-                      text-gray-600
-                      uppercase
-                      tracking-wider
-                    "
-                  >
-                    Contact Number
-                  </th>
-                  <th
-                    class="
-                      px-5
-                      py-3
-                      border-b-2 border-gray-200
-                      bg-gray-100
-                      text-left text-xs
-                      font-semibold
-                      text-gray-600
-                      uppercase
-                      tracking-wider
-                    "
-                  >
-                    Address
-                  </th>
-                  <th
-                    class="
-                      px-5
-                      py-3
-                      border-b-2 border-gray-200
-                      bg-gray-100
-                      text-left text-xs
-                      font-semibold
-                      text-gray-600
-                      uppercase
-                      tracking-wider
-                    "
-                  >
-                    Vehicle Entered
-                  </th>
-
-                  <th
-                    class="
-                      px-5
-                      py-3
-                      border-b-2 border-gray-200
-                      bg-gray-100
-                      text-left text-xs
-                      font-semibold
-                      text-gray-600
-                      uppercase
-                      tracking-wider
-                    "
-                  >
-                    Time
-                  </th>
-
-                  <th
-                    class="
-                      px-5
-                      py-3
-                      border-b-2 border-gray-200
-                      bg-gray-100
-                      text-left text-xs
-                      font-semibold
-                      text-gray-600
-                      uppercase
-                      tracking-wider
-                    "
-                  >
-                    Date
-                  </th>
-
-                  <th
-                    class="
-                      px-5
-                      py-3
-                      border-b-2 border-gray-200
-                      bg-gray-100
-                      text-left text-xs
-                      font-semibold
-                      text-gray-600
-                      uppercase
-                      tracking-wider
-                    "
-                  >
-                    Temperature
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="entry in allEntry" :key="entry.id">
-                  <td
-                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
-                  >
-                    <div class="">
-                      <div class="flex-shrink-0"></div>
-                      <div class="">
-                        <p class="text-gray-900 whitespace-no-wrap">
-                          {{ entry.name }}
-                        </p>
-                      </div>
-                    </div>
-                  </td>
-                  <td
-                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
-                  >
-                    <p class="text-gray-900 whitespace-no-wrap">
-                      {{ entry.phoneNumber }}
-                    </p>
-                  </td>
-                  <td
-                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
-                  >
-                    <p class="text-gray-900 whitespace-no-wrap">
-                      {{ entry.address }}
-                    </p>
-                  </td>
-                  <td
-                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
-                  >
-                    <span
+            <div
+              class="inline-block min-w-full shadow rounded-lg overflow-hidden"
+            >
+              <table class="min-w-full leading-normal">
+                <thead>
+                  <tr>
+                    <th
                       class="
-                        relative
-                        inline-block
-                        px-3
-                        py-1
+                        px-5
+                        py-3
+                        border-b-2 border-gray-200
+                        bg-gray-100
+                        text-left text-xs
                         font-semibold
-                        text-green-900
-                        leading-tight
+                        text-gray-600
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Name
+                    </th>
+                    <th
+                      class="
+                        px-5
+                        py-3
+                        border-b-2 border-gray-200
+                        bg-gray-100
+                        text-left text-xs
+                        font-semibold
+                        text-gray-600
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Contact Number
+                    </th>
+                    <th
+                      class="
+                        px-5
+                        py-3
+                        border-b-2 border-gray-200
+                        bg-gray-100
+                        text-left text-xs
+                        font-semibold
+                        text-gray-600
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Address
+                    </th>
+                    <th
+                      class="
+                        px-5
+                        py-3
+                        border-b-2 border-gray-200
+                        bg-gray-100
+                        text-left text-xs
+                        font-semibold
+                        text-gray-600
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Vehicle Entered
+                    </th>
+
+                    <th
+                      class="
+                        px-5
+                        py-3
+                        border-b-2 border-gray-200
+                        bg-gray-100
+                        text-left text-xs
+                        font-semibold
+                        text-gray-600
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Time
+                    </th>
+
+                    <th
+                      class="
+                        px-5
+                        py-3
+                        border-b-2 border-gray-200
+                        bg-gray-100
+                        text-left text-xs
+                        font-semibold
+                        text-gray-600
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Date
+                    </th>
+
+                    <th
+                      class="
+                        px-5
+                        py-3
+                        border-b-2 border-gray-200
+                        bg-gray-100
+                        text-left text-xs
+                        font-semibold
+                        text-gray-600
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Temperature
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="entry in allEntry" :key="entry.id">
+                    <td
+                      class="
+                        px-5
+                        py-5
+                        border-b border-gray-200
+                        bg-white
+                        text-sm
+                      "
+                    >
+                      <div class="">
+                        <div class="flex-shrink-0"></div>
+                        <div class="">
+                          <p class="text-gray-900 whitespace-no-wrap">
+                            {{ entry.name }}
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    <td
+                      class="
+                        px-5
+                        py-5
+                        border-b border-gray-200
+                        bg-white
+                        text-sm
+                      "
+                    >
+                      <p class="text-gray-900 whitespace-no-wrap">
+                        {{ entry.phoneNumber }}
+                      </p>
+                    </td>
+                    <td
+                      class="
+                        px-5
+                        py-5
+                        border-b border-gray-200
+                        bg-white
+                        text-sm
+                      "
+                    >
+                      <p class="text-gray-900 whitespace-no-wrap">
+                        {{ entry.address }}
+                      </p>
+                    </td>
+                    <td
+                      class="
+                        px-5
+                        py-5
+                        border-b border-gray-200
+                        bg-white
+                        text-sm
                       "
                     >
                       <span
-                        aria-hidden
-                        class="absolute inset-0 opacity-50 rounded-full"
-                      ></span>
-                      <span class="relative">{{ entry.visitedEstab }}</span>
-                    </span>
-                  </td>
+                        class="
+                          relative
+                          inline-block
+                          px-3
+                          py-1
+                          font-semibold
+                          text-green-900
+                          leading-tight
+                        "
+                      >
+                        <span
+                          aria-hidden
+                          class="absolute inset-0 opacity-50 rounded-full"
+                        ></span>
+                        <span class="relative">{{ entry.visitedEstab }}</span>
+                      </span>
+                    </td>
 
-                  <td
-                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
-                  >
-                    <p class="text-gray-900 whitespace-no-wrap">
-                      {{ entry.time }}
-                    </p>
-                  </td>
+                    <td
+                      class="
+                        px-5
+                        py-5
+                        border-b border-gray-200
+                        bg-white
+                        text-sm
+                      "
+                    >
+                      <p class="text-gray-900 whitespace-no-wrap">
+                        {{ entry.time }}
+                      </p>
+                    </td>
 
-                  <td
-                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
-                  >
-                    <p class="text-gray-900 whitespace-no-wrap">
-                      {{
-                      entry.month + " " + entry.day + ", " + entry.year
-                      }}
-                    </p>
-                  </td>
-                  <td
-                    class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
-                  >
-                    <p class="text-gray-900 whitespace-no-wrap">
-                      {{ entry.temperature}}
-                    </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="my-2 flex sm:flex-row flex-col">
-            <div class="flex flex-row mb-1 sm:mb-0">
-              <div class="relative"></div>
+                    <td
+                      class="
+                        px-5
+                        py-5
+                        border-b border-gray-200
+                        bg-white
+                        text-sm
+                      "
+                    >
+                      <p class="text-gray-900 whitespace-no-wrap">
+                        {{ entry.month + " " + entry.day + ", " + entry.year }}
+                      </p>
+                    </td>
+                    <td
+                      class="
+                        px-5
+                        py-5
+                        border-b border-gray-200
+                        bg-white
+                        text-sm
+                      "
+                    >
+                      <p class="text-gray-900 whitespace-no-wrap">
+                        {{ entry.temperature }}
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-           </div>
+            <div class="my-2 flex sm:flex-row flex-col">
+              <div class="flex flex-row mb-1 sm:mb-0">
+                <div class="relative"></div>
+              </div>
+            </div>
           </div>
-         </div>
         </div>
       </div>
     </div>
-
+  </div>
 </template>
 
 <script>
@@ -1216,14 +1478,14 @@ export default defineComponent({
     return {
       allEntryModal: false,
       viewNotifModal: false,
-      notifID: '',
-      notifRefer: '',
+      notifID: "",
+      notifRefer: "",
       logoutModal: false,
       notifications: [],
       notificationModal: false,
       qrApplicationNotification: "",
-      rtpcrData: '',
-      rtpcrImage: '',
+      rtpcrData: "",
+      rtpcrImage: "",
       reportModal: false,
       month: "",
       myEntry: [],
@@ -1244,28 +1506,28 @@ export default defineComponent({
         qrStatus: "No Value",
         qrData: null,
       },
-      report:{
-        reportInfo:{
-          name: '',
-          phoneNumber: '',
-          address: '',
-          gender: '',
-          age: '',
-          dayTested: '',
-          monthTested: '',
-          yearTested: '',
-          rtpcrImageLink: '',
-          message: '',
-          classification: '',
+      report: {
+        reportInfo: {
+          name: "",
+          phoneNumber: "",
+          address: "",
+          gender: "",
+          age: "",
+          dayTested: "",
+          monthTested: "",
+          yearTested: "",
+          rtpcrImageLink: "",
+          message: "",
+          classification: "",
           status: "Pending",
-          id: '',
+          id: "",
         },
       },
 
       notification: {
-        header: '',
-        notifMessage: '',
-        date: '',
+        header: "",
+        notifMessage: "",
+        date: "",
       },
 
       users: {
@@ -1281,7 +1543,7 @@ export default defineComponent({
           qrStatus: "",
           qrData: null,
           type: "passenger",
-          password: '',
+          password: "",
           loginToken: "Yes",
           vaccinationLink: null,
           validIdLink: null,
@@ -1302,7 +1564,6 @@ export default defineComponent({
 
       let userData = user.data();
 
-
       this.$data.user.name =
         userData.userInfo.firstName + " " + userData.userInfo.lastName;
       this.$data.user.phoneNumber = "+63" + userData.userInfo.phoneNumber;
@@ -1319,17 +1580,18 @@ export default defineComponent({
       this.$data.user.qrStatus = userData.userInfo.qrStatus;
       this.$data.value = userData.userInfo.qrData;
 
-      this.$data.report.reportInfo.name = userData.userInfo.firstName + " " + userData.userInfo.lastName;
-      this.$data.report.reportInfo.phoneNumber = "+63" + userData.userInfo.phoneNumber;
-      this.$data.report.reportInfo.address =  userData.userInfo.purok +
+      this.$data.report.reportInfo.name =
+        userData.userInfo.firstName + " " + userData.userInfo.lastName;
+      this.$data.report.reportInfo.phoneNumber =
+        "+63" + userData.userInfo.phoneNumber;
+      this.$data.report.reportInfo.address =
+        userData.userInfo.purok +
         ", " +
         userData.userInfo.baranggay +
         ", " +
         userData.userInfo.municipality;
       this.$data.report.reportInfo.gender = userData.userInfo.gender;
       this.$data.report.reportInfo.age = userData.userInfo.age;
-
-
 
       this.$data.users.userInfo.phoneNumber = userData.userInfo.phoneNumber;
       this.$data.users.userInfo.firstName = userData.userInfo.firstName;
@@ -1341,20 +1603,18 @@ export default defineComponent({
       this.$data.users.userInfo.municipality = userData.userInfo.municipality;
       this.$data.users.userInfo.qrStatus = userData.userInfo.qrStatus;
       this.$data.users.userInfo.qrData = userData.userInfo.qrData;
-      this.$data.users.userInfo.vaccinationLink = userData.userInfo.vaccinationLink;
+      this.$data.users.userInfo.vaccinationLink =
+        userData.userInfo.vaccinationLink;
       this.$data.users.userInfo.validIdLink = userData.userInfo.validIdLink;
       this.$data.users.userInfo.password = userData.userInfo.password;
-      
-      if(userData.userInfo.loginToken == "Yes"){
-         setDoc(this.$data.userRefer, this.$data.users);
-      }
-      else if(userData.userInfo.loginToken == "No"){
-        this.$router.push(`/passenger/login`)
-      }
-      else{
-        this.$router.push(`/passenger/login`)
-      }
 
+      if (userData.userInfo.loginToken == "Yes") {
+        setDoc(this.$data.userRefer, this.$data.users);
+      } else if (userData.userInfo.loginToken == "No") {
+        this.$router.push(`/passenger/login`);
+      } else {
+        this.$router.push(`/passenger/login`);
+      }
 
       //list all entry record
       const entryRef = collection(db, "entry-record");
@@ -1385,9 +1645,8 @@ export default defineComponent({
       });
       this.$data.myEntry = myEntries;
       this.$data.allEntry = allEntries;
-      
     },
-    viewAllEntry(){
+    viewAllEntry() {
       this.allEntryModal = true;
       this.toggleEntryRecord = false;
     },
@@ -1452,7 +1711,7 @@ export default defineComponent({
       this.$router.push(`/passenger/settings/${id}`);
     },
     logoutProfile() {
-      this.$data.users.userInfo.loginToken = "No"
+      this.$data.users.userInfo.loginToken = "No";
       const auth = getAuth(app);
       signOut(auth)
         .then(() => {
@@ -1480,14 +1739,14 @@ export default defineComponent({
       this.$data.reportModal = false;
     },
 
-    previewRtPCR(event){
+    previewRtPCR(event) {
       var input = event.target;
 
       if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = () => {
-          this.$data.rtpcrData =  event.target.files[0];
+          this.$data.rtpcrData = event.target.files[0];
           this.uploadRtPCR();
         };
 
@@ -1495,10 +1754,10 @@ export default defineComponent({
       }
     },
 
-    uploadRtPCR(){
+    uploadRtPCR() {
       const storage = getStorage(app);
 
-       // Create the file metadata
+      // Create the file metadata
       /** @type {any} */
       const metadata = {
         contentType: "image/jpeg",
@@ -1506,7 +1765,10 @@ export default defineComponent({
       // Upload file and metadata to the object 'images/mountains.jpg'
       const storageRef = ref(
         storage,
-        "proofs/" + `${this.$data.user.phoneNumber}/` + "rtpcr/" + this.rtpcrData.name
+        "proofs/" +
+          `${this.$data.user.phoneNumber}/` +
+          "rtpcr/" +
+          this.rtpcrData.name
       );
       const uploadTask = uploadBytesResumable(
         storageRef,
@@ -1560,7 +1822,7 @@ export default defineComponent({
         }
       );
     },
-    submit(){
+    submit() {
       var randomstring = require("randomstring");
       let id = randomstring.generate({
         length: 20,
@@ -1569,31 +1831,31 @@ export default defineComponent({
 
       this.$data.report.reportInfo.id = id;
 
-       const db = getFirestore(app);
-       setDoc(doc(db, "reports", id), this.$data.report);
-       alert("submitted");
-       this.$data.reportModal = false;
+      const db = getFirestore(app);
+      setDoc(doc(db, "reports", id), this.$data.report);
+      alert("submitted");
+      this.$data.reportModal = false;
     },
 
-    async getReport(){
+    async getReport() {
       let phone = "+63" + this.$data.userID;
       const db = getFirestore(app);
-        const notifRef = collection(db, "notification");
+      const notifRef = collection(db, "notification");
       let notifSnap = await getDocs(notifRef);
 
       let notifications = [];
       notifSnap.forEach((notif) => {
         let notifData = notif.data();
         notifData.id = notif.id;
-        if(notifData.phoneNumber == phone){
-        notifications.push(notifData);
+        if (notifData.phoneNumber == phone) {
+          notifications.push(notifData);
         }
       });
 
       this.$data.notifications = notifications;
     },
 
-    async view(){
+    async view() {
       const db = getFirestore(app);
       const notifRef = collection(db, "notification");
 
@@ -1610,13 +1872,10 @@ export default defineComponent({
       this.$data.notificationModal = false;
     },
 
-    closeNotif(){
+    closeNotif() {
       this.$data.viewNotifModal = false;
       this.$data.notificationModal = true;
     },
-
-
-
   },
 
   computed: {

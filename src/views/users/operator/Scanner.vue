@@ -1,97 +1,57 @@
 <template>
-  <nav
-    class="
-      bg-white
-      shadow
+  <div>
+    <qrcode-stream class="h-100vh"> </qrcode-stream>
+  </div>
+  <div   
+   class="
+      main-modal
       fixed
-      z-10
-      mx-auto
-      inset-x-0
-      top-0
+      w-full
+      inset-0
+      z-50
+      animated
+      fadeIn
+      faster
+    "
+    style="background: rgba(0, 0, 0, 0.7)">
+    <div><button class="mt-2 ml-2">
+         <svg
+                    viewBox="0 0 24 24"
+                    class="h-10 w-10 fill-current text-white"
+                  >
+                   <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+                  </svg>
+    </button>
+    </div>
+  <div
+    class="
+      main-modal
+      fixed
+      w-full
+      inset-0
+      z-50
       flex
-      justify-between
+      justify-center
       items-center
+      animated
+      fadeIn
+      faster
     "
   >
-    <button
-      href=""
-      class="
-        font-bold
-        m-3
-        inline-flex
-        hover:text-pink-700
-        transition-all
-        duration-500
-      "
-      @click="back"
-    >
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/93/93634.png"
-        style="height: 25px"
-        alt=""
-        class="mr-2"
-        loading="lazy"
-      />
-      Back
-    </button>
-
-    <!-- List of nav item -->
-    <a
-      href="#"
-      class="
-        font-bold
-        m-3
-        inline-flex
-        hover:text-pink-700
-        transition-all
-        duration-500
-      "
-    >
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/4379/4379661.png"
-        style="height: 25px"
-        alt=""
-        class="mr-2"
-        loading="lazy"
-      />
-      Scan QR Code
-    </a>
-  </nav>
-
-  <div>
-    <div class="min-h-screen font-mono bg-slate-500">
-      <div class="container mx-auto">
-        <div class="w-full max-w-2xl p-6 mx-auto">
-          <div
-            class="
-              w-full
-              h-full
-              max-w-lg
-              px-10
-              py-8
-              mx-auto
-              bg-white
-              rounded-lg
-              shadow-xl
-            "
-          >
-            <div class="max-w-md mx-auto space-y-6" v-if="scannerToggle">
-              <qrcode-stream
-                @decode="onDecode"
-                :track="drawOutline"
-                @init="onInit"
-                class="h-100vh"
-              ></qrcode-stream>
-            </div>
-            <p class="error">{{ error }}</p>
-          </div>
-        </div>
+    <div>
+      <div>
+        <qrcode-stream
+          @decode="onDecode"
+          :track="drawOutline"
+          @init="onInit"
+        ></qrcode-stream>
       </div>
     </div>
   </div>
+  </div>
 
   <div
-  v-if="resultModal"
+    v-if="resultModal"
     class="
       main-modal
       fixed
@@ -317,7 +277,7 @@
                 required
                 v-model="customerData.temperature"
               />
-              <p class="text-red-600">{{tempError}}</p>
+              <p class="text-red-600">{{ tempError }}</p>
             </div>
           </div>
 
@@ -385,7 +345,7 @@
               text-center
               dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800
             "
-          @click="submit"
+            @click="submit"
           >
             Insert
           </button>
@@ -424,7 +384,7 @@
 
 <script>
 import { QrcodeStream } from "vue3-qrcode-reader";
-import { doc, getDoc, getFirestore, setDoc} from "firebase/firestore";
+import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import app from "../../../firebase/db/firebase";
 export default {
   components: {
@@ -433,7 +393,7 @@ export default {
 
   data() {
     return {
-      tempError: '',
+      tempError: "",
       scannerToggle: true,
       resultModal: false,
       estabID: "",
@@ -441,7 +401,7 @@ export default {
         url: "",
       },
       error: "",
-        customerData: {
+      customerData: {
         name: "",
         address: "",
         age: "",
@@ -453,9 +413,9 @@ export default {
         day: "",
         month: "",
         year: "",
-        symptomsFelt:{
+        symptomsFelt: {
           symptoms: [],
-        }
+        },
       },
     };
   },
@@ -465,7 +425,7 @@ export default {
       this.result.url = result;
       console.log("result", result);
       this.$data.resultModal = true;
-       this.$data.scannerToggle = false;
+      this.$data.scannerToggle = false;
       this.getScannedResult();
     },
     async onInit(promise) {
@@ -536,8 +496,8 @@ export default {
       const docRef = doc(db, "data-record", this.$data.result.url);
       const docSnap = await getDoc(docRef);
 
-       if (docSnap.exists()) {
-         let customerData = docSnap.data();
+      if (docSnap.exists()) {
+        let customerData = docSnap.data();
         this.$data.customerData.name = customerData.info.name;
         this.$data.customerData.address = customerData.info.address;
         this.$data.customerData.age = customerData.info.age;
@@ -545,21 +505,17 @@ export default {
         this.$data.customerData.phoneNumber =
           "+63" + customerData.info.phoneNumber;
 
-
         const estabRef = doc(db, "user", this.$data.estabID);
         const estabSnap = await getDoc(estabRef);
         let estabData = estabSnap.data();
         this.$data.customerData.visitedEstab = estabData.userInfo.vehicleID;
-        console.log(this.$data.customerData.visitedEstab )
-
-
-       }
-       else{
-         console.log("No")
-       }
+        console.log(this.$data.customerData.visitedEstab);
+      } else {
+        console.log("No");
+      }
     },
 
-    async submit(){
+    async submit() {
       const current = new Date();
       const monthData = `${current.getMonth() + 1}`;
       if (monthData == "1") {
@@ -600,7 +556,7 @@ export default {
         this.$data.customerData.year = `${current.getFullYear()}`;
       } else if (monthData == "7") {
         const month = "July";
-       const day = `${current.getDate()}`;
+        const day = `${current.getDate()}`;
         this.$data.customerData.day = day;
         this.$data.customerData.month = month;
         this.$data.customerData.year = `${current.getFullYear()}`;
@@ -653,7 +609,6 @@ export default {
         (this.$data.customerData.temperature == null)
       ) {
         this.$data.tempError = "Temperature Required!";
-        
       } else {
         const addRecord = await setDoc(
           doc(db, "entry-record", id),
@@ -661,34 +616,31 @@ export default {
         );
         console.log(addRecord);
 
-        
         console.log(this.$data.customerData);
         this.closeModal();
       }
     },
 
-    closeModal(){
-       this.$data.resultModal = false;
-       this.$data.scannerToggle = true;
+    closeModal() {
+      this.$data.resultModal = false;
+      this.$data.scannerToggle = true;
     },
 
-    async getEstab(){
+    async getEstab() {
       const db = getFirestore(app);
-       const estabRef = doc(db, "user", this.$data.estabID);
-        const estabSnap = await getDoc(estabRef);
-        let estabData = estabSnap.data();
-        this.$data.customerData.visitedEstab = estabData.userInfo.vehicleID;
-        
-        if(estabData.userInfo.loginToken == "Yes"){
-          console.log();
-        }
-        else if(estabData.userInfo.loginToken == "No"){
-          this.$router.push("/operator/login");
-        }
-        else{
-          this.$router.push("/operator/login");
-        }
-    }
+      const estabRef = doc(db, "user", this.$data.estabID);
+      const estabSnap = await getDoc(estabRef);
+      let estabData = estabSnap.data();
+      this.$data.customerData.visitedEstab = estabData.userInfo.vehicleID;
+
+      if (estabData.userInfo.loginToken == "Yes") {
+        console.log();
+      } else if (estabData.userInfo.loginToken == "No") {
+        this.$router.push("/operator/login");
+      } else {
+        this.$router.push("/operator/login");
+      }
+    },
   },
 
   created() {
@@ -701,6 +653,6 @@ export default {
 
 <style scoped>
 .h-100vh {
-  height: 500px !important;
+  height: 750px !important;
 }
 </style>

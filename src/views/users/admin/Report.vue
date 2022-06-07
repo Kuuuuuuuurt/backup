@@ -46,14 +46,13 @@
       "
       @click="home"
     >
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/1008/1008001.png"
-        style="height: 25px"
-        alt=""
-        class="mr-2"
-        loading="lazy"
-      />
-      TRAFEX
+       <img
+          src="../../../../src/assets/283863145_544721900556893_7583603897868082993_n.png"
+          style="height: 30px"
+          alt=""
+          class="mr-2"
+          loading="lazy"
+        />
     </button>
   </nav>
 
