@@ -14,7 +14,7 @@
       faster
     "
     style="background: rgba(0, 0, 0, 0.7)">
-    <div><button class="mt-2 ml-2">
+    <div><button class="mt-2 ml-2" @click="back">
          <svg
                     viewBox="0 0 24 24"
                     class="h-10 w-10 fill-current text-white"
@@ -308,10 +308,17 @@
                 multiple
                 v-model="customerData.symptomsFelt.symptoms"
               >
+              <option>None</option>
                 <option>Fever</option>
-                <option>Cough</option>
-                <option>Cold</option>
-                <option>Chills</option>
+                <option>Dry Cough</option>
+                <option>Fatigue</option>
+                <option>Aches and Pains</option>
+                <option>Runny Nose</option>
+                <option>Sore Throat</option>
+                <option>Shortness of Breath</option>
+                <option>Diarrhea</option>
+                <option>Headache</option>
+                <option>Loss of Smell and Taste</option>
               </select>
             </label>
             {{}}

@@ -1,7 +1,7 @@
 <template>
     <nav class="bg-white shadow fixed z-10 mx-auto inset-x-0 top-0 flex justify-between items-center">
       
-        <a href="#" class="font-bold m-3 inline-flex hover:text-pink-700 transition-all duration-500">
+        <a @click="cancel" class="font-bold m-3 inline-flex hover:text-pink-700 transition-all duration-500">
               <img
           src="../../../../src/assets/283863145_544721900556893_7583603897868082993_n.png"
           style="height: 30px"
@@ -353,7 +353,7 @@
 					d="M5 13l4 4L19 7"
 				></path></svg>
                 <h3 class=" text-lg font-normal text-gray-500 dark:text-gray-400">Application Submitted. </h3>
-                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Please wait for the confirmation </h3>
+                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Maraming salamat sa pagsumiti ng iyong aplikasyon. Hintayin muna na maaprobahan ito ng TRAFEX Admin </h3>
                 <button data-modal-toggle="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" @click="cancel">Okay</button>
             </div>
              </div>

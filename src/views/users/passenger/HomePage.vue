@@ -90,7 +90,7 @@
     </div>
   </nav>
 
-  <div class="flex flex-wrap items-center justify-center mt-5">
+  <div class="flex flex-wrap items-center justify-center mt-10">
     <div class="w-full md:w-3/5 bg-white p-6 mt-8">
       <div
         class="flex flex-wrap items-center justify-center -mt-5"
@@ -611,7 +611,7 @@
                   class="mt-1 text-sm text-gray-500 dark:text-gray-300"
                   id="vaccination_card"
                 >
-                  RtPCR Test Captured in Landscape
+                  <span class="text-red-500">{{this.error}}</span>
                 </div>
               </div>
             </div>
@@ -1445,6 +1445,49 @@
       </div>
     </div>
   </div>
+
+
+  <div
+    v-if="reportSent"
+    class="
+      main-modal
+      fixed
+      w-full
+      inset-0
+      z-50
+      overflow-hidden
+      flex
+      justify-center
+      items-center
+      animated
+      fadeIn
+      faster
+    "
+    style="background: rgba(0, 0, 0, 0.7)"
+  >
+  <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal" @click="reportSent=false">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+            </button>
+            <div class="p-6 text-center">
+                <svg class="mx-auto mb-4 w-14 h-14 text-green-400 dark:text-green-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M5 13l4 4L19 7"
+				></path></svg>
+                <h3 class=" text-lg font-normal text-gray-500 dark:text-gray-400">Report Submitted. </h3>
+                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Salamat sa pag-ulat ng iyong karamdaman at sa pagpapahalaga sa kalusugan ng iba. Asahang tutugunan namin ito sa madaling panahon. </h3>
+                <button data-modal-toggle="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" @click="reportSent=false">Okay</button>
+            </div>
+             </div>
+        </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -1476,6 +1519,8 @@ export default defineComponent({
   },
   data() {
     return {
+      reportSent: false,
+      error: "RtPCR Test Captured in Landscape",
       allEntryModal: false,
       viewNotifModal: false,
       notifID: "",
@@ -1823,6 +1868,10 @@ export default defineComponent({
       );
     },
     submit() {
+      if( this.$data.report.reportInfo.rtpcrImageLink == "" | this.$data.report.reportInfo.rtpcrImageLink == null | this.$data.report.reportInfo.dayTested == "" | this.$data.report.reportInfo.monthTested == null | this.$data.report.reportInfo.monthTested == "" | this.$data.report.reportInfo.dayTested == null | this.$data.report.reportInfo.dayTested == "" | this.$data.report.reportInfo.yearTested == "" | this.$data.report.reportInfo.yearTested == null | this.$data.report.reportInfo.classification == "" | this.$data.report.reportInfo.classification == null){
+        this.error = "Please check all the field!"
+      }
+      else{
       var randomstring = require("randomstring");
       let id = randomstring.generate({
         length: 20,
@@ -1833,8 +1882,9 @@ export default defineComponent({
 
       const db = getFirestore(app);
       setDoc(doc(db, "reports", id), this.$data.report);
-      alert("submitted");
+      this.reportSent = true;
       this.$data.reportModal = false;
+      }
     },
 
     async getReport() {
@@ -1853,6 +1903,7 @@ export default defineComponent({
       });
 
       this.$data.notifications = notifications;
+    
     },
 
     async view() {
@@ -1870,6 +1921,7 @@ export default defineComponent({
       this.$data.notification.date = notifData.date;
       this.$data.viewNotifModal = true;
       this.$data.notificationModal = false;
+    
     },
 
     closeNotif() {

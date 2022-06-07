@@ -540,7 +540,7 @@ export default {
       this.$data.notification.phoneNumber =
         "+63" + this.$data.user.users.userInfo.phoneNumber;
            const current = new Date();
-      let date = `${current.getMonth()}` + " " + `${current.getDay()}` + ", " + `${current.getFullYear()}` ;
+      let date = `${current.getMonth()}` + "/" + `${current.getDay()}` + "/" + `${current.getFullYear()}` ;
       this.$data.notification.date = date;
 
       var randomstring = require("randomstring");
@@ -580,7 +580,7 @@ export default {
 
       setDoc(doc(db, "applications", id), this.$data.user);
       const current = new Date();
-      let date = `${current.getMonth()}` + " " + `${current.getDay()}` + ", " + `${current.getFullYear()}` ;
+      let date = `${current.getMonth()}` + "/" + `${current.getDay()}` + "/" + `${current.getFullYear()}` ;
 
       this.$data.notification.header = "QR-Code Application Update.";
       this.$data.notification.notificationMessage =

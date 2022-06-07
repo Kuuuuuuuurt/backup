@@ -14,7 +14,7 @@
     "
   >
     <a
-      href="#"
+      @click="back"
       class="
         font-bold
         m-3
