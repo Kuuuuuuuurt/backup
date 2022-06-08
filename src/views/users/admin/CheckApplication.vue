@@ -536,7 +536,7 @@ export default {
 
       this.$data.notification.header = "QR-Code Application Update.";
       this.$data.notification.notificationMessage =
-        "Ang mensahing ito ay nagpapaalam sa iyo na ang iyong QR Code Application ay naaprubahan ng TRAFEX Admin.";
+        "Ang mensahing ito ay nagpapaalam sa iyo na ang iyong QR Code Application ay naaprubahan na ng TRAFEX Admin.";
       this.$data.notification.phoneNumber =
         "+63" + this.$data.user.users.userInfo.phoneNumber;
            const current = new Date();

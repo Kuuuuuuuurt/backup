@@ -168,7 +168,7 @@
         </div>
         <div class="text-lg ml-3">
           <p>
-            Lives in <span class="font-bold">{{ user.address }}</span>
+            Lives in <span class="font-bold">{{"Purok " + user.address }}</span>
           </p>
         </div>
       </div>
