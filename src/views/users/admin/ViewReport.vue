@@ -928,7 +928,7 @@ export default {
         this.$data.report.dayTested +
         ", " +
         this.$data.report.yearTested
-      +"ikaw ay naging closed contact ng isang Covid19 Positive na pasahero sa Ozamiz Tudela Balik-Balik Transport Vehicle na may plate number na " +
+      +" ikaw ay naging closed contact ng isang Covid19 Positive na pasahero sa Ozamiz Tudela Balik-Balik Transport Vehicle na may plate number na " +
         this.visited +
         ". " +
         "Hinihikayat ka namin na mag-self quarantine kaagad.";
@@ -965,6 +965,15 @@ const current = new Date();
           length: 20,
           charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
         });
+
+        this.$data.notification.notificationMessage =
+        "Ito ay para ipaalam sa iyo na sa " +
+        this.$data.report.monthTested +
+        " " +
+        this.$data.report.dayTested +
+        ", " +
+        this.$data.report.yearTested + " ikaw ay nagkaroon ng pasaherong  Covid19 Positive. Hinihikayat ka namin na mag-self quarantine kaagad."
+
         setDoc(doc(db, "notification", id2), this.$data.notification);
       }
 

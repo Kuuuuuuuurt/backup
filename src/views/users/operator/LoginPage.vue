@@ -28,10 +28,11 @@
               >
               <input
                 type="password"
-                class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                class="border rounded-lg px-3 py-2 mt-1 text-sm w-full"
                 required
                 v-model="users.password"
               />
+              <p class="mb-5 text-red-500 text-sm">{{users.error}}</p>
               <button
                 type="submit"
                 class="
@@ -446,13 +447,13 @@ export default {
         .catch((error) => {
           switch (error.code) {
             case "auth/user-not-found":
-              alert("User not found");
+              this.users.error = "User Not Found"
               break;
             case "auth/wrong-password":
-              alert("Wrong password");
+              this.users.error = "Wrong Password"
               break;
             default:
-              alert("Something went wrong");
+              this.users.error = "Something Went Wrong"
           }
         });
     },

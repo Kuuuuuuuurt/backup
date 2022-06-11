@@ -1,53 +1,93 @@
 <template>
+  <nav
+    class="
+      bg-white
+      shadow
+      fixed
+      z-10
+      mx-auto
+      inset-x-0
+      top-0
+      flex
+      justify-between
+      items-center
+    "
+  >
+    <button
+      @click="back"
+      class="
+        font-bold
+        m-3
+        inline-flex
+        hover:text-pink-700
+        transition-all
+        duration-500
+      "
+    >
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/709/709624.png"
+        style="height: 25px"
+        alt=""
+        class="mr-2"
+        loading="lazy"
+      />
+    </button>
+
+    <!-- List of nav item -->
+    <button
+      class="
+        font-extrabold
+        m-3
+        uppercase
+        inline-flex
+        hover:text-pink-700
+        transition-all
+        duration-500
+      "
+      @click="back"
+    >
+      <img
+        src="../../../../src/assets/283863145_544721900556893_7583603897868082993_n.png"
+        style="height: 30px"
+        alt=""
+        class="mr-2"
+        loading="lazy"
+      />
+    </button>
+  </nav>
   <div>
     <qrcode-stream class="h-100vh"> </qrcode-stream>
   </div>
-  <div   
-   class="
-      main-modal
-      fixed
-      w-full
-      inset-0
-      z-50
-      animated
-      fadeIn
-      faster
-    "
-    style="background: rgba(0, 0, 0, 0.7)">
-    <div><button class="mt-2 ml-2" @click="back">
-         <svg
-                    viewBox="0 0 24 24"
-                    class="h-10 w-10 fill-current text-white"
-                  >
-                   <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
-                  </svg>
-    </button>
-    </div>
   <div
-    class="
-      main-modal
-      fixed
-      w-full
-      inset-0
-      z-50
-      flex
-      justify-center
-      items-center
-      animated
-      fadeIn
-      faster
-    "
+    class="main-modal fixed w-full animated fadeIn faster"
+    style="background: rgba(0, 0, 0, 0.7)"
   >
-    <div>
+    <div
+      class="
+        main-modal
+        fixed
+        w-full
+        inset-0
+        z-50
+        flex
+        justify-center
+        items-center
+        animated
+        fadeIn
+        faster
+      "
+    >
       <div>
-        <qrcode-stream
-          @decode="onDecode"
-          :track="drawOutline"
-          @init="onInit"
-        ></qrcode-stream>
+        <div>
+          <qrcode-stream
+            @decode="onDecode"
+            :track="drawOutline"
+            @init="onInit"
+          ></qrcode-stream>
+        </div>
       </div>
     </div>
-  </div>
+    
   </div>
 
   <div
@@ -308,7 +348,7 @@
                 multiple
                 v-model="customerData.symptomsFelt.symptoms"
               >
-              <option>None</option>
+                <option>None</option>
                 <option>Fever</option>
                 <option>Dry Cough</option>
                 <option>Fatigue</option>
