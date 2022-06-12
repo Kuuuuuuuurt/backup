@@ -42,7 +42,7 @@
                 >+63</span
               >
               <input
-              type="number"
+              type="tek"
               placeholder="Your phone number"
               class="
                 w-full
@@ -378,16 +378,19 @@ export default {
       if ((code == null) | (code == "")) {
         alert("Please Enter OTP code");
       } else {
-        const phone = this.$data.phoneNumber;
+        this.confirmCode();
         const db = getFirestore(app);
         const userRef = collection(db, "user");
-        let usersRef = doc(userRef, phone);
+
+        let usersRef = doc(userRef, this.$data.phoneNumber);
         this.$data.userRefer = usersRef;
+
         let user = await getDoc(this.$data.userRefer);
 
         let userData = user.data();
         this.$data.users =
           userData.userInfo.firstName + " " + userData.userInfo.lastName;
+          console.log(userData)
 
         const password = userData.userInfo.password;
         const email = userData.userInfo.phoneNumber + "@gmail.com";
@@ -414,6 +417,23 @@ export default {
             }
           });
       }
+    },
+
+    confirmCode(){
+      const code = this.otp;
+      console.log(code);
+       window.confirmationResult
+        .confirm(code)
+        .then((result) => {
+          const user = result.user;
+          console.log(user);
+
+          // ...
+        })
+        .catch((error) => {
+          console.log(error);
+          // ...
+        });
     },
 
     async resetPass() {
