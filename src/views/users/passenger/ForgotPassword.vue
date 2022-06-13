@@ -32,41 +32,42 @@
               >Phone Number</label
             >
             <div class="flex">
-               <span
-                class=" w-fit
-                px-2
-                py-2
-                placeholder-gray-300
-                border border-gray-300
-                rounded-md"
+              <span
+                class="
+                  w-fit
+                  px-2
+                  py-2
+                  placeholder-gray-300
+                  border border-gray-300
+                  rounded-md
+                "
                 >+63</span
               >
               <input
-              type="tek"
-              placeholder="Your phone number"
-              class="
-                w-full
-                px-3
-                py-2
-                placeholder-gray-300
-                border border-gray-300
-                rounded-md
-                focus:outline-none
-                focus:ring
-                focus:ring-indigo-100
-                focus:border-indigo-300
-                dark:bg-gray-700
-                dark:text-white
-                dark:placeholder-gray-500
-                dark:border-gray-600
-                dark:focus:ring-gray-900
-                dark:focus:border-gray-500
-              "
-              v-model="phoneNumber"
-            />
-            <p class="text-red-500">{{ error.number }}</p>
+                type="tek"
+                placeholder="Your phone number"
+                class="
+                  w-full
+                  px-3
+                  py-2
+                  placeholder-gray-300
+                  border border-gray-300
+                  rounded-md
+                  focus:outline-none
+                  focus:ring
+                  focus:ring-indigo-100
+                  focus:border-indigo-300
+                  dark:bg-gray-700
+                  dark:text-white
+                  dark:placeholder-gray-500
+                  dark:border-gray-600
+                  dark:focus:ring-gray-900
+                  dark:focus:border-gray-500
+                "
+                v-model="phoneNumber"
+              />
+              <p class="text-red-500">{{ error.number }}</p>
             </div>
-            
           </div>
           <div class="mb-6">
             <button
@@ -94,7 +95,6 @@
               >OTP</label
             >
             <input
-              type="number"
               placeholder="Enter Code"
               class="
                 w-full
@@ -114,7 +114,7 @@
                 dark:focus:ring-gray-900
                 dark:focus:border-gray-500
               "
-              v-model="otp"
+              v-model="otpCode"
             />
             <p class="text-red-500">{{ error.otp }}</p>
           </div>
@@ -258,7 +258,7 @@
           <p class="text-sm text-center text-gray-400">
             Don&#x27;t have an account yet?
             <a
-              href="#!"
+              href="/passenger/login"
               class="
                 font-semibold
                 text-indigo-500
@@ -296,7 +296,7 @@ export default {
       newPassword: "",
       retypePassword: "",
       phoneNumber: "",
-      otp: "",
+      otpCode: "",
       togglePassForm: false,
       toggleOTPForm: true,
       appVerifier: "",
@@ -320,6 +320,9 @@ export default {
           qrData: "",
           type: "",
           password: "",
+          loginToken: "",
+          vaccinationLink: null,
+          validIdLink: null,
         },
       },
     };
@@ -374,66 +377,65 @@ export default {
     },
 
     async sendOTP() {
-      const code = this.$data.otp;
+      const code = this.otpCode;
       if ((code == null) | (code == "")) {
         alert("Please Enter OTP code");
       } else {
-        this.confirmCode();
-        const db = getFirestore(app);
-        const userRef = collection(db, "user");
+        window.confirmationResult
+          .confirm(code)
+          .then((result) => {
 
-        let usersRef = doc(userRef, this.$data.phoneNumber);
-        this.$data.userRefer = usersRef;
-
-        let user = await getDoc(this.$data.userRefer);
-
-        let userData = user.data();
-        this.$data.users =
-          userData.userInfo.firstName + " " + userData.userInfo.lastName;
-          console.log(userData)
-
-        const password = userData.userInfo.password;
-        const email = userData.userInfo.phoneNumber + "@gmail.com";
-        const auth = getAuth(app);
-        signInWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
+            const user = result.user;
             console.log(user);
-            console.log(auth.currentUser);
-            this.togglePassForm = true;
-            this.toggleOTPForm = false;
+            this.getUser();
+
+            // ...
           })
           .catch((error) => {
-            switch (error.code) {
-              case "auth/user-not-found":
-                alert("User not found");
-                break;
-              case "auth/wrong-password":
-                alert("Wrong password");
-                break;
-              default:
-                alert("Something went wrong");
-            }
+            console.log(error);
+            // ...
           });
       }
     },
 
-    confirmCode(){
-      const code = this.otp;
-      console.log(code);
-       window.confirmationResult
-        .confirm(code)
-        .then((result) => {
-          const user = result.user;
-          console.log(user);
+    async getUser() {
+      const db = getFirestore(app);
+      const userRef = collection(db, "user");
 
-          // ...
-        })
-        .catch((error) => {
-          console.log(error);
-          // ...
-        });
+            let usersRef = doc(userRef, this.$data.phoneNumber);
+            this.$data.userRefer = usersRef;
+
+            let user = await getDoc(this.$data.userRefer);
+
+            let userData = user.data();
+            this.$data.users =
+              userData.userInfo.firstName + " " + userData.userInfo.lastName;
+            console.log(userData);
+
+            const password = userData.userInfo.password;
+            const email = userData.userInfo.phoneNumber + "@gmail.com";
+            const auth = getAuth(app);
+            signInWithEmailAndPassword(auth, email, password)
+              .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                console.log(user);
+                console.log(auth.currentUser);
+                this.togglePassForm = true;
+                this.toggleOTPForm = false;
+              })
+              .catch((error) => {
+                switch (error.code) {
+                  case "auth/user-not-found":
+                    alert("User not found");
+                    break;
+                  case "auth/wrong-password":
+                    alert("Wrong password");
+                    break;
+                  default:
+                    alert("Something went wrong");
+                }
+              });
     },
 
     async resetPass() {
@@ -462,30 +464,40 @@ export default {
       this.$data.user.userInfo.qrData = userData.userInfo.qrData;
       this.$data.user.userInfo.qrStatus = userData.userInfo.qrStatus;
       this.$data.user.userInfo.type = userData.userInfo.type;
+      this.$data.user.userInfo.loginToken = userData.userInfo.loginToken;
+       this.$data.user.userInfo.vaccinationLink = userData.userInfo.vaccinationLink;
+        this.$data.user.userInfo.validIdLink = userData.userInfo.validIdLink;
+      
 
       if (newPass == retypePass) {
-          if(newPass != ""){
-        updatePassword(user, newPass)
-          .then(() => {
-            // Update successful.
-            this.$data.user.userInfo.password = newPass;
-            setDoc(this.$data.userRefer, this.$data.user);
-            alert("password updated");
-            this.$router.push("/passenger/slogin");
-          })
-          .catch((error) => {
-            // An error ocurred
-            alert(error);
-            // ...
-          });
-          }
-          else{
-              this.$data.error.password = "Please Provide Password!";
-          }
+        if (newPass != "") {
+          updatePassword(user, newPass)
+            .then(() => {
+              // Update successful.
+              this.$data.user.userInfo.password = newPass;
+              setDoc(this.$data.userRefer, this.$data.user);
+              alert("password updated");
+              this.$router.push("/passenger/login");
+            })
+            .catch((error) => {
+              // An error ocurred
+              alert(error);
+              // ...
+            });
+        } else {
+          this.$data.error.password = "Please Provide Password!";
+        }
       } else {
         this.$data.error.password = "Password Mismatch!";
       }
     },
+
+    // back(){
+    //   this.$router.push("/passenger/login");
+    // }
+  },
+
+  created(){
   },
 };
 </script>

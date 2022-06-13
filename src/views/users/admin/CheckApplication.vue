@@ -553,6 +553,14 @@ export default {
         doc(db, "notification", notifID),
         this.$data.notification
       );
+
+       var randomstringsA = require("randomstring");
+      let idA = randomstringsA.generate({
+        length: 20,
+        charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      });
+
+      setDoc(doc(db, "applications", idA), this.$data.user.users);
       
        this.acceptedModal = true;
     },
@@ -578,7 +586,7 @@ export default {
         charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
       });
 
-      setDoc(doc(db, "applications", id), this.$data.user);
+      setDoc(doc(db, "applications", id), this.$data.user.users);
       const current = new Date();
       let date = `${current.getMonth()}` + "/" + `${current.getDay()}` + "/" + `${current.getFullYear()}` ;
 
