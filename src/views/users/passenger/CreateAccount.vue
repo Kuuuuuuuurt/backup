@@ -14,6 +14,7 @@
           class="border p-2 w-1/2"
           v-model="user.userInfo.firstName"
           required
+          autocapitalize
         />
         <input
           type="text"
@@ -21,6 +22,7 @@
           class="border p-2 w-1/2"
           v-model="user.userInfo.lastName"
           required
+          autocapitalize
         />
       </div>
       <input
@@ -37,9 +39,9 @@
           id="gender"
           class="border p-2 w-1/2"
         >
-          <option selected>Male</option>
-          <option value="US">Female</option>
-          <option value="CA">Others</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Others</option>
         </select>
         <input
           type="tel"
@@ -56,6 +58,7 @@
           class="border p-2 w-1/2"
           v-model="user.userInfo.purok"
           required
+          autocapitalize
         />
         <input
           type="text"
@@ -63,6 +66,7 @@
           class="border p-2 w-1/2"
           v-model="user.userInfo.baranggay"
           required
+          autocapitalize
         />
       </div>
       <div class="flex space-x-5 mt-3">
@@ -72,6 +76,7 @@
           class="border p-2 w-1/2"
           v-model="user.userInfo.municipality"
           required
+          autocapitalize
         />
         <input type="tel" placeholder="" class="p-2 w-1/2 bg-white" disabled />
       </div>
@@ -665,6 +670,8 @@ export default {
           console.log(user);
 
           //firestoredb
+          const encrypt = window.btoa(password);
+          this.$data.user.userInfo.password = encrypt;
           let id = this.$data.user.userInfo.phoneNumber;
           const addDocs = setDoc(doc(db, "user", id), this.$data.user);
           console.log(addDocs);

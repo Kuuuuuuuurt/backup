@@ -21,6 +21,7 @@
           class="border p-2 w-1/2"
           v-model="user.userInfo.owner"
           required
+          autocapitalize
         />
         <input
           type="tel"

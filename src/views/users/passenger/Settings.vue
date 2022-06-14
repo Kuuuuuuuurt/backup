@@ -565,7 +565,8 @@ export default defineComponent({
 
       const user = auth.currentUser;
       const password = this.$data.newPassword;
-      this.$data.user.userInfo.password = password;
+      const encrypt = window.btoa( password );
+      this.$data.user.userInfo.password = encrypt;
 
       updatePassword(user, password)
         .then(() => {

@@ -231,9 +231,53 @@
                   </div>
                 </div>
               </a>
+
+              <a
+                @click="reportModal = true"
+                class="
+                  w-full
+                  sm:w-auto
+                  bg-gray-800
+                  hover:bg-gray-700
+                  focus:ring-4 focus:outline-none focus:ring-gray-300
+                  text-white
+                  rounded-lg
+                  inline-flex
+                  items-center
+                  justify-center
+                  px-4
+                  py-2.5
+                  dark:bg-gray-700
+                  dark:hover:bg-gray-600
+                  dark:focus:ring-gray-700
+                "
+              >
+                <svg
+                  class="mr-3 w-6 h-6 dark:text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
+                  ></path>
+                </svg>
+                <div class="text-left">
+                  <div class="mb-1 text-xs">Report:</div>
+                  <div class="-mt-1 font-sans text-sm font-semibold">
+                    Report Case
+                  </div>
+                </div>
+              </a>
             </div>
           </div>
         </div>
+
+        
 
         <div class="flex items-center">
           <label for="simple-search" class="sr-only">Search</label>
@@ -1358,6 +1402,218 @@
       </div>
     </div>
   </div>
+
+
+  <div
+  v-if="reportModal"
+    class="
+      main-modal
+      fixed
+      w-full
+      inset-0
+      z-50
+      overflow-hidden
+      flex
+      justify-center
+      items-center
+      animated
+      fadeIn
+      faster
+    "
+    style="background: rgba(0, 0, 0, 0.7)"
+  >
+    <div class="bg-white rounded-2xl border shadow-x1 p-4 max-w-lg">
+      <div class="flex flex-col items-center space-y-1">
+        <h1 class="font-bold text-2xl text-gray-700 w-4/6 text-center">
+          Report Problem
+        </h1>
+        <p class="text-sm text-gray-500 text-center w-5/6">
+          Please fill out the form below completely and truthfully to prevent
+          unnecessary panic.
+        </p>
+        <form class="w-full">
+          <div class="">
+            <div class="">
+              <label for="names" class="text-md text-gray-600"
+                >Date tested positive</label
+              >
+              <div class="flex">
+                <select
+                  class="border-2 rounded-lg w-full h-12 px-4"
+                  v-model="report.reportInfo.monthTested"
+                >
+                  <option>January</option>
+                  <option>February</option>
+                  <option>March</option>
+                  <option>April</option>
+                  <option>May</option>
+                  <option>June</option>
+                  <option>July</option>
+                  <option>August</option>
+                  <option>September</option>
+                  <option>October</option>
+                  <option>November</option>
+                  <option>December</option>
+                </select>
+
+                <select
+                  class="border-2 rounded-lg w-full h-12 px-4"
+                  v-model="report.reportInfo.dayTested"
+                >
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                  <option>11</option>
+                  <option>12</option>
+                  <option>13</option>
+                  <option>14</option>
+                  <option>15</option>
+                  <option>16</option>
+                  <option>17</option>
+                  <option>18</option>
+                  <option>19</option>
+                  <option>20</option>
+                  <option>21</option>
+                  <option>22</option>
+                  <option>23</option>
+                  <option>24</option>
+                  <option>25</option>
+                  <option>26</option>
+                  <option>27</option>
+                  <option>28</option>
+                  <option>29</option>
+                  <option>30</option>
+                  <option>31</option>
+                </select>
+
+                <select
+                  class="border-2 rounded-lg w-full h-12 px-4"
+                  v-model="report.reportInfo.yearTested"
+                >
+                  <option>2022</option>
+                  <option>2023</option>
+                  <option>2024</option>
+                  <option>2025</option>
+                  <option>2026</option>
+                  <option>2027</option>
+                  <option>2028</option>
+                </select>
+              </div>
+            </div>
+            <div class="">
+              <label for="names" class="text-md text-gray-600"
+                >Classification</label
+              >
+              <select
+                class="border-2 rounded-lg w-full h-12 px-4"
+                v-model="report.reportInfo.classification"
+              >
+                <option>Symptomatic</option>
+                <option>Pre-symptomatic</option>
+                <option>Asymptomatic</option>
+              </select>
+            </div>
+
+            <div class="mt-4">
+              <label for="names" class="text-md text-gray-600"
+                >RtPCR Test</label
+              >
+              <div>
+                <label
+                  class="
+                    block
+                    text-sm
+                    font-medium
+                    text-gray-900
+                    dark:text-gray-300
+                  "
+                  for="vaccination_cards"
+                  >Upload Image</label
+                >
+                <input
+                  class="
+                    block
+                    w-full
+                    text-sm text-gray-900
+                    bg-gray-50
+                    rounded-lg
+                    border border-gray-300
+                    cursor-pointer
+                    dark:text-gray-400
+                    focus:outline-none focus:border-transparent
+                    dark:bg-gray-700
+                    dark:border-gray-600
+                    dark:placeholder-gray-400
+                  "
+                  aria-describedby="vaccination_card"
+                  id="vaccination_cards"
+                  type="file"
+                  accept="image/*"
+                  @change="previewRtPCR"
+                />
+                <div
+                  class="mt-1 text-sm text-gray-500 dark:text-gray-300"
+                  id="vaccination_card"
+                >
+                  <span class="text-red-500">{{this.error}}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <label for="names" class="text-md text-gray-600"
+                >Other Details</label
+              >
+              <textarea
+                class="border-2 rounded-lg w-full h-24 px-4"
+                placeholder="details"
+                v-model="report.reportInfo.message"
+              ></textarea>
+            </div>
+          </div>
+        </form>
+        <div class="">
+          <div class="flex justify-end pt-2 space-x-4">
+            <button
+              class="
+                px-4
+                bg-gray-200
+                p-3
+                rounded
+                text-black
+                hover:bg-gray-300
+                font-semibold
+              "
+              @click="reportModal=false"
+            >
+              Cancel
+            </button>
+            <button
+              class="
+                px-4
+                bg-green-500
+                p-3
+                ml-3
+                rounded-lg
+                text-white
+                hover:bg-green-600
+              "
+              @click="submit"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -1370,10 +1626,18 @@ import {
   getDocs,
   setDoc,
 } from "firebase/firestore";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
 import { getAuth, signOut } from "firebase/auth";
 export default {
   data() {
     return {
+      reportModal: false,
+      error: "RtPCR Test Captured in Landscape",
       allEntries: [],
       allEntryModal: false,
       notifID: "",
@@ -1413,6 +1677,22 @@ export default {
         notifMessage: "",
         date: "",
       },
+
+        report: {
+        reportInfo: {
+          name: "",
+          phoneNumber: "",
+          address: "",
+          dayTested: "",
+          monthTested: "",
+          yearTested: "",
+          rtpcrImageLink: "",
+          message: "",
+          classification: "",
+          status: "Pending",
+          id: "",
+        },
+      },
     };
   },
 
@@ -1438,6 +1718,19 @@ export default {
       this.$data.user.userInfo.type = userData.userInfo.type;
       this.$data.user.userInfo.password = userData.userInfo.password;
       this.$data.user.userInfo.loginToken = userData.userInfo.loginToken;
+
+      this.$data.report.reportInfo.name = userData.userInfo.owner;
+      this.$data.report.reportInfo.phoneNumber = userData.userInfo.phoneNumber;
+      this.$data.report.reportInfo.address =   userData.userInfo.purok +
+          ", " +
+          userData.userInfo.baranggay +
+          ", " +
+          userData.userInfo.municipality +
+          ", " +
+          "Misamis Occidental";
+
+          console.log( this.$data.report)
+      
 
       if (userData.userInfo.loginToken == "Yes") {
         this.$data.users.vehicleID = userData.userInfo.vehicleID;
@@ -1633,6 +1926,111 @@ export default {
       this.$data.viewNotifModal = false;
       this.$data.notificationModal = true;
     },
+
+    previewRtPCR(event) {
+      var input = event.target;
+
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = () => {
+          this.$data.rtpcrData = event.target.files[0];
+          this.uploadRtPCR();
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    },
+
+    uploadRtPCR() {
+      const storage = getStorage(app);
+
+      // Create the file metadata
+      /** @type {any} */
+      const metadata = {
+        contentType: "image/jpeg",
+      };
+      // Upload file and metadata to the object 'images/mountains.jpg'
+      const storageRef = ref(
+        storage,
+        "proofs/" +
+          `${this.$data.user.phoneNumber}/` +
+          "rtpcr/" +
+          this.rtpcrData.name
+      );
+      const uploadTask = uploadBytesResumable(
+        storageRef,
+        this.rtpcrData,
+        metadata
+      );
+
+      // Listen for state changes, errors, and completion of the upload.
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+          }
+        },
+        (error) => {
+          // A full list of error codes is available at
+          // https://firebase.google.com/docs/storage/web/handle-errors
+          switch (error.code) {
+            case "storage/unauthorized":
+              // User doesn't have permission to access the object
+              break;
+            case "storage/canceled":
+              // User canceled the upload
+              break;
+
+            // ...
+
+            case "storage/unknown":
+              // Unknown error occurred, inspect error.serverResponse
+              break;
+          }
+        },
+        () => {
+          // Upload completed successfully, now we can get the download URL
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            console.log("File available at", downloadURL);
+            this.rtpcrImage = downloadURL;
+            this.$data.report.reportInfo.rtpcrImageLink = downloadURL;
+            console.log("Link:" + this.$data.report.reportInfo.rtpcrImageLink);
+          });
+        }
+      );
+    },
+
+    submit(){
+      if( this.$data.report.reportInfo.rtpcrImageLink == "" | this.$data.report.reportInfo.rtpcrImageLink == null | this.$data.report.reportInfo.dayTested == "" | this.$data.report.reportInfo.monthTested == null | this.$data.report.reportInfo.monthTested == "" | this.$data.report.reportInfo.dayTested == null | this.$data.report.reportInfo.dayTested == "" | this.$data.report.reportInfo.yearTested == "" | this.$data.report.reportInfo.yearTested == null | this.$data.report.reportInfo.classification == "" | this.$data.report.reportInfo.classification == null){
+        this.error = "Please check all the field!"
+      }
+      else{
+        var randomstring = require("randomstring");
+      let id = randomstring.generate({
+        length: 20,
+        charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      });
+
+      this.$data.report.reportInfo.id = id;
+      console.log(this.$data.report.reportInfo.id);
+
+      const db = getFirestore(app);
+      setDoc(doc(db, "operator-reports", id), this.$data.report);
+      alert("success");
+      this.reportModal=false;
+      }
+    }
   },
 
   created() {

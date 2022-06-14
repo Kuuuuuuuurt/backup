@@ -26,7 +26,7 @@
       </div>
       <!-- sign-in -->
       <div class="m-6">
-        <form class="mb-4">
+        <div class="mb-4">
           <div class="mb-6">
             <label class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
               >Phone Number</label
@@ -151,7 +151,7 @@
               >Sign up</a
             >.
           </p>
-        </form>
+        </div>
       </div>
     </div>
 
@@ -377,7 +377,7 @@ export default {
     },
 
     async sendOTP() {
-      const code = this.otpCode;
+      const code = this.$data.otpCode;
       if ((code == null) | (code == "")) {
         alert("Please Enter OTP code");
       } else {
@@ -393,6 +393,7 @@ export default {
           })
           .catch((error) => {
             console.log(error);
+            alert("Invalid Code")
             // ...
           });
       }
@@ -413,9 +414,10 @@ export default {
             console.log(userData);
 
             const password = userData.userInfo.password;
+            const decrypt = window.atob(password)
             const email = userData.userInfo.phoneNumber + "@gmail.com";
             const auth = getAuth(app);
-            signInWithEmailAndPassword(auth, email, password)
+            signInWithEmailAndPassword(auth, email, decrypt)
               .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user;
@@ -474,7 +476,8 @@ export default {
           updatePassword(user, newPass)
             .then(() => {
               // Update successful.
-              this.$data.user.userInfo.password = newPass;
+              const encrypt = window.btoa(newPass);
+              this.$data.user.userInfo.password = encrypt;
               setDoc(this.$data.userRefer, this.$data.user);
               alert("password updated");
               this.$router.push("/passenger/login");

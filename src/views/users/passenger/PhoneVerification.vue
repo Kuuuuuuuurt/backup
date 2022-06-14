@@ -374,6 +374,7 @@ export default {
         .catch((error) => {
           // User couldn't sign in (bad verification code?)
           console.log(error);
+          alert("Invalid Code")
           // ...
         });
     },

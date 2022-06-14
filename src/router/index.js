@@ -28,6 +28,7 @@ import EntryRecord from '../views/users/admin/EntryRecord.vue'
 import Application from '../views/users/admin/Application.vue'
 import Report from '../views/users/admin/Report.vue'
 import ViewReport from '../views/users/admin/ViewReport.vue'
+import ViewOperator from '../views/users/admin/ViewOperatorReport.vue'
 
 const routes = [
 
@@ -116,6 +117,11 @@ const routes = [
     path: '/admin-login',
     name: 'LoginPageAdmin',
     component: LoginPageAdmin
+  },
+  {
+    path: '/admin-report/operator/:id2/:id',
+    name: 'ViewOperator',
+    component: ViewOperator
   },
   {
     path: '/admin-home/:id',
