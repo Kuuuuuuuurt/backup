@@ -965,6 +965,10 @@ const current = new Date();
     back() {
       this.$router.push(`/admin-report/${this.id}`);
     },
+
+    selectReport(){
+      console.log("selected");
+    }
   },
 
   created() {

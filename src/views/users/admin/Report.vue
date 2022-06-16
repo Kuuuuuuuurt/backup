@@ -60,6 +60,7 @@
     <div class="flex flex-col justify-center h-full">
       <!-- Table -->
       <div
+      v-if="showPassenger"
         class="
           w-full
           max-w-2xl
@@ -101,12 +102,14 @@
                 dark:focus:ring-blue-500
                 dark:focus:border-blue-500
               "
+              v-model="reportSelect"
             >
               <option>Passenger Reports</option>
               <option>Operator Reports</option>
             </select>
 
             <button
+            @click="selectReport"
               type="button"
               class="
                 text-blue-700
@@ -209,6 +212,7 @@
       </div>
 
       <div
+      v-if="showOperator"
         class="
           mt-5
           w-full
@@ -251,12 +255,14 @@
                 dark:focus:ring-blue-500
                 dark:focus:border-blue-500
               "
+              v-model="reportSelect"
             >
               <option>Operator Reports</option>
               <option>Passenger Reports</option>
             </select>
 
             <button
+            @click="selectReport"
               type="button"
               class="
                 text-blue-700
@@ -373,6 +379,9 @@ import {
 export default {
   data() {
     return {
+      showPassenger: true,
+      showOperator: false,
+      reportSelect: "Passenger Reports",
       operatorReports: [],
       reports: [],
       id: "",
@@ -437,6 +446,20 @@ export default {
     home() {
       this.$router.push(`/admin-home/${this.id2}`);
     },
+
+    selectReport(){
+      if(this.reportSelect == "Passenger Reports"){
+        this.showPassenger = true;
+        this.showOperator = false;
+      }
+      else if(this.reportSelect == "Operator Reports"){
+        this.showPassenger = false;
+        this.showOperator = true;
+      }
+      else{
+        console.log("no")
+      }
+    }
   },
 
   created() {

@@ -1682,6 +1682,7 @@ export default {
         reportInfo: {
           name: "",
           phoneNumber: "",
+          cabNo: "",
           address: "",
           dayTested: "",
           monthTested: "",
@@ -1721,6 +1722,7 @@ export default {
 
       this.$data.report.reportInfo.name = userData.userInfo.owner;
       this.$data.report.reportInfo.phoneNumber = userData.userInfo.phoneNumber;
+      this.$data.report.reportInfo.cabNo = userData.userInfo.vehicleID;
       this.$data.report.reportInfo.address =   userData.userInfo.purok +
           ", " +
           userData.userInfo.baranggay +

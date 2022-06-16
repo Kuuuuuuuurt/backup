@@ -132,7 +132,23 @@
             </div>
           </div>
 
-          <div class="md:w-2/3 mx-auto max-w-sm space-y-5"></div>
+          <div class="md:w-2/3 mx-auto max-w-sm space-y-5">
+            <label class="text-sm text-gray-400">Vehicle Owner</label>
+            <div class="w-full inline-flex border">
+              <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
+                <img
+                  class="w-4 ml-2 mt-1"
+                  src="https://cdn-icons-png.flaticon.com/512/546/546394.png"
+                  alt="logo"
+                />
+              </div>
+              <input
+                v-model="user.userInfo.owner"
+                type=""
+                class="w-11/12 focus:outline-none focus:text-gray-600 p-2"
+              />
+            </div>
+          </div>
         </div>
 
         <div
@@ -147,7 +163,7 @@
           "
         >
           <div class="md:w-2/3 mx-auto max-w-sm space-y-5">
-            <label class="text-sm text-gray-400">Establishment Purok</label>
+            <label class="text-sm text-gray-400">Purok</label>
             <div class="w-full inline-flex border">
               <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
                 <img
@@ -165,7 +181,7 @@
           </div>
 
           <div class="md:w-2/3 mx-auto max-w-sm space-y-5">
-            <label class="text-sm text-gray-400">Establishment baranggay</label>
+            <label class="text-sm text-gray-400">baranggay</label>
             <div class="w-full inline-flex border">
               <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
                 <img

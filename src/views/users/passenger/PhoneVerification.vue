@@ -329,11 +329,9 @@ export default {
 
             signInWithPhoneNumber(auth, phone, appVerifier)
               .then((confirmationResult) => {
-                console.log(confirmationResult);
                 // SMS sent. Prompt user to type the code from the message, then sign the
                 // user in with confirmationResult.confirm(code).
                 window.confirmationResult = confirmationResult;
-                console.log(confirmationResult);
                 this.smsSentModal = true;
                 this.$data.togglePhoneNUmber = false;
                 this.$data.toggleOTP = true;
