@@ -628,7 +628,6 @@ export default {
           owner: "",
           phoneNumber: "",
           type: "operator",
-          password: "",
           loginToken: "Yes",
         },
       },
@@ -637,7 +636,6 @@ export default {
 
   methods: {
     register() {
-      console.log("creating");
 
       const email = this.$data.user.userInfo.email;
       const password = this.$data.user.userInfo.password;
@@ -646,15 +644,12 @@ export default {
       const db = getFirestore(app);
 
       createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+        .then(() => {
           //auth
-          const user = userCredential.user;
-          console.log(user);
 
           //firestore
           let id = this.$data.user.userInfo.email;
-          const addDocs = setDoc(doc(db, "user", id), this.$data.user);
-          console.log(addDocs);
+          setDoc(doc(db, "user", id), this.$data.user);
           this.$router.push(`/operator/home/${id}`);
         })
         .catch((error) => {

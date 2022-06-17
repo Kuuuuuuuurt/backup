@@ -1730,8 +1730,6 @@ export default {
           userData.userInfo.municipality +
           ", " +
           "Misamis Occidental";
-
-          console.log( this.$data.report)
       
 
       if (userData.userInfo.loginToken == "Yes") {
@@ -2004,10 +2002,8 @@ export default {
         () => {
           // Upload completed successfully, now we can get the download URL
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            console.log("File available at", downloadURL);
             this.rtpcrImage = downloadURL;
             this.$data.report.reportInfo.rtpcrImageLink = downloadURL;
-            console.log("Link:" + this.$data.report.reportInfo.rtpcrImageLink);
           });
         }
       );
@@ -2025,7 +2021,6 @@ export default {
       });
 
       this.$data.report.reportInfo.id = id;
-      console.log(this.$data.report.reportInfo.id);
 
       const db = getFirestore(app);
       setDoc(doc(db, "operator-reports", id), this.$data.report);

@@ -1969,10 +1969,8 @@ export default defineComponent({
         () => {
           // Upload completed successfully, now we can get the download URL
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            console.log("File available at", downloadURL);
             this.rtpcrImage = downloadURL;
             this.$data.report.reportInfo.rtpcrImageLink = downloadURL;
-            console.log("Link:" + this.$data.report.reportInfo.rtpcrImageLink);
           });
         }
       );

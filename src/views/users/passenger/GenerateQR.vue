@@ -525,7 +525,6 @@ this.$data.name =
         length: 30,
         charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
       });
-      console.log(id); 
 
       const db = getFirestore(app);
       this.$data.user.userInfo.qrStatus = "Pending Application"
@@ -627,10 +626,8 @@ this.$data.name =
         () => {
           // Upload completed successfully, now we can get the download URL
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            console.log("File available at", downloadURL);
             this.vaccinationCard = downloadURL;
             this.$data.user.userInfo.vaccinationLink = downloadURL;
-            console.log("Link:" + this.$data.user.userInfo.vaccinationLink);
           });
         }
       );
@@ -693,10 +690,8 @@ this.$data.name =
         () => {
           // Upload completed successfully, now we can get the download URL
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            console.log("File available at", downloadURL);
             this.validID = downloadURL;
             this.$data.user.userInfo.validIdLink = downloadURL;
-            console.log("Link:" + this.$data.user.userInfo.validIdLink);
           });
         }
       );

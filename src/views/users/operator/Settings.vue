@@ -395,6 +395,7 @@ export default {
           phoneNumber: "",
           type: "operator",
           loginToken: '',
+          password: ""
         },
       },
     };
@@ -422,6 +423,7 @@ export default {
       this.$data.user.userInfo.owner = userData.userInfo.owner;
       this.$data.user.userInfo.phoneNumber = userData.userInfo.phoneNumber;
       this.$data.user.userInfo.loginToken = userData.userInfo.loginToken;
+      this.$data.user.userInfo.password = userData.userInfo.password;
       }
       else if(userData.userInfo.loginToken == "No"){
         this.$router.push("/operator/login")

@@ -457,7 +457,6 @@ export default {
 
       let user = await getDoc(this.$data.userRefer);
       let reportData = user.data();
-      console.log(reportData);
 
       this.$data.report.name = reportData.reportInfo.name;
       this.$data.report.address = reportData.reportInfo.address;
@@ -511,7 +510,7 @@ export default {
               (recordData.year == this.$data.report.yearTested) &
               (recordData.day == this.$data.report.dayTested))
           ){
-              console.log(recordData);
+              
            people.push(recordData);
            peopleNo.push(recordData.phoneNumber);
           }
@@ -520,13 +519,11 @@ export default {
       });
       this.people = people;
       this.peopleNo = peopleNo;
-      console.log(this.people)
     },
 
     async sendNotif(){
-      console.log("sent");
       const current = new Date();
-      let date = `${current.getMonth()}` + "/" + `${current.getDay()}` + "/" + `${current.getFullYear()}` ;
+      let date = `${current.getMonth() + 1}` + "/" + `${current.getDate()}` + "/" + `${current.getFullYear()}` ;
       this.$data.notification.date = date;
 
       this.$data.notification.header = "Trafex Alert";

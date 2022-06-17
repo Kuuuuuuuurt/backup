@@ -664,18 +664,14 @@ export default {
       const db = getFirestore(app);
 
       createUserWithEmailAndPassword(auth, emailPhone, password)
-        .then((userCredential) => {
+        .then(() => {
           //authentication
-          const user = userCredential.user;
-          console.log(user);
 
           //firestoredb
           const encrypt = window.btoa(password);
           this.$data.user.userInfo.password = encrypt;
           let id = this.$data.user.userInfo.phoneNumber;
-          const addDocs = setDoc(doc(db, "user", id), this.$data.user);
-          console.log(addDocs);
-          console.log("Success");
+          setDoc(doc(db, "user", id), this.$data.user);
           this.$router.push(`/passenger/home/${id}`);
         })
         .catch((error) => {

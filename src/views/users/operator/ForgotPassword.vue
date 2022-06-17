@@ -118,7 +118,7 @@ export default {
       sendPasswordResetEmail(auth, email)
         .then(() => {
           // Password reset email sent!
-          console.log("Password reset email sent!");
+          alert("Password reset email sent!");
           // ..
         })
         .catch((error) => {

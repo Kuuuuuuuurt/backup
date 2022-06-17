@@ -350,15 +350,12 @@ export default {
           );
 
           const appVerifier = window.recaptchaVerifier;
-          console.log(appVerifier);
 
           signInWithPhoneNumber(auth, phone, appVerifier)
             .then((confirmationResult) => {
-              console.log(confirmationResult);
               // SMS sent. Prompt user to type the code from the message, then sign the
               // user in with confirmationResult.confirm(code).
               window.confirmationResult = confirmationResult;
-              console.log(confirmationResult);
               alert("SMS sent");
               // ...
             })
@@ -383,10 +380,8 @@ export default {
       } else {
         window.confirmationResult
           .confirm(code)
-          .then((result) => {
+          .then(() => {
 
-            const user = result.user;
-            console.log(user);
             this.getUser();
 
             // ...
@@ -411,7 +406,6 @@ export default {
             let userData = user.data();
             this.$data.users =
               userData.userInfo.firstName + " " + userData.userInfo.lastName;
-            console.log(userData);
 
             const password = userData.userInfo.password;
             const decrypt = window.atob(password)
@@ -422,7 +416,6 @@ export default {
                 // Signed in
                 const user = userCredential.user;
                 console.log(user);
-                console.log(auth.currentUser);
                 this.togglePassForm = true;
                 this.toggleOTPForm = false;
               })

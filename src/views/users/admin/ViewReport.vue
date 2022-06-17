@@ -909,7 +909,7 @@ export default {
         ". " +
         "Hinihikayat ka namin na mag-self quarantine kaagad.";
 const current = new Date();
-      let date = `${current.getMonth()}` + "/" + `${current.getDay()}` + "/" + `${current.getFullYear()}` ;
+      let date = `${current.getMonth() + 1}` + "/" + `${current.getDate()}` + "/" + `${current.getFullYear()}` ;
       this.$data.notification.date = date;
     },
 

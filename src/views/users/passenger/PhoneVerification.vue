@@ -325,7 +325,6 @@ export default {
             );
 
             const appVerifier = window.recaptchaVerifier;
-            console.log(appVerifier);
 
             signInWithPhoneNumber(auth, phone, appVerifier)
               .then((confirmationResult) => {
@@ -357,14 +356,12 @@ export default {
 
     confirmCode() {
       const code = this.$data.otpCode;
-      console.log(code);
       window.confirmationResult
         .confirm(code)
-        .then((result) => {
+        .then(() => {
           // User signed in successfully.
-          const user = result.user;
+          
           const phone = this.$data.phoneNumber;
-          console.log(user);
           this.$router.push(`/passenger/create-account/${phone}`);
 
           // ...

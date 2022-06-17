@@ -470,7 +470,6 @@ export default {
   methods: {
     onDecode(result) {
       this.result.url = result;
-      console.log("result", result);
       this.$data.resultModal = true;
       this.$data.scannerToggle = false;
       this.getScannedResult();
@@ -556,7 +555,6 @@ export default {
         const estabSnap = await getDoc(estabRef);
         let estabData = estabSnap.data();
         this.$data.customerData.visitedEstab = estabData.userInfo.vehicleID;
-        console.log(this.$data.customerData.visitedEstab);
       } else {
         console.log("No");
       }
@@ -657,13 +655,10 @@ export default {
       ) {
         this.$data.tempError = "Temperature Required!";
       } else {
-        const addRecord = await setDoc(
+        await setDoc(
           doc(db, "entry-record", id),
           this.$data.customerData
         );
-        console.log(addRecord);
-
-        console.log(this.$data.customerData);
         this.closeModal();
       }
     },
