@@ -40,7 +40,7 @@
                 >+63</span
               >
               <input
-                type="text"
+                type="number"
                 class="
                   w-full
                   px-3
