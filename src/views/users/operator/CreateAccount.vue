@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form
+    <div
       action=""
       class="form bg-white p-6 my-10 relative"
       @submit.prevent="register"
@@ -97,7 +97,19 @@
       >
         Create Account
       </button>
-    </form>
+    </div>
+    <p class="text-sm text-center text-gray-400">
+            Don&#x27;t have an account yet?
+            <a
+              href="/operator/login"
+              class="
+                font-semibold
+                text-indigo-500
+                focus:text-indigo-600 focus:outline-none focus:underline
+              "
+              >Sign in</a
+            >.
+          </p>
   </div>
 
   <div

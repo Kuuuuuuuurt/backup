@@ -174,7 +174,7 @@
           <p class="text-sm text-center text-gray-400">
             Already have an account?
             <a
-              href="#!"
+              href="/passenger/login"
               class="
                 font-semibold
                 text-indigo-500
@@ -369,7 +369,7 @@ export default {
         .catch((error) => {
           // User couldn't sign in (bad verification code?)
           console.log(error);
-          alert("Invalid Code")
+          alert("Wrong Code")
           // ...
         });
     },

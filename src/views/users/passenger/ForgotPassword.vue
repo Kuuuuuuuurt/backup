@@ -142,13 +142,13 @@
           <p class="text-sm text-center text-gray-400">
             Don&#x27;t have an account yet?
             <a
-              href="#!"
+              href="/passenger/login"
               class="
                 font-semibold
                 text-indigo-500
                 focus:text-indigo-600 focus:outline-none focus:underline
               "
-              >Sign up</a
+              >Sign in</a
             >.
           </p>
         </div>
@@ -264,7 +264,7 @@
                 text-indigo-500
                 focus:text-indigo-600 focus:outline-none focus:underline
               "
-              >Sign up</a
+              >Sign in</a
             >.
           </p>
         </form>
