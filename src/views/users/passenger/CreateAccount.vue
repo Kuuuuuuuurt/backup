@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div
+    <form
       action=""
       class="form bg-white p-6 my-10 relative"
       @submit.prevent="register"
@@ -114,7 +114,7 @@
       >
         Create Account
       </button>
-    </div>
+    </form>
        <p class="text-sm text-center text-gray-400">
             Don&#x27;t have an account yet?
             <a
