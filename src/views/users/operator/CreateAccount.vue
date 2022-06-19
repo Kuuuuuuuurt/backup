@@ -74,15 +74,6 @@
         />
         <input type="tel" placeholder="" class="p-2 w-1/2 bg-white" disabled />
       </div>
-      <p class="font-bold text-sm mt-3">Privacy Policy *</p>
-      <div class="flex items-baseline space-x-2 mt-2">
-        <p class="text-gray-600 text-sm">
-          by clicking create account, you agree to our
-          <button class="text-blue-700" @click="privacyPolicyModal = true">
-            Privay Policy.
-          </button>
-        </p>
-      </div>
       <button
         value="Submit"
         class="
@@ -98,6 +89,16 @@
         Create Account
       </button>
     </form>
+    <div class="p-6 -mt-16">
+     <p class="font-bold text-sm ">Privacy Policy *</p>
+      <div class="flex items-baseline space-x-2 mt-2">
+        <p class="text-gray-600 text-sm">
+          by clicking create account, you agree to our
+          <button class="text-blue-700" @click="privacyPolicyModal = true">
+            Privay Policy.
+          </button>
+        </p>
+      </div>
     <p class="text-sm text-center text-gray-400">
             Don&#x27;t have an account yet?
             <a
@@ -110,6 +111,7 @@
               >Sign in</a
             >.
           </p>
+  </div>
   </div>
 
   <div

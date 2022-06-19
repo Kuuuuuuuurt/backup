@@ -95,8 +95,8 @@
       <div class="flex items-baseline space-x-2 mt-2">
         <p class="text-gray-600 text-sm">
           by clicking create account, you agree to our
-          <a class="text-blue-700" @click="privacyPolicyModal = true"
-            >Privay Policy.</a
+          <button class="text-blue-700" @click="privacyPolicyModal = true"
+            >Privay Policy.</button
           >
         </p>
       </div>
