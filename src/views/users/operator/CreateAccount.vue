@@ -99,7 +99,7 @@
           </button>
         </p>
       </div>
-    <p class="text-sm text-center text-gray-400">
+    <p class="text-sm text-center text-gray-400 mt-5">
             Don&#x27;t have an account yet?
             <a
               href="/operator/login"
