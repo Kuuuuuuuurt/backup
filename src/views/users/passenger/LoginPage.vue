@@ -18,7 +18,6 @@
                 >Phone Number</label
               >
               <input
-                type="number"
                 class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
                 required
                 v-model="users.phoneNumber"
