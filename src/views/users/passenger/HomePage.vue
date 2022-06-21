@@ -270,7 +270,7 @@
           <div class="flex flex-wrap items-center">
             <div class="relative w-full px-4 max-w-full flex-grow flex-1">
               <h3 class="font-semibold text-base text-blueGray-700">
-                Establishment Visited
+                Cab No.
               </h3>
             </div>
             <div
@@ -331,7 +331,7 @@
                     text-left
                   "
                 >
-                  Establishment name
+                  Cab No.
                 </th>
                 <th
                   class="

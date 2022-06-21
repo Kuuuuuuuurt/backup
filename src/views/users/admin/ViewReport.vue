@@ -742,6 +742,8 @@ import {
 export default {
   data() {
     return {
+      closeContactPerson: [],
+      closeContactAddress: [],
       visited: "",
       notifSendModal: false,
       pageShow: true,
@@ -784,6 +786,17 @@ export default {
         type: "",
         loginToken: "",
       },
+
+      closeContact:{
+        positivePerson: "",
+        closeContactPerson: "",
+        month: "",
+        day: "",
+        year: "",
+        address: "",
+      }
+
+
     };
   },
 
@@ -875,6 +888,8 @@ export default {
       //people
       let peopleEncountered = [];
       let listPeople = [];
+      let contactPersonName = [];
+      let contactPersonAddress = [];
       recordSnap.forEach((dataRec) => {
         let recordData = dataRec.data();
         if (enteredVehicle.some((r) => recordData.visitedEstab.includes(r))) {
@@ -889,12 +904,17 @@ export default {
             if (recordData.name != this.$data.report.name) {
               peopleEncountered.push(recordData.phoneNumber);
               listPeople.push(recordData);
+              contactPersonName.push(recordData.name);
+              contactPersonAddress.push(recordData.address);
             }
           }
         }
       });
       this.$data.peopleEncountered = peopleEncountered;
       this.$data.listPeople = listPeople;
+      this.closeContactAddress = contactPersonAddress;
+      this.closeContactPerson = contactPersonName;
+       
 
       this.$data.notification.header = "TRAFEX ALERT!";
       this.$data.notification.notificationMessage =
@@ -911,6 +931,15 @@ export default {
 const current = new Date();
       let date = `${current.getMonth() + 1}` + "/" + `${current.getDate()}` + "/" + `${current.getFullYear()}` ;
       this.$data.notification.date = date;
+
+     this.$data.closeContact.positivePerson = this.$data.report.name;
+     this.$data.closeContact.month = this.$data.report.monthTested;
+     this.$data.closeContact.day = this.$data.report.dayTested;
+     this.$data.closeContact.year = this.$data.report.yearTested;
+
+     //
+
+   
     },
 
     async sendNotif() {
@@ -951,6 +980,18 @@ const current = new Date();
         this.$data.report.yearTested + " ikaw ay nagkaroon ng pasaherong  Covid19 Positive. Hinihikayat ka namin na mag-self quarantine kaagad."
 
         setDoc(doc(db, "notification", id2), this.$data.notification);
+      }
+
+         for (let y = 0; y < this.closeContactPerson.length; y++){
+        this.$data.closeContact.closeContactPerson = this.closeContactPerson[y];
+        this.$data.closeContact.address = this.closeContactAddress[y];
+
+         var ran = require("randomstring");
+          let id3 = ran.generate({
+          length: 20,
+          charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+        });
+         setDoc(doc(db, "first-contact-data", id3), this.$data.closeContact);
       }
 
       const userRef = collection(db, "reports");
